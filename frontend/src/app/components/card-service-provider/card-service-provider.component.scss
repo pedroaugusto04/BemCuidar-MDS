@@ -1,0 +1,22 @@
+.provider {
+  padding-right: 2rem;
+  padding-left: 2rem;
+  padding-bottom: 2rem;
+  display: block;
+  height: 25rem;
+}
+
+.provider-img {
+  width: 100%;
+  height: 80%;
+  object-fit: cover;
+}
+
+.provider-info {
+  width: 100%;
+  height: 20%;
+}
+
+h4 {
+  font-weight: 400;
+}
