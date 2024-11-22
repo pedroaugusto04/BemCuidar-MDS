@@ -2,7 +2,8 @@
   padding-right: 2rem;
   padding-left: 2rem;
   padding-bottom: 2rem;
-  display: block;
+  display: flex;
+  flex-direction: column;
   height: 25rem;
 }
 
@@ -19,4 +20,7 @@
 
 h4 {
   font-weight: 400;
+}
+
+@media screen and (min-width: 992px) {
 }

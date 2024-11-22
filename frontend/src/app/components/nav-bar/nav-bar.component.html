@@ -4,6 +4,7 @@
       @if (isMobile){
       <button
         class="button-menu"
+        id="button-menu-mobile"
         mat-icon-button
         [matMenuTriggerFor]="menu"
         aria-label="Menu button"
@@ -22,19 +23,20 @@
           <div class="divider-row"></div>
         </div>
         <div class="sections">
-          @if(isMobile){
           <a href="" mat-menu-item>
             <mat-icon>person</mat-icon>
             <span class="sections-text">Meu perfil</span>
           </a>
-          }
           <button mat-menu-item>
+            <mat-icon>star</mat-icon>
             <span class="sections-text">Meus Favoritos</span>
           </button>
           <button mat-menu-item>
+            <mat-icon>search</mat-icon>
             <span class="sections-text">Descobrir</span>
           </button>
           <button mat-menu-item>
+            <mat-icon>work</mat-icon>
             <span class="sections-text">Quero me inscrever</span>
           </button>
           <div class="divider">
@@ -53,20 +55,24 @@
           </a>
         </div>
         @if (!isMobile){
-            <div class="sections">
-                <a id="my-projects">Meus Favoritos</a>
-                <a class="link-menu">Descobrir</a>
-                <a class="link-menu">Quero me inscrever</a>
-            </div>
+        <div class="sections" id="sections-desktop">
+          <a id="my-projects">Meus Favoritos</a>
+          <a class="link-menu">Descobrir</a>
+          <a class="link-menu">Quero me inscrever</a>
+        </div>
         }
       </div>
       <div class="div-icons">
-        @if(isMobile){
-        <a class="div-profile-img" [matMenuTriggerFor]="menu2">
+        @if(!isMobile){
+        <a
+          class="div-profile-img"
+          [matMenuTriggerFor]="menu2"
+          id="profile-img-desktop"
+        >
           <img class="profile-img" />
         </a>
         } @else {
-        <a class="div-profile-img">
+        <a class="div-profile-img" id="profile-img-mobile">
           <img class="profile-img" />
         </a>
         }

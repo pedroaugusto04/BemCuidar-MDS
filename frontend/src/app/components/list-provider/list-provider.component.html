@@ -1,13 +1,15 @@
 <app-nav-bar></app-nav-bar>
 <div class="list-elements">
   @for (provider of providers; track provider.name) {
-  <app-card-service-provider
-    providerName="{{ provider.name }}"
-    providerService="{{ provider.service }}"
-    providerAge="{{ provider.age }}"
-    providerCountry="{{ provider.country }}"
-    providerState="{{ provider.state }}"
-    providerCity="{{ provider.city }}"
-  ></app-card-service-provider>
+    <div class = "provider">
+      <app-card-service-provider
+      providerName="{{ provider.name }}"
+      providerService="{{ provider.service }}"
+      providerAge="{{ provider.age }}"
+      providerCountry="{{ provider.country }}"
+      providerState="{{ provider.state }}"
+      providerCity="{{ provider.city }}"
+    ></app-card-service-provider>
+    </div>
   }
 </div>
