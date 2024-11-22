@@ -1,11 +1,14 @@
-FROM node:alpine
+FROM node:22-alpine
 
 WORKDIR /app
 
-COPY . ./
+COPY package*.json ./
+
+RUN npm install
 
 RUN npm install -g @angular/cli
 
-RUN npm install
+COPY . .
+
 
 CMD ["ng", "serve", "--host", "0.0.0.0", "--disable-host-check"]

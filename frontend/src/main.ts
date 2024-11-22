@@ -9,11 +9,19 @@ import {
 } from "@angular/router";
 import { APP_ROUTES } from "./app/app.routes";
 import { provideAnimationsAsync } from "@angular/platform-browser/animations/async";
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
+import { AuthorizationInterceptor } from "./app/interceptors/authorization.interceptor";
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(APP_ROUTES, withPreloading(PreloadAllModules)),
     provideAnimations(),
-    provideAnimationsAsync(), provideAnimationsAsync(),
+    provideAnimationsAsync(),
+    provideHttpClient(withInterceptorsFromDi()),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthorizationInterceptor,
+      multi: true,
+    },
   ],
 }).catch((err) => console.error(err));

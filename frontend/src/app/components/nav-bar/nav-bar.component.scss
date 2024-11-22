@@ -16,6 +16,7 @@ a {
 }
 
 .div-logo {
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,10 +39,6 @@ a {
 .profile-img {
   border-radius: 4rem;
   height: 2.5rem;
-}
-
-.div-icon-notification {
-  padding-right: 0.5rem;
 }
 
 .profile-img {
@@ -87,7 +84,7 @@ a {
   background: var(--divider, rgba(0, 0, 0, 0.12));
 }
 
-#my-projects {
+.menu-item {
   color: var(--Neutral-Colors-Neutral-60, #fcfdff);
   text-decoration: none;
   font-size: 1.25rem;
@@ -97,18 +94,6 @@ a {
   letter-spacing: 0.00938rem;
 
   margin-left: 6.25rem;
-  margin-right: 3rem;
-}
-
-.link-menu {
-  color: var(--Neutral-Colors-Neutral-60, #fcfdff);
-  text-decoration: none;
-  font-family: Roboto;
-  font-size: 1.25rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 1.25rem;
-  letter-spacing: 0.00938rem;
   margin-right: 3rem;
 }
 
@@ -171,14 +156,22 @@ a {
   flex: 1 0 0;
 }
 
+#div-register {
+  cursor: pointer;
+  padding-right: 2rem;
+  height: 100%;
+}
+
+#icon-register {
+  padding-top: 0.2rem;
+  padding-right: 0.5rem;
+  transform: scale(1.5);
+}
+
 @media (min-width: 992px) {
   mat-toolbar-row {
     margin: 0;
     padding: 0;
-  }
-
-  .div-icon-notification {
-    padding-right: 1rem;
   }
 
   .profile-img {
@@ -186,6 +179,7 @@ a {
   }
 
   .div-logo {
+    cursor: pointer;
     padding-left: 1.88rem;
   }
 }

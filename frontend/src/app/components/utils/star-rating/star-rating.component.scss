@@ -1,0 +1,10 @@
+fa-icon {
+  cursor: pointer;
+  color: #d3d3d3;
+  font-size: 2.5rem;
+
+  &.active {
+    color: gold;
+  }
+  transition: color 0.3 ease-out;
+}

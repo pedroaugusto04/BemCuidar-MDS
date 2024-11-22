@@ -1,0 +1,52 @@
+<app-nav-bar></app-nav-bar>
+<div class="container">
+  <div class="form-container">
+    <div class="div-form">
+      <h5>Cadastre-se</h5>
+      <form [formGroup]="form" class="form">
+        <div class="sub-form">
+          <mat-form-field class="input" id="nameField" appearance="outline">
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="name" />
+            @if(form.get("name")?.invalid){ 
+                <mat-error >{{formErrorMessage("name")}}</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field class="input" id="lastNameField" appearance="outline">
+            <mat-label>Sobrenome</mat-label>
+            <input matInput formControlName="last_name" />
+            @if(form.get("lastName")?.invalid){ 
+                <mat-error >{{formErrorMessage("lastName")}}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <mat-form-field class="input" appearance="outline">
+          <mat-label>E-mail</mat-label>
+          <input matInput formControlName="email" />
+          @if(form.get("email")?.invalid){ 
+            <mat-error >{{formErrorMessage("email")}}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="input" appearance="outline">
+          <mat-label>Senha</mat-label>
+          <input type="{{ password }}" matInput formControlName="password" />
+          @if(form.get("password")?.invalid){
+          <mat-error>{{ formErrorMessage("password") }}</mat-error>
+          } @if(visibility){
+          <mat-icon (click)="onClick()" matSuffix>visibility_off</mat-icon>
+          } @else {
+          <mat-icon (click)="onClick()" matSuffix>visibility</mat-icon>
+          }
+        </mat-form-field>
+        <button (click)="signUp()" class="btn-primary" mat-raised-button color="primary">
+          <span>CADASTRAR</span>
+        </button>
+      </form>
+      <a routerLink="/login" class="msg-register"> Entrar</a>
+      <span class="password"
+        >*A senha deve conter pelo menos 8 caracteres, incluindo letras
+        maiúsculas, minúsculas e números</span
+      >
+    </div>
+  </div>
+</div>

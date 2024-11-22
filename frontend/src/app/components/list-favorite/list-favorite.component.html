@@ -1,0 +1,21 @@
+<app-nav-bar></app-nav-bar>
+@if(user$ | async; as user){
+<div class="list-elements">
+  @if(favoriteProviders$ | async; as favoriteProviders) { @for (provider of
+  favoriteProviders; track provider.name) {
+  <div class="favorite-provider">
+    <app-card-service-provider
+      providerName="{{ provider.name }}"
+      providerServiceDescription="{{ provider.service_description }}"
+      providerAge="{{ provider.age }}"
+      providerCountry="{{ provider.country }}"
+      providerState="{{ provider.state }}"
+      providerCity="{{ provider.city }}"
+      providerPhoto="{{ provider.photo }}"
+    ></app-card-service-provider>
+  </div>
+  } }
+</div>
+} @else {
+  <h1> Você precisa estar logado para ver seus favoritos!</h1>
+}

@@ -1,0 +1,180 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0.5rem;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  padding-top: 1.5rem;
+  font-size: 2.1rem;
+}
+
+.input {
+  width: 18rem;
+  padding-bottom: 1.5rem;
+}
+
+.div-form {
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-img {
+  margin-bottom: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.empty-projects {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 19rem;
+  border-radius: var(--borderRadius, 0.25rem);
+  background: var(--color-principal-70, #e6e9f2);
+}
+
+label {
+  color: var(--Neutral-Colors-Neutral-110, #515255);
+}
+
+h5 {
+  flex-shrink: 0;
+  align-self: stretch;
+  color: var(--Neutral-Colors-Neutral-110, #515255);
+  line-height: 1.5rem;
+}
+
+.hidden-input {
+  display: none;
+}
+
+.add-project {
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-18 {
+  align-self: center;
+  width: 2.875rem;
+  height: 2.875rem;
+  font-size: 2.857rem;
+  margin-bottom: 1rem;
+}
+
+#add-img-button {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.button-container {
+  padding: 0 !important;
+}
+.project-cover {
+  width: 100%;
+  border-radius: 0.25rem;
+  object-fit: cover;
+}
+
+.div-finish-modal {
+  display: flex;
+  padding: var(--none, 0rem);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--2, 1rem);
+}
+.projects button {
+  cursor: pointer;
+  border: none;
+  border-radius: 0.25rem;
+}
+
+.button-save {
+  color: #fcfdff;
+  display: flex;
+  margin-right: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: var(--borderRadius, 0.25rem);
+  background: var(--Color-Brand-Secundria-Secondary-100, #f52);
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+}
+
+#button-cancel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: var(--borderRadius, 0.25rem);
+  background: var(--action-disabledBackground, rgba(0, 0, 0, 0.12));
+
+  color: var(--action-disabled, rgba(0, 0, 0, 0.38));
+  font-feature-settings: "clig" off, "liga" off;
+
+  font-family: Roboto;
+  font-size: 0.9375rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.625rem;
+  letter-spacing: 0.02875rem;
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 992px) {
+  .fields {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: first baseline;
+    flex-wrap: wrap;
+  }
+
+  .input {
+    width: 30%;
+    margin: 1rem;
+  }
+
+  .description {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .description #description-field {
+    width: 60rem;
+  }
+
+  .upload-img {
+    width: 100%;
+  }
+
+  .empty-projects {
+    width: 50rem;
+    height: 25rem;
+  }
+
+  #button-register {
+    width: 20rem;
+    height: 3rem;
+    margin: 1rem;
+  }
+}
