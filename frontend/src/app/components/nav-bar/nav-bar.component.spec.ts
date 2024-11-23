@@ -3,10 +3,6 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { NavBarComponent } from "./nav-bar.component";
 
 import { RouterTestingModule } from "@angular/router/testing";
-import { HttpClientModule } from "@angular/common/http";
-import { BehaviorSubject, of } from "rxjs";
-import { User } from "../../models/User";
-import { userMock } from "../tests/mocks/user.mock";
 
 describe("NavBarComponent", () => {
   let component: NavBarComponent;
@@ -14,7 +10,7 @@ describe("NavBarComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NavBarComponent, RouterTestingModule, HttpClientModule],
+      imports: [NavBarComponent,RouterTestingModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(NavBarComponent);
@@ -24,7 +20,7 @@ describe("NavBarComponent", () => {
 
   it("Should render if desktop and loggedIn", () => {
     component.isMobile = false;
-    component.user$ = new BehaviorSubject<User>(userMock);
+    component.isLoggedIn = true;
     fixture.detectChanges();
 
     const sections = fixture.nativeElement.querySelector("#sections-desktop");
@@ -37,8 +33,10 @@ describe("NavBarComponent", () => {
     expect(divProfileImg).not.toBeNull();
   });
 
+
   it("Should render if desktop and NOT loggedIn", () => {
     component.isMobile = false;
+    component.isLoggedIn = false;
     fixture.detectChanges();
 
     const sections = fixture.nativeElement.querySelector("#sections-desktop");
@@ -68,7 +66,7 @@ describe("NavBarComponent", () => {
 
   it("Should render if mobile and loggedIn", () => {
     component.isMobile = true;
-    component.user$ = new BehaviorSubject<User>(userMock);
+    component.isLoggedIn = true;
     fixture.detectChanges();
 
     const buttonElement = fixture.nativeElement.querySelector(
@@ -86,6 +84,7 @@ describe("NavBarComponent", () => {
 
   it("Should render if mobile and NOT loggedIn", () => {
     component.isMobile = true;
+    component.isLoggedIn = false;
     fixture.detectChanges();
 
     const divRegister = fixture.nativeElement.querySelector("#div-register");

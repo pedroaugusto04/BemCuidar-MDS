@@ -9,10 +9,8 @@ import {
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
-import { RegisterProviderService } from "../../services/providerServices/register-provider.service";
-import { MatButtonModule } from "@angular/material/button";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { Router } from "@angular/router";
+import { RegisterProviderService } from "./service/register-provider.service";
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: "app-register-provider",
@@ -23,7 +21,7 @@ import { Router } from "@angular/router";
     ReactiveFormsModule,
     MatIconModule,
     MatInputModule,
-    MatButtonModule,
+    MatButtonModule
   ],
   templateUrl: "./register-provider.component.html",
   styleUrl: "./register-provider.component.scss",
@@ -40,18 +38,16 @@ export class RegisterProviderComponent {
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
-    private registerProviderService: RegisterProviderService,
-    private snackBar: MatSnackBar,
-    private router: Router
+    private registerProviderService: RegisterProviderService
   ) {
     this.form = this.formBuilder.group({
       name: ["", [Validators.required, Validators.minLength(3)]],
-      service_description: ["", [Validators.required, Validators.minLength(3)]],
+      serviceDescription: ["", [Validators.required, Validators.minLength(3)]],
       age: ["", [Validators.required]],
       country: ["", [Validators.required, Validators.minLength(3)]],
       state: ["", [Validators.required]],
       city: ["", [Validators.required, Validators.minLength(3)]],
-      photo: [""],
+      photo: ["", [Validators.required, Validators.minLength(3)]],
     });
   }
 
@@ -81,11 +77,11 @@ export class RegisterProviderComponent {
     const selectedFile = event.target.files[0];
 
     if (selectedFile) {
-      if (this.formData.has("photo")) {
-        this.formData.delete("photo");
+      if (this.formData.has("imgUrl")) {
+        this.formData.delete("imgUrl");
       }
 
-      this.formData.append("photo", selectedFile);
+      this.formData.append("imgUrl", selectedFile);
       const reader = new FileReader();
       reader.onload = () => {
         this.selectedImage = reader.result as string;
@@ -94,53 +90,32 @@ export class RegisterProviderComponent {
     }
   }
 
-  registerProvider() {
-    const file = this.formData.get("photo") as File;
-    this.formData = new FormData();
-    if (file) {
-      this.formData.append("photo", file);
-    }
+  addProject() {
     this.formData.append("name", this.form.value.name);
     this.formData.append(
-      "service_description",
-      this.form.value.service_description
+      "serviceDescription",
+      this.form.value.serviceDescription
     );
     this.formData.append("age", this.form.value.age);
     this.formData.append("country", this.form.value.country);
     this.formData.append("state", this.form.value.state);
     this.formData.append("city", this.form.value.city);
-
-    if (this.form.invalid) {
-      this.onError("Preencha os campos corretamente!");
-      return;
-    }
+    this.formData.append("photo", this.form.value.photo);
     this.registerProviderService.register(this.formData).subscribe({
       next: () => {
-        this.onSuccess("Cuidador registrado com sucesso!");
+        this.onSuccess();
       },
       error: (error: any) => {
-        this.onError("Erro ao registrar cuidador!");
+        this.onError();
       },
     });
   }
 
-  onSuccess(msg: string) {
-    this.snackBar.open(msg, "X", {
-      duration: 1000,
-      verticalPosition: "top",
-      panelClass: ["success-snackbar"],
-    });
-
-    setTimeout(() => {
-      this.router.navigateByUrl("/home");
-    }, 1000);
+  onSuccess() {
+    console.log("sucesso");
   }
 
-  onError(msg: string) {
-    this.snackBar.open(msg, "X", {
-      duration: 1000,
-      verticalPosition: "top",
-      panelClass: ["error-snackbar"],
-    });
+  onError() {
+    console.log("erro");
   }
 }

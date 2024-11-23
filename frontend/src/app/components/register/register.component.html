@@ -14,7 +14,7 @@
           </mat-form-field>
           <mat-form-field class="input" id="lastNameField" appearance="outline">
             <mat-label>Sobrenome</mat-label>
-            <input matInput formControlName="last_name" />
+            <input matInput formControlName="lastName" />
             @if(form.get("lastName")?.invalid){ 
                 <mat-error >{{formErrorMessage("lastName")}}</mat-error>
             }

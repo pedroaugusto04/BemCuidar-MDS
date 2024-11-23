@@ -1,11 +1,9 @@
 export interface ServiceProvider { 
-    id: string;
     name: string;
-    service_description: string;
+    serviceDescription: string;
     age: number;
     country: string;
     state: string;
     city: string;
     photo: string;
-    favorited?: boolean
 }
