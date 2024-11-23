@@ -1,20 +1,29 @@
 import { Request, Response } from "express";
+import { UserService } from "../services/user.service";
+import { User } from "../models/User";
+import { verifyToken } from "../utils/jwtAuth";
+import { hashPassword } from "../utils/bcryptUtils";
+
 
 export class UserController {
-    
-  public static async createUser(req: Request, res: Response) {
-    try {
-      return res.status(200).send("Usuário criado com sucesso!");
-    } catch (error) {
-      return res.status(500).send("Erro ao criar usuário");
-    }
-  }
 
-  public static async getAllUsers(req: Request, res: Response) {
+  public static async createUser(req: Request, res: Response) {
+    const newUser: User = req.body;
     try {
-      return res.status(200).send("Usuários retornados com sucesso");
-    } catch (error) {
-      return res.status(500).send("Erro ao obter usuários");
+      newUser.password = await hashPassword(newUser.password);
+
+      const createdUser = await UserService.createUser(newUser);
+
+      const { password, ...dtoUser } = createdUser;
+
+      return res.status(201).json(dtoUser);
+    } catch (error: any) {
+      if (error.code === "ER_DUP_ENTRY") {
+        return res.status(409).json({ message: "Este e-mail já está em uso." });
+      } else {
+        console.error("Erro ao criar usuário:", error);
+        return res.status(500).json({ message: "Erro interno ao criar usuário." });
+      }
     }
   }
 }

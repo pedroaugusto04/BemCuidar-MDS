@@ -12,17 +12,18 @@ export class LoginController {
       const { email, password } = req.body;
 
       const user = await LoginService.authenticateLogin(email);
+
       if (user) {
         const isAValidPassword = await comparePasswords(
           password,
           user.password
         );
         if (isAValidPassword) {
-          const token = generateToken(user);
-          const id = user.id;
+          const { password, ...dtoUser } = user;
+          const token = generateToken(dtoUser);
           return res
             .status(200)
-            .json({ message: "Login bem-sucedido!",id,token });
+            .json({ message: "Login bem-sucedido.", dtoUser, token });
         }
       }
 

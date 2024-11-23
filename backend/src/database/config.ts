@@ -7,7 +7,7 @@ dotenv.config();
 
 export const connection = new Pool({
   host: process.env.POSTGRES_HOST_DEV,
-  port: parseInt(process.env.POSTGRES_PORT_DEV || "5434"),
+  port: parseInt(process.env.POSTGRES_PORT_DEV || "5433"),
   user: process.env.POSTGRES_USER_DEV,
   password: process.env.POSTGRES_PASSWORD_DEV,
   database: process.env.POSTGRES_DB_DEV,
