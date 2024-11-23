@@ -22,11 +22,13 @@
             </button>
           </div>
           } @else {
-          <img
-            class="project-cover"
-            [src]="selectedImage"
-            alt="Imagem selecionada"
-          />
+          <button id="add-img-button" (click)="triggerFile(fileInput)">
+            <img
+              class="project-cover"
+              [src]="selectedImage"
+              alt="Imagem selecionada"
+            />
+          </button>
           }
         </div>
         <mat-form-field class="input" id="nameField" appearance="outline">
@@ -73,17 +75,24 @@
             <mat-label>Descrição do tipo de Serviço</mat-label>
             <textarea
               matInput
-              formControlName="serviceDescription"
+              formControlName="service_description"
               rows="5"
               cols="50"
             ></textarea>
-            @if(form.get("serviceDescription")?.invalid){
-            <mat-error>{{ formErrorMessage("serviceDescription") }}</mat-error>
+            @if(form.get("service_description")?.invalid){
+            <mat-error>{{ formErrorMessage("service_description") }}</mat-error>
             }
           </mat-form-field>
         </div>
       </div>
     </form>
   </div>
-  <button id="button-register" mat-flat-button color="accent">REGISTRAR</button>
+  <button
+    (click)="registerProvider()"
+    id="button-register"
+    mat-flat-button
+    color="accent"
+  >
+    REGISTRAR
+  </button>
 </div>

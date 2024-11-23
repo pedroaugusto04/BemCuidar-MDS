@@ -24,3 +24,8 @@ export const verifyToken = (token: string, expectedUserId?: string) => {
 
   return decodedToken;
 };
+
+export const getUserIdByToken = (token: string) => {
+  const decodedToken: any = jwt.verify(token, secretKey);
+  return decodedToken.id;
+}

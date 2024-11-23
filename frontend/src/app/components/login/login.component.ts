@@ -1,22 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-import { LoginService } from './service/login.service';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { NavBarComponent } from '../nav-bar/nav-bar.component';
+import { Component, OnInit } from "@angular/core";
+import {
+  FormGroup,
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from "@angular/forms";
+import { RouterLink } from "@angular/router";
+import { LoginService } from "../../services/userServices/login.service";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatIconModule } from "@angular/material/icon";
+import { MatInputModule } from "@angular/material/input";
+import { NavBarComponent } from "../nav-bar/nav-bar.component";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-login',
+  selector: "app-login",
   standalone: true,
-  imports: [RouterLink,MatIconModule,MatFormFieldModule,ReactiveFormsModule,MatInputModule, NavBarComponent],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  imports: [
+    RouterLink,
+    MatIconModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    NavBarComponent,
+    MatSnackBarModule,
+  ],
+  templateUrl: "./login.component.html",
+  styleUrl: "./login.component.scss",
 })
-
 export class LoginComponent implements OnInit {
-
   visibility: boolean = false;
   password: string = "password";
   loading: boolean = false;
@@ -24,10 +37,11 @@ export class LoginComponent implements OnInit {
 
   form!: FormGroup;
 
-
   constructor(
     private formBuilder: NonNullableFormBuilder,
     private loginService: LoginService,
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -65,29 +79,40 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.form.invalid) {
-      this.onError();
+      this.onError("Preencha os campos corretamente!");
       return;
     }
-    this.loading = true;
     this.loginService.authenticate(this.form).subscribe({
       next: (result: boolean) => {
         if (result) {
-          this.onSuccess();
+          this.onSuccess("Login realizado com sucesso!");
         } else {
-          this.onError();
+          this.onError("Dados inválidos!");
         }
       },
       error: () => {
-        this.onError();
+        this.onError("Não foi possível realizar o login!");
       },
     });
   }
 
-  onSuccess() {
-    console.log("ok");
+  onSuccess(msg: string) {
+    this.snackBar.open(msg, "X", {
+      duration: 1000,
+      verticalPosition: "top",
+      panelClass: ["success-snackbar"],
+    });
+
+    setTimeout(() => {
+      this.router.navigateByUrl("/profile");
+    }, 1000);
   }
 
-  onError() {
-    console.log("erro");
+  onError(msg: string) {
+    this.snackBar.open(msg, "X", {
+      duration: 1000,
+      verticalPosition: "top",
+      panelClass: ["error-snackbar"],
+    });
   }
 }

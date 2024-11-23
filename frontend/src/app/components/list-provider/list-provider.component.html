@@ -1,15 +1,20 @@
 <app-nav-bar></app-nav-bar>
 <div class="list-elements">
-  @for (provider of providers; track provider.name) {
-    <div class = "provider">
-      <app-card-service-provider
+  @if(providers$ | async; as providers) { @for (provider of providers; track
+  provider.name) {
+  <div class="provider">
+    <app-card-service-provider
+      providerId="{{provider.id}}"
       providerName="{{ provider.name }}"
-      providerServiceDescription="{{ provider.serviceDescription }}"
+      providerServiceDescription="{{ provider.service_description }}"
       providerAge="{{ provider.age }}"
       providerCountry="{{ provider.country }}"
       providerState="{{ provider.state }}"
       providerCity="{{ provider.city }}"
+      providerPhoto="{{ provider.photo }}"
+      [providerFavorited]="provider.favorited ?? false"
+      [discover]="true"
     ></app-card-service-provider>
-    </div>
-  }
+  </div>
+  } }
 </div>

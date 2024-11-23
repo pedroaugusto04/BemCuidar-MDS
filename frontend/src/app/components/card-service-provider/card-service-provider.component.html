@@ -2,11 +2,22 @@
   <img
     mat-card-image
     class="provider-img"
-    [src]="'assets/imgs/default_img.jpeg'"
+    [src]="providerPhoto ? providerPhoto : 'assets/imgs/default_img.jpeg'"
     alt="{{ providerName }}"
   />
-  <div class="provider-info">
-    <h2>{{ providerName }} ({{ providerAge }} anos)</h2>
-    <h4>{{ providerCountry }} - {{ providerState }} - {{ providerCity }}</h4>
+  <div class="info">
+    <div class="provider-info">
+      <h2>{{ providerName }} ({{ providerAge }} anos)</h2>
+      <h4>{{ providerCountry }} - {{ providerState }} - {{ providerCity }}</h4>
+    </div>
+    @if(discover){ @if(providerFavorited) {
+    <div class="rating">
+      <app-star-rating [providerId]="providerId" [active]="true"></app-star-rating>
+    </div>
+    } @else {
+    <div class="rating">
+      <app-star-rating [providerId]="providerId" [active]="false"></app-star-rating>
+    </div>
+    } }
   </div>
 </div>

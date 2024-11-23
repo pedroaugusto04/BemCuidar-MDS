@@ -9,8 +9,10 @@ import {
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
-import { RegisterProviderService } from "./service/register-provider.service";
-import {MatButtonModule} from '@angular/material/button';
+import { RegisterProviderService } from "../../services/providerServices/register-provider.service";
+import { MatButtonModule } from "@angular/material/button";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-register-provider",
@@ -21,7 +23,7 @@ import {MatButtonModule} from '@angular/material/button';
     ReactiveFormsModule,
     MatIconModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   templateUrl: "./register-provider.component.html",
   styleUrl: "./register-provider.component.scss",
@@ -38,16 +40,18 @@ export class RegisterProviderComponent {
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
-    private registerProviderService: RegisterProviderService
+    private registerProviderService: RegisterProviderService,
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {
     this.form = this.formBuilder.group({
       name: ["", [Validators.required, Validators.minLength(3)]],
-      serviceDescription: ["", [Validators.required, Validators.minLength(3)]],
+      service_description: ["", [Validators.required, Validators.minLength(3)]],
       age: ["", [Validators.required]],
       country: ["", [Validators.required, Validators.minLength(3)]],
       state: ["", [Validators.required]],
       city: ["", [Validators.required, Validators.minLength(3)]],
-      photo: ["", [Validators.required, Validators.minLength(3)]],
+      photo: [""],
     });
   }
 
@@ -77,11 +81,11 @@ export class RegisterProviderComponent {
     const selectedFile = event.target.files[0];
 
     if (selectedFile) {
-      if (this.formData.has("imgUrl")) {
-        this.formData.delete("imgUrl");
+      if (this.formData.has("photo")) {
+        this.formData.delete("photo");
       }
 
-      this.formData.append("imgUrl", selectedFile);
+      this.formData.append("photo", selectedFile);
       const reader = new FileReader();
       reader.onload = () => {
         this.selectedImage = reader.result as string;
@@ -90,32 +94,53 @@ export class RegisterProviderComponent {
     }
   }
 
-  addProject() {
+  registerProvider() {
+    const file = this.formData.get("photo") as File;
+    this.formData = new FormData();
+    if (file) {
+      this.formData.append("photo", file);
+    }
     this.formData.append("name", this.form.value.name);
     this.formData.append(
-      "serviceDescription",
-      this.form.value.serviceDescription
+      "service_description",
+      this.form.value.service_description
     );
     this.formData.append("age", this.form.value.age);
     this.formData.append("country", this.form.value.country);
     this.formData.append("state", this.form.value.state);
     this.formData.append("city", this.form.value.city);
-    this.formData.append("photo", this.form.value.photo);
+
+    if (this.form.invalid) {
+      this.onError("Preencha os campos corretamente!");
+      return;
+    }
     this.registerProviderService.register(this.formData).subscribe({
       next: () => {
-        this.onSuccess();
+        this.onSuccess("Cuidador registrado com sucesso!");
       },
       error: (error: any) => {
-        this.onError();
+        this.onError("Erro ao registrar cuidador!");
       },
     });
   }
 
-  onSuccess() {
-    console.log("sucesso");
+  onSuccess(msg: string) {
+    this.snackBar.open(msg, "X", {
+      duration: 1000,
+      verticalPosition: "top",
+      panelClass: ["success-snackbar"],
+    });
+
+    setTimeout(() => {
+      this.router.navigateByUrl("/home");
+    }, 1000);
   }
 
-  onError() {
-    console.log("erro");
+  onError(msg: string) {
+    this.snackBar.open(msg, "X", {
+      duration: 1000,
+      verticalPosition: "top",
+      panelClass: ["error-snackbar"],
+    });
   }
 }

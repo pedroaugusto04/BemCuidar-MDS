@@ -26,6 +26,9 @@ replay_pid*
 #Node
 node_modules
 
+#.angular (cache)
+.angular
+
 #env
 .env
 env

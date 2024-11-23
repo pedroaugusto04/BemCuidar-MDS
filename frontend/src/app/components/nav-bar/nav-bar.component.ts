@@ -1,11 +1,17 @@
-import { Component, HostListener } from "@angular/core";
+import { Component, HostListener, OnInit } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
 import { HttpClientModule } from "@angular/common/http";
-import {RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
+import { LoginService } from "../../services/userServices/login.service";
+import { Observable } from "rxjs";
+import { User } from "../../models/User";
+import { CommonModule } from "@angular/common";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { UserService } from "../../services/userServices/user.service";
 
 @Component({
   selector: "app-nav-bar",
@@ -16,18 +22,24 @@ import {RouterLink } from "@angular/router";
     MatToolbarModule,
     HttpClientModule,
     RouterLink,
+    CommonModule,
   ],
   providers: [MatIconRegistry],
   templateUrl: "./nav-bar.component.html",
   styleUrl: "./nav-bar.component.scss",
 })
-export class NavBarComponent {
+export class NavBarComponent implements OnInit {
   isMobile!: boolean;
-  isLoggedIn: boolean = false;
+  user$!: Observable<User>;
+  defaultIcon: string = "assets/imgs/user_icon.svg";
 
   constructor(
     private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private loginService: LoginService,
+    private userService: UserService,
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {
     if (typeof window !== "undefined") {
       this.isMobile = window.innerWidth < 992;
@@ -35,13 +47,33 @@ export class NavBarComponent {
     this.matIconRegistry.addSvgIcon(
       "Logo",
       this.domSanitizer.bypassSecurityTrustResourceUrl(
-        "../../assets/imgs/logo.svg"
+        "assets/imgs/icon_logo.svg"
       )
     );
+  }
+  ngOnInit(): void {
+    this.user$ = this.userService.getUserInfo();
   }
 
   @HostListener("window:resize", ["$event"])
   onResize(event: any) {
     this.isMobile = event.target.innerWidth < 992;
+  }
+
+  signOut() {
+    this.loginService.signOut();
+    this.signOutAlert("Usuário deslogado com suceso!");
+  }
+
+  signOutAlert(msg: string){
+    this.snackBar.open(msg, "X", {
+      duration: 1000,
+      verticalPosition: "top",
+      panelClass: ["success-snackbar"],
+    });
+
+    setTimeout(() => {
+      this.router.navigateByUrl("/home");
+    }, 1000);
   }
 }

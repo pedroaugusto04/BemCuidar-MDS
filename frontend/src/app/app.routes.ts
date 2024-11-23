@@ -4,8 +4,8 @@ export const APP_ROUTES: Routes = [
   {
     path: "",
     loadChildren: () =>
-      import("./components/list-provider/list-provider.routes").then(
-        (m) => m.LIST_PROVIDER_ROUTES
+      import("./components/home/home.component.routes").then(
+        (m) => m.HOME_ROUTES
       ),
   },
   {
@@ -32,15 +32,15 @@ export const APP_ROUTES: Routes = [
   {
     path: "home",
     loadChildren: () =>
-      import("./components/list-provider/list-provider.routes").then(
-        (m) => m.LIST_PROVIDER_ROUTES
+      import("./components/home/home.component.routes").then(
+        (m) => m.HOME_ROUTES
       ),
   },
   {
     path: "profile",
     loadChildren: () =>
-      import("./components/list-provider/list-provider.routes").then(
-        (m) => m.LIST_PROVIDER_ROUTES
+      import("./components/profile/profile.component.routes").then(
+        (m) => m.PROFILE_ROUTES
       ),
   },
   {

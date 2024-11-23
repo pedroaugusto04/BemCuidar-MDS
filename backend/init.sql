@@ -3,10 +3,11 @@ CREATE TABLE IF NOT EXISTS users (
     name VARCHAR,
     last_name VARCHAR,
     email VARCHAR,
+    icon VARCHAR,
     password VARCHAR
 );
 
-CREATE TABLE IF NOT EXISTS ServiceProviders (
+CREATE TABLE IF NOT EXISTS service_providers (
     id  VARCHAR PRIMARY KEY,
     name VARCHAR,
     age INT NULL,
@@ -19,6 +20,6 @@ CREATE TABLE IF NOT EXISTS ServiceProviders (
 
 CREATE TABLE IF NOT EXISTS user_favorites_service_providers (
     id_user VARCHAR REFERENCES users(id),
-    id_provider VARCHAR  REFERENCES ServiceProviders(id),
+    id_provider VARCHAR  REFERENCES service_providers(id),
     PRIMARY KEY (id_user, id_provider)
 );
