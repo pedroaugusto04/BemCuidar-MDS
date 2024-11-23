@@ -20,14 +20,12 @@
           @if(user$ | async; as user){
           <button routerLink="/favorites" mat-menu-item>
             <mat-icon>star</mat-icon>
-            <span  class="sections-text"
-              >Meus Favoritos</span
-            >
+            <span class="sections-text">Meus Favoritos</span>
           </button>
           }
           <button routerLink="/care" mat-menu-item>
             <mat-icon>work</mat-icon>
-            <span  class="sections-text">Quero Cuidar</span>
+            <span class="sections-text">Quero Cuidar</span>
           </button>
           @if(user$ | async; as user){
           <button (click)="signOut()" mat-menu-item>
@@ -42,7 +40,7 @@
         <a>
           <mat-icon id="icon-logo" svgIcon="Logo">menu</mat-icon>
         </a>
-        <h4>BabyCare</h4>
+        <h4>BemCuidar</h4>
       </div>
       <div class="right-side">
         @if (!isMobile){
