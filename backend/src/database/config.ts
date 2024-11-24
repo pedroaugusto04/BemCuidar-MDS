@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const poolConfig =
-  process.env.NODE_ENV === "production"
+  process.env.IS_PRODUCTION === "true"
     ? {
         // PRODUCAO
         host: process.env.POSTGRES_HOST,
