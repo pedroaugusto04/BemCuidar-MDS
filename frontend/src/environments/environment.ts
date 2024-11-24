@@ -1,8 +1,12 @@
 export const environment = {
-    production: true,
-    name: "production",
-    baseUrl: "",
-    getApiProviders: "providers",
-    getApiUsers: "users",
-    getApiFavoritedProviders: (userId: string) => `users/${userId}/providers`,
-  };
+  production: true,
+  name: "production",
+  baseUrl: "https://bemcuidar-mds.onrender.com/",
+  getApiProviders: "providers",
+  getApiUsersInfo: "users/info/",
+  getApiUsers: "users",
+  getApiAuth: "login",
+  getApiFavoritedProviders: "users/providers",
+  getApiFavoriteProvider: (providerId: string) =>
+    `users/providers/${providerId}`,
+};
