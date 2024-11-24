@@ -10,7 +10,7 @@ describe("ListProviderComponent", () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule,ListProviderComponent],
+      imports: [RouterTestingModule, ListProviderComponent],
       declarations: [],
     }).compileComponents();
 
@@ -37,9 +37,7 @@ describe("ListProviderComponent", () => {
         expect(element.componentInstance.providerServiceDescription).toBe(
           provider.service_description
         );
-        expect(Number(element.componentInstance.providerAge)).toBe(
-          provider.age
-        );
+        expect(element.componentInstance.providerAge).toBe(provider.age);
         expect(element.componentInstance.providerCountry).toBe(
           provider.country
         );
