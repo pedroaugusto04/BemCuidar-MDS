@@ -42,7 +42,6 @@ export class UserController {
   public static async unfavoriteProvider(req: Request, res: Response) {
     try {
       const token = req.headers.authorization;
-      let user;
       if (token) {
         const userId = getUserIdByToken(token);
         const providerId = req.params.providerId;
@@ -58,10 +57,25 @@ export class UserController {
     }
   }
 
+  public static async requestProvider(req: Request, res: Response) {
+    try {
+      const token = req.headers.authorization;
+      if (token) {
+        const userId = getUserIdByToken(token);
+        const providerId = req.params.providerId;
+        await UserService.requestProvider(userId, providerId);
+        return res
+          .status(200)
+          .json({ message: "Cuidador Solicitado com sucesso!" });
+      }
+    } catch (error: any) {
+      return res.status(500).json({ message: "Erro ao solicitar cuidador." });
+    }
+  }
+
   public static async getFavoritedProviders(req: Request, res: Response) {
     try {
       const token = req.headers.authorization;
-      let user;
       if (token) {
         const userId = getUserIdByToken(token);
         const favoritedProviders = await UserService.getFavoritedProviders(

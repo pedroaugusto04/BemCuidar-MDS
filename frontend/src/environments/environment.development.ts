@@ -9,4 +9,6 @@ export const environment = {
   getApiFavoritedProviders: "users/providers",
   getApiFavoriteProvider: (providerId: string) =>
     `users/providers/${providerId}`,
+  getApiRequestProvider: (providerId: string) =>
+    `/users/request/providers/${providerId}`,
 };

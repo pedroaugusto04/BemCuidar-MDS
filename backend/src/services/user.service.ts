@@ -95,6 +95,23 @@ export class UserService {
     }
   }
 
+  public static async requestProvider(
+    userId: string,
+    providerId: string
+  ): Promise<void> {
+    const client: PoolClient = await connection.connect();
+    try {
+      const sqlStatement =
+        "INSERT INTO user_requests_service_providers (id_user,id_provider) VALUES ($1,$2) RETURNING *";
+
+      const values = [userId, providerId];
+
+      await client.query(sqlStatement, values);
+    } finally {
+      client.release();
+    }
+  }
+
   public static async getFavoritedProviders(
     userId: string
   ): Promise<ServiceProvider[]> {
