@@ -37,7 +37,7 @@ export class ViewServiceProviderComponent {
 
   enviarSolicitacao() {
     if (!this.cookieService.get("token")) {
-      this.onError("Faça login para favoritar um cuidador!");
+      this.onError("Faça login para solicitar um cuidador!");
     }
 
     const serviceProvider = this.modal.serviceProvider;
