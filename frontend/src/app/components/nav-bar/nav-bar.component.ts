@@ -7,11 +7,13 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { HttpClientModule } from "@angular/common/http";
 import { Router, RouterLink } from "@angular/router";
 import { LoginService } from "../../services/userServices/login.service";
-import { Observable } from "rxjs";
+import { Observable, delay } from "rxjs";
 import { User } from "../../models/User";
 import { CommonModule } from "@angular/common";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { UserService } from "../../services/userServices/user.service";
+import { LoadingService } from "../../loading/services/loading.service";
+import { LoadingComponent } from "../../loading/loading.component";
 
 @Component({
   selector: "app-nav-bar",
@@ -23,6 +25,7 @@ import { UserService } from "../../services/userServices/user.service";
     HttpClientModule,
     RouterLink,
     CommonModule,
+    LoadingComponent,
   ],
   providers: [MatIconRegistry],
   templateUrl: "./nav-bar.component.html",
@@ -39,7 +42,8 @@ export class NavBarComponent implements OnInit {
     private loginService: LoginService,
     private userService: UserService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private loadingService: LoadingService
   ) {
     if (typeof window !== "undefined") {
       this.isMobile = window.innerWidth < 992;
@@ -52,7 +56,17 @@ export class NavBarComponent implements OnInit {
     );
   }
   ngOnInit(): void {
+    this.loadingService.setLoading(true);
     this.user$ = this.userService.getUserInfo();
+
+    this.user$.pipe(delay(100)).subscribe({
+      next: () => {
+        this.loadingService.setLoading(false); // Oculta o loading após o atraso
+      },
+      error: () => {
+        this.loadingService.setLoading(false); // Oculta o loading se ocorrer erro, após o atraso
+      },
+    });
   }
 
   @HostListener("window:resize", ["$event"])
@@ -65,7 +79,7 @@ export class NavBarComponent implements OnInit {
     this.signOutAlert("Usuário deslogado com suceso!");
   }
 
-  signOutAlert(msg: string){
+  signOutAlert(msg: string) {
     this.snackBar.open(msg, "X", {
       duration: 1000,
       verticalPosition: "top",
