@@ -42,7 +42,10 @@ export class ViewServiceProviderComponent {
 
     const serviceProvider = this.modal.serviceProvider;
 
-    this.providerService.requestProvider(serviceProvider.id);
+    this.providerService.requestProvider(serviceProvider.id).subscribe({
+      next: () => this.onSuccess("Cuidador solicitado com sucesso!"),
+      error: () => this.onError("Erro ao solicitar cuidador!"),
+    });
   }
 
   onSuccess(msg: string) {
