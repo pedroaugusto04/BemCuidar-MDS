@@ -18,7 +18,9 @@ export class ProviderService {
   }
   getFavoritedProviders(): Observable<ServiceProvider[]> {
     const apiUrl = new URL(
-      environment.getApiFavoritedProviders,this.API).toString();
+      environment.getApiFavoritedProviders,
+      this.API
+    ).toString();
     return this.httpClient.get<ServiceProvider[]>(apiUrl);
   }
 }

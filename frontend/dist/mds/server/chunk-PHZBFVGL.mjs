@@ -1,2 +1,0 @@
-import './polyfills.server.mjs';
-import{e as s}from"./chunk-VC2TCARJ.mjs";import"./chunk-J4OVULGT.mjs";import{Ja as r,Ka as i,La as a,O as o,ab as p,gb as m}from"./chunk-T7GZVMYR.mjs";import"./chunk-VVCT4QZE.mjs";var c=(()=>{let e=class e{};e.\u0275fac=function(n){return new(n||e)},e.\u0275cmp=o({type:e,selectors:[["app-profile"]],standalone:!0,features:[m],decls:3,vars:0,template:function(n,l){n&1&&(a(0,"app-nav-bar"),r(1,"h1"),p(2,"PROFILE PAGE"),i())},dependencies:[s]});let t=e;return t})();var h=[{path:"",component:c}];export{h as PROFILE_ROUTES};
