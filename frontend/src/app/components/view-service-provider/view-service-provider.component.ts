@@ -6,10 +6,10 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule } from "@angular/material/dialog";
 import { ProviderService } from "../../services/providerServices/provider.service";
 import { User } from "../../models/User";
-import { UserService } from "../../services/userServices/user.service";
 import { Observable } from "rxjs";
 import { CookieService } from "ngx-cookie-service";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { LoginService } from "../../services/userServices/login.service";
 
 @Component({
   selector: "app-view-service-provider",
@@ -19,20 +19,20 @@ import { MatSnackBar } from "@angular/material/snack-bar";
   imports: [MatIconModule, MatButtonModule, MatDialogModule],
 })
 export class ViewServiceProviderComponent {
-  user$!: Observable<User>;
+  user$!: Observable<User | null>;
   userId!: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public modal: { serviceProvider: ServiceProvider },
     private providerService: ProviderService,
-    private userService: UserService,
+    private loginService: LoginService,
     private cookieService: CookieService,
     private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
-    this.user$ = this.userService.getUserInfo();
+    this.user$ = this.loginService.getUserInfo();
   }
 
   enviarSolicitacao() {

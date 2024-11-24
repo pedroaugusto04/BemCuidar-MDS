@@ -33,7 +33,7 @@ import { LoadingComponent } from "../../loading/loading.component";
 })
 export class NavBarComponent implements OnInit {
   isMobile!: boolean;
-  user$!: Observable<User>;
+  user$!: Observable<User | null>;
   defaultIcon: string = "assets/imgs/user_icon.svg";
 
   constructor(
@@ -57,14 +57,13 @@ export class NavBarComponent implements OnInit {
   }
   ngOnInit(): void {
     this.loadingService.setLoading(true);
-    this.user$ = this.userService.getUserInfo();
-
-    this.user$.pipe(delay(100)).subscribe({
+    this.user$ = this.loginService.getUserInfo();
+    this.user$.subscribe({
       next: () => {
-        this.loadingService.setLoading(false); // Oculta o loading após o atraso
+        this.loadingService.setLoading(false);
       },
       error: () => {
-        this.loadingService.setLoading(false); // Oculta o loading se ocorrer erro, após o atraso
+        this.loadingService.setLoading(false);
       },
     });
   }

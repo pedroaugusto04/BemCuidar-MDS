@@ -1,16 +1,20 @@
 import { Injectable } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable, tap } from "rxjs";
 import { environment } from "../../../environments/environment.development";
 import { HttpClient } from "@angular/common/http";
 import { AuthResponse } from "../../models/AuthResponse";
 import { CookieService } from "ngx-cookie-service";
+import { User } from "../../models/User";
 
 @Injectable({
   providedIn: "root",
 })
 export class LoginService {
   private readonly API = environment.baseUrl;
+  private userSubject: BehaviorSubject<User | null> =
+    new BehaviorSubject<User | null>(null);
+  public user$: Observable<User | null> = this.userSubject.asObservable();
 
   constructor(
     private httpClient: HttpClient,
@@ -43,7 +47,25 @@ export class LoginService {
     return this.cookieService.get("token") ?? "";
   }
 
+  getUserInfo(): Observable<User | null> {
+    if (this.userSubject.value) {
+      return new Observable<User>((observer) => {
+        // retorna o valor direto do subject
+        observer.next(this.userSubject.value!);
+        observer.complete();
+      });
+    }
+    const apiUrl = new URL(environment.getApiUsersInfo, this.API).toString();
+
+    return this.httpClient.get<User>(apiUrl).pipe(
+      tap((user) => {
+        this.userSubject.next(user); // busca o usuario do banco e armazena no subject
+      })
+    );
+  }
+
   signOut() {
+    this.userSubject.next(null); // limpa os dados carregados
     this.cookieService.deleteAll();
   }
 
@@ -88,10 +110,5 @@ export class LoginService {
       console.error("Error validating token expiration:", error);
       return true;
     }
-  }
-
-  isUserLoggedIn() {
-    //const token = this.getAuthorizationToken("token");
-    //return !this.isTokenExpired(token);
   }
 }

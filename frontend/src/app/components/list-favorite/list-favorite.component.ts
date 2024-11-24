@@ -11,6 +11,7 @@ import { MatChipsModule } from "@angular/material/chips";
 import { MatCardModule } from "@angular/material/card";
 import { User } from "../../models/User";
 import { UserService } from "../../services/userServices/user.service";
+import { LoginService } from "../../services/userServices/login.service";
 
 @Component({
   selector: "app-list",
@@ -27,16 +28,19 @@ import { UserService } from "../../services/userServices/user.service";
   templateUrl: "./list-favorite.component.html",
   styleUrl: "./list-favorite.component.scss",
 })
-export class ListFavoriteComponent implements OnInit{
-  user$!: Observable<User>;
+export class ListFavoriteComponent implements OnInit {
+  user$!: Observable<User | null>;
   favoriteProviders$!: Observable<ServiceProvider[]>;
 
-  constructor(private providerService: ProviderService, private userService: UserService) {}
-  
+  constructor(
+    private providerService: ProviderService,
+    private loginService: LoginService
+  ) {}
+
   ngOnInit(): void {
-  this.user$ = this.userService.getUserInfo();
-  if (this.user$){
-    this.favoriteProviders$ = this.providerService.getFavoritedProviders();
-  }
+    this.user$ = this.loginService.getUserInfo();
+    if (this.user$) {
+      this.favoriteProviders$ = this.providerService.getFavoritedProviders();
+    }
   }
 }
