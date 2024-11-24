@@ -1,0 +1,12 @@
+{
+  "routes": [
+    "/",
+    "/care",
+    "/discover",
+    "/favorites",
+    "/home",
+    "/login",
+    "/profile",
+    "/register"
+  ]
+}
