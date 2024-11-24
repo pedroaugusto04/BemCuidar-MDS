@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../../environments/environment.development";
-import { Observable } from "rxjs";
+import { Observable, map } from "rxjs";
 import { ServiceProvider } from "../../models/ServiceProvider";
 
 @Injectable({
@@ -22,5 +22,16 @@ export class ProviderService {
       this.API
     ).toString();
     return this.httpClient.get<ServiceProvider[]>(apiUrl);
+  }
+
+  requestProvider(providerId: string): Observable<boolean> {
+    const apiUrl = new URL(
+      environment.getApiRequestProvider(providerId),
+      this.API
+    ).toString();
+
+    return this.httpClient
+      .post(apiUrl, {}, { observe: "response" })
+      .pipe(map((response) => response.status === 200));
   }
 }
