@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import { StarRatingComponent } from "./components/utils/star-rating/star-rating.component";
-import { LoadingComponent } from "./loading/loading.component";
+import { LoadingComponent } from "./components/loading/loading.component";
 import { CommonModule } from "@angular/common";
 @Component({
   selector: "app-root",

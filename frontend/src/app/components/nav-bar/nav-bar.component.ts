@@ -7,13 +7,11 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { HttpClientModule } from "@angular/common/http";
 import { Router, RouterLink } from "@angular/router";
 import { LoginService } from "../../services/userServices/login.service";
-import { Observable, delay } from "rxjs";
+import { Observable } from "rxjs";
 import { User } from "../../models/User";
 import { CommonModule } from "@angular/common";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { UserService } from "../../services/userServices/user.service";
-import { LoadingService } from "../../loading/services/loading.service";
-import { LoadingComponent } from "../../loading/loading.component";
+import { LoadingComponent } from "../loading/loading.component";
 
 @Component({
   selector: "app-nav-bar",
@@ -40,10 +38,8 @@ export class NavBarComponent implements OnInit {
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
     private loginService: LoginService,
-    private userService: UserService,
     private snackBar: MatSnackBar,
-    private router: Router,
-    private loadingService: LoadingService
+    private router: Router
   ) {
     if (typeof window !== "undefined") {
       this.isMobile = window.innerWidth < 992;
@@ -56,16 +52,7 @@ export class NavBarComponent implements OnInit {
     );
   }
   ngOnInit(): void {
-    this.loadingService.setLoading(true);
     this.user$ = this.loginService.getUserInfo();
-    this.user$.subscribe({
-      next: () => {
-        this.loadingService.setLoading(false);
-      },
-      error: () => {
-        this.loadingService.setLoading(false);
-      },
-    });
   }
 
   @HostListener("window:resize", ["$event"])
