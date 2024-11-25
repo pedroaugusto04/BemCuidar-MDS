@@ -1,7 +1,7 @@
 import { UserRequestStatus } from "./enums/UserRequestStatus";
 
 export interface UserRequest {
-  id_user: string;
-  id_provider: string;
+  name: string;
+  photo: string;
   status: UserRequestStatus;
 }
