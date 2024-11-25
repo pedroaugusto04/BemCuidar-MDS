@@ -9,6 +9,7 @@ import { CardServiceProviderComponent } from "../card-service-provider/card-serv
 import { ProviderService } from "../../services/providerServices/provider.service";
 import { Observable } from "rxjs";
 import { CommonModule } from "@angular/common";
+import { LoadingComponent } from "../loading/loading.component";
 
 @Component({
   selector: "app-list",
@@ -21,6 +22,7 @@ import { CommonModule } from "@angular/common";
     MatMenuModule,
     MatIconModule,
     CommonModule,
+    LoadingComponent,
   ],
   templateUrl: "./list-provider.component.html",
   styleUrl: "./list-provider.component.scss",

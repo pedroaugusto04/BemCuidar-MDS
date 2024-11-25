@@ -90,6 +90,21 @@ export class UserController {
     }
   }
 
+  public static async getUserRequests(req: Request, res: Response) {
+    try {
+      const token = req.headers.authorization;
+      if (token) {
+        const userId = getUserIdByToken(token);
+        const userRequests = await UserService.getUserRequests(userId);
+        return res.status(200).json(userRequests);
+      }
+    } catch (error: any) {
+      return res
+        .status(500)
+        .json({ message: "Erro ao buscar cuidadores favoritos." });
+    }
+  }
+
   public static async getUserInfo(req: Request, res: Response) {
     try {
       const token = req.headers.authorization;

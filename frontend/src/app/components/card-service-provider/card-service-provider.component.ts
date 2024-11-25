@@ -1,7 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { StarRatingComponent } from "../utils/star-rating/star-rating.component";
 import { ServiceProvider } from "../../models/ServiceProvider";
-import { ViewServiceProviderComponent } from "../view-service-provider/view-service-provider.component";
 import { ViewServiceProviderService } from "../view-service-provider/services/view-service-provider.service";
 
 @Component({

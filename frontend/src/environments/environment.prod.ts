@@ -7,6 +7,7 @@ export const environment = {
   getApiUsers: "users",
   getApiAuth: "login",
   getApiFavoritedProviders: "users/providers",
+  getApiUserRequests: "users/requests",
   getApiFavoriteProvider: (providerId: string) =>
     `users/providers/${providerId}`,
   getApiRequestProvider: (providerId: string) =>
