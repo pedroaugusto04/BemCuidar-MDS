@@ -30,9 +30,7 @@ import { LoadingComponent } from "../loading/loading.component";
 export class ListProviderComponent implements OnInit {
   providers$!: Observable<ServiceProvider[]>;
 
-  constructor(
-    private providerService: ProviderService,
-  ) {}
+  constructor(private providerService: ProviderService) {}
 
   ngOnInit(): void {
     this.providers$ = this.providerService.getProviders();

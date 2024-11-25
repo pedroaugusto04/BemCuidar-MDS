@@ -1,6 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../../environments/environment.development";
+import { UserRequest } from "../../models/UserRequest";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -24,5 +26,10 @@ export class UserService {
       this.API
     ).toString();
     return this.httpClient.delete(apiUrl);
+  }
+
+  getUserRequests(): Observable<UserRequest[]> {
+    const apiUrl = new URL(environment.getApiUserRequests, this.API).toString();
+    return this.httpClient.get<UserRequest[]>(apiUrl);
   }
 }

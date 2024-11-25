@@ -25,9 +25,9 @@ export const APP_ROUTES: Routes = [
   {
     path: "care",
     loadChildren: () =>
-      import("./components/register-provider/register-provider.component.routes").then(
-        (m) => m.REGISTER_PROVIDER_ROUTES
-      ),
+      import(
+        "./components/register-provider/register-provider.component.routes"
+      ).then((m) => m.REGISTER_PROVIDER_ROUTES),
   },
   {
     path: "home",
@@ -55,6 +55,20 @@ export const APP_ROUTES: Routes = [
     loadChildren: () =>
       import("./components/register/register.component.routes").then(
         (m) => m.REGISTER_ROUTES
+      ),
+  },
+  {
+    path: "provider-announcements",
+    loadChildren: () =>
+      import(
+        "./components/provider-announcements/provider-announcements.component.routes"
+      ).then((m) => m.PROVIDER_ANNOUNCEMENTS_ROUTES),
+  },
+  {
+    path: "user-requests",
+    loadChildren: () =>
+      import("./components/user-requests/user-requests.component.routes").then(
+        (m) => m.USER_REQUESTS_ROUTES
       ),
   },
 ];

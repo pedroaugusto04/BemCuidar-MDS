@@ -1,0 +1,14 @@
+<app-nav-bar></app-nav-bar>
+<h1>Suas Solicitações</h1>
+<div class="list-elements">
+  @if(requests$ | async; as requests) { @for (request of requests; track
+  request) {
+  <div class="request">
+    <app-card-user-request
+      id_user="{{ request.id_user }}"
+      id_provider="{{ request.id_provider }}"
+      status="{{ request.status }}"
+    ></app-card-user-request>
+  </div>
+  } }
+</div>
