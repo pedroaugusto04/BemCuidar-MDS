@@ -3,6 +3,7 @@ import { User } from "../models/User";
 import { v4 as uuidv4 } from "uuid";
 import { connection } from "../database/config";
 import { ServiceProvider } from "../models/ServiceProvider";
+import { UserRequest } from "../models/UserRequest";
 
 export class UserService {
   public static async getUsers(): Promise<User[]> {
@@ -125,6 +126,22 @@ export class UserService {
       const result: QueryResult = await client.query(sqlStatement, values);
 
       return result.rows as ServiceProvider[];
+    } finally {
+      client.release();
+    }
+  }
+
+  public static async getUserRequests(userId: string): Promise<UserRequest[]> {
+    const client: PoolClient = await connection.connect();
+    try {
+      const sqlStatement =
+        "SELECT p.name,p.photo,r.status FROM service_providers p JOIN user_requests_service_providers r  ON p.id = r.id_provider WHERE r.id_user = $1";
+
+      const values = [userId];
+
+      const result: QueryResult = await client.query(sqlStatement, values);
+
+      return result.rows as UserRequest[];
     } finally {
       client.release();
     }
