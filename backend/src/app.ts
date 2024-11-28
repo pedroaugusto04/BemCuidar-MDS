@@ -23,3 +23,13 @@ app.use(multerMiddleware);
 app.use(loginRouter);
 app.use(userRouter);
 app.use(serviceProviderRouter);
+
+// Swagger, apenas para desenvolvimento. Nao vai rodar no docker porque
+// o docker nao instala as dependencias de desenvolvimento. Para rodar, usar:
+// `npm run develop` no diretorio do backend (precisa das dependencias de dev)
+// o swagger vai ficar em /swagger
+// - @pejacome
+if (process.env.NODE_ENV == "development") {
+  const { swaggerDocs } = require("./utils/swagger");
+  swaggerDocs(app);
+}

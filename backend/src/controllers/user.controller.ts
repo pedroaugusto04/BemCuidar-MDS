@@ -101,7 +101,7 @@ export class UserController {
     } catch (error: any) {
       return res
         .status(500)
-        .json({ message: "Erro ao buscar cuidadores favoritos." });
+        .json({ message: "Erro ao buscar solicitações." });
     }
   }
 
@@ -115,9 +115,9 @@ export class UserController {
       }
       if (user) {
         const { password, ...dtoUser } = user;
-        res.json(dtoUser);
+        res.status(200).json(dtoUser);
       } else {
-        res.status(204).json({ message: "Usuário não encontrado." });
+        res.status(404).json({ message: "Usuário não encontrado." });
       }
     } catch (error: any) {
       if (error.message === "Token inválido para este usuário.") {
