@@ -26,6 +26,7 @@ export class StarRatingComponent {
   onClick() {
     if (!this.cookieService.get("token")) {
       this.onError("Faça login para favoritar um cuidador!");
+      return;
     }
     if (this.active) {
       this.unfavorite();

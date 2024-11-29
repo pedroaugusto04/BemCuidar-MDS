@@ -38,13 +38,17 @@ export class ViewServiceProviderComponent {
   enviarSolicitacao() {
     if (!this.cookieService.get("token")) {
       this.onError("Faça login para solicitar um cuidador!");
+      return;
     }
 
     const serviceProvider = this.modal.serviceProvider;
 
     this.providerService.requestProvider(serviceProvider.id).subscribe({
       next: () => this.onSuccess("Cuidador solicitado com sucesso!"),
-      error: () => this.onError("Erro ao solicitar cuidador!"),
+      error: () => {
+        this.onError("Erro ao solicitar cuidador!");
+        return;
+      },
     });
   }
 
