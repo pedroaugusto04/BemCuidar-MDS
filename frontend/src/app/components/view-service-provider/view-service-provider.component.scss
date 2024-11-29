@@ -137,9 +137,28 @@ a {
   width: 100%;
 }
 .button-register{
-  padding-left: 3rem;
+  padding-left: 2rem;
   padding-top: 1.5rem;
+  padding-right: 2rem;
 }
 .btn-register{
-  width:28rem;
+  width:40%;
+  align-items: left;
+}
+@media  (max-width: 37.5rem) {
+  .content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: baseline;
+  }
+  .btn-register{
+    width: 100%;
+  }
+  .provider-description{
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
 }
