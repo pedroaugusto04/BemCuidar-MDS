@@ -24,6 +24,10 @@ a {
   padding-top: 0.6rem;
 }
 
+.div-logo h4{
+  font-family: Hammersmith One;
+}
+
 .div-icons {
   display: flex;
   justify-content: flex-end;
@@ -92,7 +96,7 @@ a {
   font-weight: 500;
   line-height: 1.25rem;
   letter-spacing: 0.00938rem;
-
+  font-family: Hammersmith One;
   margin-left: 6.25rem;
   margin-right: 3rem;
 }
@@ -120,7 +124,7 @@ a {
 #username-info {
   color: var(--text-primary, rgba(0, 0, 0, 0.87));
   font-feature-settings: "clig" off, "liga" off;
-  font-family: Roboto;
+  font-family: Hammersmith One;
   font-size: 1rem;
   font-style: normal;
   align-self: stretch;
@@ -134,7 +138,7 @@ a {
 #username-email-info {
   color: var(--text-secondary, rgba(0, 0, 0, 0.6));
   font-feature-settings: "clig" off, "liga" off;
-  font-family: Roboto;
+  font-family: Hammersmith One;
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 400;
@@ -147,7 +151,7 @@ a {
 .sections-text {
   color: var(--text-primary, rgba(0, 0, 0, 0.87));
   font-feature-settings: "clig" off, "liga" off;
-  font-family: Roboto;
+  font-family: Hammersmith One;
   font-size: 1rem;
   font-style: normal;
   font-weight: 400;
@@ -157,6 +161,7 @@ a {
 }
 
 #div-register {
+  font-family: Hammersmith One;
   cursor: pointer;
   padding-right: 2rem;
   height: 100%;
@@ -182,4 +187,34 @@ a {
     cursor: pointer;
     padding-left: 1.88rem;
   }
+}
+@media (max-width: 37.5rem) {
+  mat-toolbar-row {
+    margin: 0;
+    padding: 0;
+  }
+
+  .profile-img {
+    cursor: pointer;
+    padding-right: 0;
+  }
+
+  .div-logo {
+    cursor: pointer;
+    padding-left: 1.88rem;
+  }
+}
+@media(max-width:25rem){
+  .div-logo {
+    cursor: pointer;
+    padding-left: 0.9rem;
+  }
+  mat-toolbar {
+    padding-right: 0;
+  }
+}
+.hammersmith-one-regular {
+  font-family: "Hammersmith One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }

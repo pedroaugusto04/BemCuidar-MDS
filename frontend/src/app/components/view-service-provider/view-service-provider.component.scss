@@ -73,6 +73,14 @@ a {
   align-items: center;
   gap: var(--1, 0.5rem);
 }
+::ng-deep button[mat-flat-button] {
+  background-color: black !important; /* Fundo preto */
+  color: white !important; /* Texto branco */
+}
+
+::ng-deep button[mat-flat-button]:hover {
+  background-color: #333 !important; /* Fundo preto mais claro no hover */
+}
 
 .hidden-input {
   display: none;

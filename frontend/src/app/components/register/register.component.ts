@@ -13,6 +13,7 @@ import { first } from "rxjs";
 import { RegisterService } from "../../services/userServices/register.service";
 import { NavBarComponent } from "../nav-bar/nav-bar.component";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: "app-register",
@@ -24,6 +25,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
     RouterLink,
     MatIconModule,
     NavBarComponent,
+    MatButtonModule,
   ],
   templateUrl: "./register.component.html",
   styleUrl: "./register.component.scss",

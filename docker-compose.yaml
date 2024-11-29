@@ -1,6 +1,15 @@
 services:
   front:
     build: ./frontend
+    develop:
+      watch:
+        - action: sync
+          path: ./components
+          target: /src/app/components
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: package.json
     volumes:
       - ./frontend:/app
       - /app/node_modules

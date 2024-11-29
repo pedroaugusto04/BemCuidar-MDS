@@ -26,5 +26,5 @@ const poolConfig =
         password: process.env.POSTGRES_PASSWORD_DEV,
         database: process.env.POSTGRES_DB_DEV,
       };
-
+      
 export const connection = new Pool(poolConfig);
