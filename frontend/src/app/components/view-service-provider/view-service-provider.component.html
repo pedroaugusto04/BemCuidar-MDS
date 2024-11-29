@@ -8,7 +8,8 @@
     <!-- carregar componente de upload-->
     <div class="upload-img">
       <div class="providers">
-        <img
+        <div class="class-img-provider">
+          <img
           [src]="
             modal.serviceProvider.photo
               ? modal.serviceProvider.photo
@@ -17,6 +18,7 @@
           class="provider-cover"
           alt="Imagem selecionada"
         />
+        </div>
       </div>
       <div class="main-info">
         <div class="provider-info">
@@ -36,7 +38,10 @@
       </p>
     </div>
   </div>
-  <button mat-flat-button color="black" (click)="enviarSolicitacao()">
-    Enviar Solicitação
-  </button>
+  <div class="button-register">
+    <button mat-flat-button class="btn-register" color="black" (click)="enviarSolicitacao()">
+      Enviar Solicitação
+    </button>
+  </div>
+
 </div>

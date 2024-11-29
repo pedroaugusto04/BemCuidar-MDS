@@ -107,12 +107,15 @@ a {
   font-weight: 400;
   line-height: 1rem;
   letter-spacing: 0.03125rem;
+  padding-right: 3rem;
 }
 
 .providers {
+  padding-right: 3rem;
   width: 80%;
+  align-items: center;
+  align-content: center;
 }
-
 .empty-providers {
   display: flex;
   align-items: center;
@@ -123,10 +126,20 @@ a {
   border-radius: var(--borderRadius, 0.25rem);
   background: var(--color-principal-70, #e6e9f2);
 }
-
+.class-img-provider{
+  align-items: center;
+  padding-left: 5rem;
+}
 .provider-cover {
   border-radius: 0.25rem;
   object-fit: cover;
   height: 100%;
   width: 100%;
+}
+.button-register{
+  padding-left: 3rem;
+  padding-top: 1.5rem;
+}
+.btn-register{
+  width:28rem;
 }
