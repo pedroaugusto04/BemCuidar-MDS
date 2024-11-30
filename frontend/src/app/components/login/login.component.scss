@@ -82,10 +82,25 @@ h5 {
 
   .div-form {
     width: 32.313rem;
+    height: 21.9rem;
+    border-radius: 0.5rem;
+    border-width: 0.07rem;
+    border-color: #b9b9b9;
+    border-style: solid;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 }
 .hammersmith-one-regular {
   font-family: "Hammersmith One", sans-serif;
   font-weight: 400;
   font-style: normal;
+}
+.btn-primary{
+  width: 100%;
+}
+::ng-deep button[mat-flat-button] {
+  background-color: black !important;
+  color: white !important;
+  border-radius: 0.5rem;
 }

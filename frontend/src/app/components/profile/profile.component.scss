@@ -1,41 +1,51 @@
-profile-container{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
+.profile-container {
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center; //cetraliza verticalmente
+
 }
-div-links{
-    padding-top: 30rem;
-    border-style: solid;
-    border-radius: 2rem;
-    border-color: black;
-    height: 30rem;
-    width: 30rem;
+.div-links {
+  border-style: solid;
+  border-radius: 2rem;
+  border-color: #b9b9b9;
+  height: 11rem;
+  width: 22rem;
+  display: flex;
+  display: inline-block;
+  align-items: center;
+  text-align: left;
+  margin-left: 37.5%;
 }
-sections-text{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
+.sections-text {
+  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
 }
 
-h1{
-    font-family: Hammersmith One;
-    font-size: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-    padding-top: 15rem;
-    padding-bottom: 0;
-    margin-bottom: 0;
+h1 {
+  font-family: Hammersmith One;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  padding-top: 8rem;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  width: 100%;
 }
-h2{
-    font-family: Hammersmith One;
-    font-size: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-    padding-top: 0;
+.profile-container h1 {
+  width: 100%;
+  align-items: center;
+}
+h2 {
+  font-family: Hammersmith One;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  padding-top: 0;
 }
