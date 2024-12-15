@@ -1,21 +1,12 @@
-profile-container{
+
+.div-links{
+
+    height: 20rem;
+    width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-}
-div-links{
-    padding-top: 30rem;
-    border-style: solid;
-    border-radius: 2rem;
-    border-color: black;
-    height: 30rem;
-    width: 30rem;
-}
-sections-text{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column; /* Para alinhar os botões em uma coluna */
+    gap: 1rem; /* Espaço entre os botões */
+    align-items: center; /* Centraliza os botões horizontalmente */
     align-content: center;
 }
 
@@ -26,7 +17,7 @@ h1{
     align-items: center;
     justify-content: center;
     align-content: center;
-    padding-top: 15rem;
+    padding-top: 9rem;
     padding-bottom: 0;
     margin-bottom: 0;
 }
@@ -38,4 +29,9 @@ h2{
     justify-content: center;
     align-content: center;
     padding-top: 0;
+}
+::ng-deep button[mat-flat-button] {
+  background-color: #007bff !important;
+  color: white !important;
+  border-radius: 0.5rem;
 }

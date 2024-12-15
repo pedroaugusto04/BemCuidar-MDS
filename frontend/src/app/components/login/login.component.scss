@@ -23,7 +23,6 @@ a {
 }
 
 h5 {
-  font-size: 1.5rem;
   font-size: 36px;
 }
 
@@ -72,7 +71,7 @@ h5 {
   }
 
   .form-container h5 {
-    font-size: 3rem !important;
+    font-size: 2.25rem !important;
     margin-bottom: 3rem;
   }
 
@@ -88,4 +87,10 @@ h5 {
   font-family: "Hammersmith One", sans-serif;
   font-weight: 400;
   font-style: normal;
+}
+
+::ng-deep button[mat-flat-button] {
+  background-color: black !important;
+  color: white !important;
+  border-radius: 0.5rem;
 }

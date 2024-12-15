@@ -207,11 +207,10 @@ a {
 @media(max-width:25rem){
   .div-logo {
     cursor: pointer;
-    padding-left: 0.9rem;
+    padding-left: 0rem;
+    margin-right: 0;
   }
-  mat-toolbar {
-    padding-right: 0;
-  }
+
 }
 .hammersmith-one-regular {
   font-family: "Hammersmith One", sans-serif;
