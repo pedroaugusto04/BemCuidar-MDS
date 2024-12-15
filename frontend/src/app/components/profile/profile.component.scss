@@ -17,18 +17,18 @@ h1{
     align-items: center;
     justify-content: center;
     align-content: center;
-    padding-top: 9rem;
+    padding-top: 15rem;
     padding-bottom: 0;
     margin-bottom: 0;
 }
-h2{
-    font-family: Hammersmith One;
-    font-size: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-    padding-top: 0;
+h2 {
+  font-family: Hammersmith One;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  padding-top: 0;
 }
 ::ng-deep button[mat-flat-button] {
   background-color: #007bff !important;

@@ -167,13 +167,15 @@ h5 {
     padding-top: 0rem;
   }
   #nameField {
+    padding-left: 1.5rem;
     padding-bottom: 0rem;
     padding-top: 0rem;
   }
   .fields {
     width: 60rem;
     height: 65rem;
-    border-radius: 20px;
+    border-radius: 1.25rem;
+    border-width: 0.07rem;
     border-color: #d9d9d9;
     border-style: solid;
     align-items: center;
@@ -187,8 +189,8 @@ h5 {
 
   .title-about-yourself {
     align-items: rigth;
-    padding-top: 1rem;
-    padding-left: 1rem;
+    padding-top: 1.25rem;
+    padding-left: 1.875rem;
     padding-right: 40rem;
     margin-bottom: 0rem;
     margin-top: 0rem;
