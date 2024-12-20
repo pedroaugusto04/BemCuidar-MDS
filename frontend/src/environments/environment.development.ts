@@ -3,6 +3,7 @@ export const environment = {
   name: "development",
   baseUrl: "http://localhost:3000/",
   getApiProviders: "providers",
+  getApiProviderAnnouncements: "providers/announcements",
   getApiUsersInfo: "users/info/",
   getApiUsers: "users",
   getApiAuth: "login",

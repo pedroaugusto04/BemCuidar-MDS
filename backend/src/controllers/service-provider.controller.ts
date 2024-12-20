@@ -30,19 +30,38 @@ export class ServiceProviderController {
 
   public static async createProvider(req: Request, res: Response) {
     try {
-      const newProvider: ServiceProvider = req.body;
-      if (req.files && "photo" in req.files) {
-        let downloadUrl = await uploadFile(req.files["photo"][0]);
-        newProvider.photo = downloadUrl ? downloadUrl : "";
+      const token = req.headers.authorization;
+      let createdProvider: ServiceProvider;
+      if (token){
+        const userId = getUserIdByToken(token);
+        const newProvider: ServiceProvider = req.body;
+        if (req.files && "photo" in req.files) {
+          let downloadUrl = await uploadFile(req.files["photo"][0]);
+          newProvider.photo = downloadUrl ? downloadUrl : "";
+        }
+  
+        createdProvider = await ServiceProviderService.createProvider(
+          newProvider,userId
+        ); 
+        return res.status(201).json(createdProvider);
       }
-
-      const createdProvider = await ServiceProviderService.createProvider(
-        newProvider
-      );
-      return res.status(201).json(createdProvider);
     } catch (error: any) {
       console.log(error);
       return res.status(500).json({ message: "Erro ao registrar cuidador." });
+    }
+  }
+
+  public static async getProviderAnnouncements(req: Request, res: Response) {
+    try {
+      const token = req.headers.authorization;
+      let providerAnnouncements: ServiceProvider[] = [];
+      if (token){
+        const userId = getUserIdByToken(token);
+        providerAnnouncements = await ServiceProviderService.getProviderAnnouncements(userId);
+      }
+      return res.status(200).json(providerAnnouncements);
+    } catch (error: any) {
+      res.status(500).json({ message: "Erro ao buscar Anúncios do cuidador." });
     }
   }
 }

@@ -38,10 +38,11 @@
       </p>
     </div>
   </div>
-  <div class="button-register">
-    <button mat-flat-button class="btn-register" color="black" (click)="enviarSolicitacao()">
-      Enviar Solicitação
-    </button>
-  </div>
-
+  @if(!isProviderRequirement){
+    <div class="button-register">
+      <button mat-flat-button class="btn-register" color="black" (click)="enviarSolicitacao()">
+        Enviar Solicitação
+      </button>
+    </div>
+  }
 </div>

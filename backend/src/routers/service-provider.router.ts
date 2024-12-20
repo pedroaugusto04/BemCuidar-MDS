@@ -30,6 +30,8 @@ const serviceProviderRouter = Router();
  */
 serviceProviderRouter.get("/providers", ServiceProviderController.getProviders);
 
+serviceProviderRouter.get("/providers/announcements",ServiceProviderController.getProviderAnnouncements);
+
 /**
  * @openapi
  * '/providers':

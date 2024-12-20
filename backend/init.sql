@@ -15,7 +15,9 @@ CREATE TABLE IF NOT EXISTS service_providers (
     country VARCHAR,
     city VARCHAR,
     photo VARCHAR NULL,
-    service_description VARCHAR NULL
+    service_description VARCHAR NULL,
+    user_id VARCHAR NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE TABLE IF NOT EXISTS user_favorites_service_providers (

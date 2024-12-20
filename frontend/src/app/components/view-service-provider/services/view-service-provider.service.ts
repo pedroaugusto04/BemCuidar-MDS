@@ -9,9 +9,9 @@ import { ServiceProvider } from "../../../models/ServiceProvider";
 export class ViewServiceProviderService {
   constructor(private dialog: MatDialog) {}
 
-  openDialog(serviceProvider: ServiceProvider) {
+  openDialog(serviceProvider: ServiceProvider, isProviderRequirement: boolean = false) {
     this.dialog.open(ViewServiceProviderComponent, {
-      data: { serviceProvider },
+      data: { serviceProvider, isProviderRequirement},
       width: "90%",
       height: "95%",
     });

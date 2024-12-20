@@ -1,8 +1,20 @@
 <app-nav-bar></app-nav-bar>
-<div class="ads-container">
-    <h1>Anúncio</h1>
-    <div class="list-ads">
-
-    </div>
+<div class="list-elements">
+  @if(providerAnnouncements$ | async; as providerAnnouncements) { @for (providerAnnouncement of providerAnnouncements; track
+  providerAnnouncement.name) {
+  <div class="provider">
+    
+    <app-card-announcement-service-provider
+      providerAnnouncementId="{{providerAnnouncement.id}}"
+      providerAnnouncementName="{{ providerAnnouncement.name }}"
+      providerAnnouncementServiceDescription="{{ providerAnnouncement.service_description }}"
+      providerAnnouncementAge="{{ providerAnnouncement.age }}"
+      providerAnnouncementCountry="{{ providerAnnouncement.country }}"
+      providerAnnouncementState="{{ providerAnnouncement.state }}"
+      providerAnnouncementCity="{{ providerAnnouncement.city }}"
+      providerAnnouncementPhoto="{{ providerAnnouncement.photo }}"
+    ></app-card-announcement-service-provider>
+  </div>
+  } }
 </div>
 

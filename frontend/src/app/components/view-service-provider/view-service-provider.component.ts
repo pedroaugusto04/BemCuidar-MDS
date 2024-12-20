@@ -21,10 +21,16 @@ import { LoginService } from "../../services/userServices/login.service";
 export class ViewServiceProviderComponent {
   user$!: Observable<User | null>;
   userId!: string;
+  isProviderRequirement: boolean = false;
 
   constructor(
+    /*
+    isProviderRequirement eh true quando o provider estiver
+    visualizando o proprio anuncio. Nao eh mais possivel solicitar 
+    e devem aparecer as opcoes para gerenciamento
+    */
     @Inject(MAT_DIALOG_DATA)
-    public modal: { serviceProvider: ServiceProvider },
+    public modal: { serviceProvider: ServiceProvider, isProviderRequirement: boolean}, 
     private providerService: ProviderService,
     private loginService: LoginService,
     private cookieService: CookieService,
@@ -33,6 +39,7 @@ export class ViewServiceProviderComponent {
 
   ngOnInit(): void {
     this.user$ = this.loginService.getUserInfo();
+    this.isProviderRequirement = this.modal.isProviderRequirement;
   }
 
   enviarSolicitacao() {

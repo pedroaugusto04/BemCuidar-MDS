@@ -1,0 +1,16 @@
+<div class="providerAnnouncement">
+    <img
+      (click)="onCardClick()"
+      mat-card-image
+      class="providerAnnouncement-img"
+      [src]="providerAnnouncementPhoto ? providerAnnouncementPhoto : 'assets/imgs/default_img.jpeg'"
+      alt="{{ providerAnnouncementName }}"
+    />
+    <div class="info">
+      <div class="providerAnnouncement-info">
+        <h2>{{ providerAnnouncementName }} ({{ providerAnnouncementAge }} anos)</h2>
+        <h4>{{ providerAnnouncementCountry }} - {{ providerAnnouncementState }} - {{ providerAnnouncementCity }}</h4>
+      </div>
+    </div>
+  </div>
+  

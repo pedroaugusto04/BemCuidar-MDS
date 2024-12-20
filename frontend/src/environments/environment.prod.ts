@@ -3,6 +3,7 @@ export const environment = {
   name: "production",
   baseUrl: "https://bemcuidar-mds.onrender.com/",
   getApiProviders: "providers",
+  getApiProviderAnnouncements: "providers/announcements",
   getApiUsersInfo: "users/info/",
   getApiUsers: "users",
   getApiAuth: "login",

@@ -34,4 +34,9 @@ export class ProviderService {
       .post(apiUrl, {}, { observe: "response" })
       .pipe(map((response) => response.status === 200));
   }
+
+  getProviderAnnouncements(): Observable<ServiceProvider[]> {
+    const apiUrl = new URL(environment.getApiProviderAnnouncements, this.API).toString();
+    return this.httpClient.get<ServiceProvider[]>(apiUrl);
+  }
 }
