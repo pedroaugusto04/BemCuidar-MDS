@@ -50,4 +50,19 @@ serviceProviderRouter.post(
   ServiceProviderController.createProvider
 );
 
+serviceProviderRouter.get(
+  "/providers/requests",
+  ServiceProviderController.getRequests
+)
+
+serviceProviderRouter.get(
+  "/providers/requests/:requestId",
+  ServiceProviderController.getRequest
+)
+
+serviceProviderRouter.put(
+  "/providers/requests/:requestId",
+  ServiceProviderController.setRequestStatus
+)
+
 export { serviceProviderRouter };

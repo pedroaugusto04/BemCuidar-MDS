@@ -3,6 +3,8 @@ import { UserService } from "../services/user.service";
 import { User } from "../models/User";
 import { hashPassword } from "../utils/bcryptUtils";
 import { getUserIdByToken } from "../utils/jwtAuth";
+import { ServiceRequest } from "../models/ServiceRequest";
+import { uploadFile } from "../utils/fileUploadUtils";
 
 export class UserController {
   public static async createUser(req: Request, res: Response) {
@@ -12,7 +14,7 @@ export class UserController {
 
       const createdUser = await UserService.createUser(newUser);
 
-      const { password, ...dtoUser } = createdUser;
+      const { password, create_time, ...dtoUser } = createdUser;
 
       return res.status(201).json(dtoUser);
     } catch (error: any) {
@@ -60,10 +62,15 @@ export class UserController {
   public static async requestProvider(req: Request, res: Response) {
     try {
       const token = req.headers.authorization;
+      let newRequest: ServiceRequest = req.body;
       if (token) {
         const userId = getUserIdByToken(token);
         const providerId = req.params.providerId;
-        await UserService.requestProvider(userId, providerId);
+        if (req.files && "req_photo" in req.files) {
+          let downloadUrl = await uploadFile(req.files["req_photo"][0]);
+          newRequest.req_photo = downloadUrl ? downloadUrl : "";
+        }
+        await UserService.requestProvider(newRequest, userId, providerId);
         return res
           .status(200)
           .json({ message: "Cuidador Solicitado com sucesso!" });
@@ -102,6 +109,22 @@ export class UserController {
       return res
         .status(500)
         .json({ message: "Erro ao buscar solicitações." });
+    }
+  }
+
+  public static async getUserRequest(req: Request, res: Response) {
+    try {
+      const token = req.headers.authorization;
+      const requestId = req.params.requestid;
+      if (token && requestId) {
+        const userId = getUserIdByToken(token);
+        const userRequest = await UserService.getUserRequest(userId, requestId);
+        return res.status(200).json(userRequest);
+      }
+    } catch (error: any) {
+      return res
+        .status(500)
+        .json({ message: "Erro ao buscar solicitação." });
     }
   }
 

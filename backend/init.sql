@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS users (
-    id VARCHAR PRIMARY KEY,
+    id VARCHAR PRIMARY KEY NOT NULL,
+    create_time TIMESTAMP (6) WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     name VARCHAR,
     last_name VARCHAR,
     email VARCHAR,
@@ -8,7 +9,8 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 CREATE TABLE IF NOT EXISTS service_providers (
-    id  VARCHAR PRIMARY KEY,
+    id  VARCHAR PRIMARY KEY NOT NULL,
+    create_time TIMESTAMP (6) WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     name VARCHAR,
     age INT NULL,
     state VARCHAR,
@@ -21,16 +23,23 @@ CREATE TABLE IF NOT EXISTS service_providers (
 );
 
 CREATE TABLE IF NOT EXISTS user_favorites_service_providers (
-    id_user VARCHAR REFERENCES users(id),
-    id_provider VARCHAR  REFERENCES service_providers(id),
-    PRIMARY KEY (id_user, id_provider)
+    create_time TIMESTAMP (6) WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    user_id VARCHAR NOT NULL REFERENCES users(id),
+    provider_id VARCHAR NOT NULL REFERENCES service_providers(id),
+    PRIMARY KEY (user_id, provider_id)
 );
 
 CREATE TYPE request_status AS ENUM ('pendente','aceito','negado','excluido');
 
 CREATE TABLE IF NOT EXISTS user_requests_service_providers (
-    id_user VARCHAR REFERENCES users(id),
-    id_provider VARCHAR REFERENCES service_providers(id),
-    status request_status DEFAULT 'pendente',
-    PRIMARY KEY (id_user, id_provider)
+    id VARCHAR NOT NULL PRIMARY KEY,
+    user_id VARCHAR NOT NULL REFERENCES users(id),
+    provider_id VARCHAR NOT NULL REFERENCES service_providers(id),
+    create_time TIMESTAMP (6) WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    status request_status NOT NULL DEFAULT 'pendente',
+    req_name VARCHAR NOT NULL,
+    req_email VARCHAR NOT NULL,
+    req_address VARCHAR NOT NULL,
+    req_phone VARCHAR NOT NULL,
+    req_photo VARCHAR NULL
 );

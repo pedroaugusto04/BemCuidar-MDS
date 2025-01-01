@@ -28,8 +28,15 @@ export class UserService {
     return this.httpClient.delete(apiUrl);
   }
 
+  // recebe todos os pedidos que o usuario logado fez a cuidadores
   getUserRequests(): Observable<UserRequest[]> {
     const apiUrl = new URL(environment.getApiUserRequests, this.API).toString();
     return this.httpClient.get<UserRequest[]>(apiUrl);
+  }
+
+  //recebe apenas o pedido especificado por requestId (deve ter sido feito pelo usuario logado)
+  getUserRequest(requestId: string): Observable<UserRequest> {
+    const apiUrl = new URL(environment.getApiUserRequest(requestId), this.API).toString();
+    return this.httpClient.get<UserRequest>(apiUrl);
   }
 }

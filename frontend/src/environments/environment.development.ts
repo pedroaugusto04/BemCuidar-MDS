@@ -11,6 +11,13 @@ export const environment = {
   getApiUserRequests: "users/requests",
   getApiFavoriteProvider: (providerId: string) =>
     `users/providers/${providerId}`,
-  getApiRequestProvider: (providerId: string) =>
-    `/users/request/providers/${providerId}`,
+  postApiRequestProvider: (providerId: string) =>
+    `/users/request/${providerId}`,
+  getApiUserRequest: (requestId: string) =>
+    `/users/request/${requestId}`,
+  getApiServiceRequests: "providers/requests",
+  getApiServiceRequest: (requestId: string) =>
+    `providers/requests/${requestId}`,
+  putApiRequestStatus: (requestId: string) =>
+    `providers/requests/${requestId}`,
 };

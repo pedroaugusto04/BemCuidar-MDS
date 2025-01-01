@@ -52,7 +52,7 @@ userRouter.post(
  *        description: Erro ao solicitar cuidador.
  */
 userRouter.post(
-  "/users/request/providers/:providerId",
+  "/users/requests/:providerId",
   UserController.requestProvider
 );
 
@@ -103,6 +103,8 @@ userRouter.get("/users/providers", UserController.getFavoritedProviders);
  *        description: Erro ao buscar solicitações.
  */
 userRouter.get("/users/requests", UserController.getUserRequests);
+
+userRouter.get("/users/requests/:requestid", UserController.getUserRequest);
 
 /**
  * @openapi
