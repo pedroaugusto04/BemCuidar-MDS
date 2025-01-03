@@ -4,6 +4,7 @@ import { environment } from "../../../environments/environment.development";
 import { Observable, map } from "rxjs";
 import { ServiceProvider } from "../../models/ServiceProvider";
 import { ServiceRequest } from "../../models/ServiceRequest";
+import { UserRequestStatus } from "../../models/enums/UserRequestStatus";
 
 @Injectable({
   providedIn: "root",
@@ -53,7 +54,7 @@ export class ProviderService {
   }
 
   // recebe um pedido especifico ao anuncio do usuario que esta logado
-  getRequests(requestId: string): Observable<ServiceRequest>{
+  getRequestById(requestId: string): Observable<ServiceRequest>{
     const apiUrl = new URL(
       environment.getApiServiceRequest(requestId),
       this.API

@@ -19,9 +19,9 @@ export class CardUserRequestComponent {
 
   ngOnInit(): void {
     this.userRequest = {
-      name: this.name,
-      photo: this.photo,
-      status: this.status as UserRequestStatus,
+      req_name: this.name,
+      req_photo: this.photo,
+      req_status: this.status as UserRequestStatus,
     };
   }
 }
