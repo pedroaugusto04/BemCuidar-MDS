@@ -72,6 +72,50 @@
           <mat-error>{{ formErrorMessage("city") }}</mat-error>
           }
         </mat-form-field>
+        <mat-form-field class="input" id="CEP-field" appearance="outline">
+          <mat-label>CEP</mat-label>
+          <input matInput formControlName="city" />
+          @if(form.get("city")?.invalid){
+          <mat-error>{{ formErrorMessage("city") }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="input" id="bairro-field" appearance="outline">
+          <mat-label>Bairro</mat-label>
+          <input matInput formControlName="city" />
+          @if(form.get("city")?.invalid){
+          <mat-error>{{ formErrorMessage("city") }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="input" id="street-field" appearance="outline">
+          <mat-label>Rua</mat-label>
+          <input matInput formControlName="city" />
+          @if(form.get("city")?.invalid){
+          <mat-error>{{ formErrorMessage("city") }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="input" id="street-number-field" appearance="outline">
+          <mat-label>N°</mat-label>
+          <input matInput formControlName="city" />
+          @if(form.get("city")?.invalid){
+          <mat-error>{{ formErrorMessage("city") }}</mat-error>
+          }
+        </mat-form-field>
+
+        <div class="map-gap">
+          <h3>Mapa aqui</h3>
+        </div>
+        <div class="title-age-preference">
+          <h3>Como cuidador você prefere tratar de:</h3>
+        </div>
+        <div class="checkbox-age">
+          <mat-checkbox class="example-margin">Crianças</mat-checkbox>
+          <mat-checkbox class="example-margin">Idosos</mat-checkbox>
+          <mat-checkbox class="example-margin">Pessoas com condições Especiais</mat-checkbox>       
+        </div>
+
+        <div class="title-description">
+          <h3>Comente abaixo sobre sua forma de trabalho ou serviços adicionais:</h3>
+        </div>
         <div class="description">
           <mat-form-field
             id="description-field"
@@ -90,6 +134,8 @@
             }
           </mat-form-field>
         </div>
+
+
         <div class="class-button-register">
           <button
             (click)="registerProvider()"

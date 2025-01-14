@@ -13,6 +13,7 @@ import { RegisterProviderService } from "../../services/providerServices/registe
 import { MatButtonModule } from "@angular/material/button";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @Component({
   selector: "app-register-provider",
@@ -24,6 +25,7 @@ import { Router } from "@angular/router";
     MatIconModule,
     MatInputModule,
     MatButtonModule,
+    MatCheckboxModule,
   ],
   templateUrl: "./register-provider.component.html",
   styleUrl: "./register-provider.component.scss",

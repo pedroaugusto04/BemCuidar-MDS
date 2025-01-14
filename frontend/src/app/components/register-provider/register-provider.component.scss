@@ -34,6 +34,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 .empty-projects {
   width: 10rem;
@@ -133,6 +134,11 @@ h5 {
   font-family: Inter;
   font-weight: bold;
 }
+.title-age-preference h3{
+  font-size: 1.5rem;
+  font-family: Inter;
+  font-weight: bold;
+}
 #button-cancel {
   display: flex;
   flex-direction: column;
@@ -173,16 +179,46 @@ h5 {
   }
   .fields {
     width: 60rem;
-    height: 65rem;
+    height: 110rem;
     border-radius: 1.25rem;
     border-width: 0.07rem;
     border-color: #d9d9d9;
     border-style: solid;
     align-items: center;
   }
+  .map-gap{
+    margin-left: 3rem;
+    width: 54rem;
+    height: 26rem;
+    border-radius: 0.5rem;
+    border-width: 0.07rem;
+    border-color: #d9d9d9;
+    border-style: solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem ;
+  }
   .title-localization {
     padding-left: 2rem;
     padding-right: 35rem;
+    padding-bottom: 0rem;
+    padding-top: 0rem;
+  }
+  .title-description {
+    padding-left: 2rem;
+    padding-right: 5rem;
+    padding-top: 0rem;
+    padding-bottom: 1rem;
+  }
+  .checkbox-age{
+    padding-left:1rem;
+    margin-top: 0rem;
+    padding-bottom: 1rem;
+  }
+  .title-age-preference{
+    padding-left: 1.8rem;
+    padding-right: 30rem;
     padding-bottom: 0rem;
     padding-top: 0rem;
   }
@@ -196,6 +232,12 @@ h5 {
     margin-top: 0rem;
   }
   .title-about-yourself h2 {
+    font-family: Inter;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0rem;
+  }
+  .title-description h3 {
     font-family: Inter;
     font-size: 1.5rem;
     font-weight: bold;
@@ -222,6 +264,29 @@ h5 {
     padding-top: 0rem;
     padding-bottom: 0rem;
   }
+  #CEP-field {
+    margin-top: 0rem;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+  }
+  #bairro-field {
+    margin-top: 0rem;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+  }
+  #street-field {
+    margin-top: 0rem;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+    width: 29rem;
+  }
+  #street-number-field {
+    margin-top: 0rem;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+    width: 8.65rem;
+  }
+  
   .description {
     width: 100%;
     display: flex;
@@ -276,9 +341,44 @@ h5 {
     padding-bottom: 1rem;
     padding-top: 0rem;
   }
+  #CEP-field {
+    padding-bottom: 1rem;
+    padding-top: 0rem;
+  }
+  #bairro-field {
+    padding-bottom: 1rem;
+    padding-top: 0rem;
+  }
+  #street-field {
+    padding-bottom: 1rem;
+    padding-top: 0rem;
+  }
+  #street-number-field {
+    padding-bottom: 1rem;
+    padding-top: 0rem;
+  }
 }
 ::ng-deep button[mat-flat-button] {
   background-color: black !important;
   color: white !important;
   border-radius: 0.5rem;
+}
+.mat-mdc-checkbox{
+  --mdc-checkbox-selected-icon-color: #3f51b5 !important;
+  --mdc-checkbox-pressed-focus-state-color: #3f51b5 !important;
+
+  --mdc-checkbox-state-layer-size: 50px;
+  --mdc-checkbox-unselected-hover-icon-color: #3f51b5 !important;
+  --mdc-checkbox-selected-focus-state-layer-color: #3f51b5 !important;
+  --mdc-checkbox-selected-pressed-state-layer-color:#3f51b5 !important;
+  --mdc-checkbox-selected-pressed-icon-color: #3f51b5!important;
+  --mdc-checkbox--anim-unchecked-checked-color: #3f51b5!important;
+  --mdc-checkbox__native-control-color:#3f51b5!important;
+  --mdc-checkbox--selected-color: #3f51b5!important;
+  --mat-full-pseudo-checkbox-selected-icon-color:#3f51b5!important;
+  --mdc-checkbox-selected-hover-state-layer-color:#3f51b5!important;
+  --mdc-checkbox-selected-hover-icon-color:#3f51b5!important;
+  --mdc-checkbox-selected-focus-icon-color:#3f51b5!important;
+  --mat-select-invalid-arrow-color:#3f51b5!important;
+  --mat-minimal-pseudo-checkbox-selected-checkmark-color:#3f51b5!important;
 }
