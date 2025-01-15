@@ -71,5 +71,12 @@ export const APP_ROUTES: Routes = [
         (m) => m.USER_REQUESTS_ROUTES
       ),
   },
+  {
+    path: "request-provider/:providerId",
+    loadChildren: () =>
+      import("./components/request-provider/request-provider.component.routes").then(
+        (m) => m.REQUEST_PROVIDER_ROUTES
+      ),
+  },
 ];
 export { Routes };

@@ -10,13 +10,15 @@ import { Observable } from "rxjs";
 import { CookieService } from "ngx-cookie-service";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { LoginService } from "../../services/userServices/login.service";
+import { Router, RouterLink } from "@angular/router";
+import { ViewServiceProviderService } from "./services/view-service-provider.service";
 
 @Component({
   selector: "app-view-service-provider",
   templateUrl: "./view-service-provider.component.html",
   styleUrls: ["./view-service-provider.component.scss"],
   standalone: true,
-  imports: [MatIconModule, MatButtonModule, MatDialogModule],
+  imports: [MatIconModule, MatButtonModule, MatDialogModule, RouterLink],
 })
 export class ViewServiceProviderComponent {
   user$!: Observable<User | null>;
@@ -34,7 +36,9 @@ export class ViewServiceProviderComponent {
     private providerService: ProviderService,
     private loginService: LoginService,
     private cookieService: CookieService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private viewServiceProvider: ViewServiceProviderService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -74,4 +78,17 @@ export class ViewServiceProviderComponent {
       panelClass: ["error-snackbar"],
     });
   }
+
+  onRequestProvider(){
+    this.closeDialog();
+
+    const serviceProvider = this.modal.serviceProvider;
+
+    this.router.navigateByUrl(`/request-provider/${serviceProvider.id}`);
+  }
+
+  closeDialog(){
+    this.viewServiceProvider.closeDialog();
+  }
+
 }

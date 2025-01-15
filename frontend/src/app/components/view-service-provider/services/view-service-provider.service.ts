@@ -16,4 +16,8 @@ export class ViewServiceProviderService {
       height: "95%",
     });
   }
+
+  closeDialog() {
+    this.dialog.closeAll();
+  }
 }
