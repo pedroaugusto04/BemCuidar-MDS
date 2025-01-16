@@ -41,31 +41,41 @@
         </mat-form-field>
         <mat-form-field class="input" id="bairro-field" appearance="outline">
           <mat-label>Bairro</mat-label>
-          <input matInput formControlName="city" />
+          <input matInput formControlName="neighborhood" />
           @if(form.get("city")?.invalid){
           <mat-error>{{ formErrorMessage("city") }}</mat-error>
           }
         </mat-form-field>
         <mat-form-field class="input" id="street-field" appearance="outline">
           <mat-label>Rua</mat-label>
-          <input matInput formControlName="city" />
+          <input matInput formControlName="street" />
           @if(form.get("city")?.invalid){
           <mat-error>{{ formErrorMessage("city") }}</mat-error>
           }
         </mat-form-field>
         <mat-form-field class="input" id="street-number-field" appearance="outline">
           <mat-label>N°</mat-label>
-          <input matInput formControlName="city" />
+          <input matInput formControlName="streetNumber" />
           @if(form.get("city")?.invalid){
           <mat-error>{{ formErrorMessage("city") }}</mat-error>
           }
         </mat-form-field>
-        <div class="map-gap">
-            <app-leaflet [height]="430" [width]="870"></app-leaflet>
+        <div class="class-button-verify-address">
+          <button
+            (click)="verifyAddress()"
+            id="button-verify-address"
+            mat-flat-button
+            color="white"
+          >
+            VERIFICAR ENDEREÇO
+          </button>
+        </div>
+        <div class="map">
+            <app-leaflet></app-leaflet>
         </div>
         <div class="class-button-register">
           <button
-            (click)="registerProvider()"
+            (click)="requestProvider()"
             id="button-register"
             mat-flat-button
             color="white"
