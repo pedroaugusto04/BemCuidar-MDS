@@ -11,4 +11,4 @@ RUN npm install -g @angular/cli
 COPY . .
 
 
-CMD ["ng", "serve", "--host", "0.0.0.0", "--disable-host-check"]
+CMD ["ng", "serve", "--host", "0.0.0.0", "--disable-host-check", "--poll", "500"]

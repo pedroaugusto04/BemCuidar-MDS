@@ -2,8 +2,14 @@
 <div class="container">
   <h1>Solicite o Cuidador</h1>
   <div class="div-form">
-    <form [formGroup]="form">
+ 
+    <form [formGroup]="form"> 
+
       <div class="fields">
+              
+        <div class="title-data">
+          <h2>Preencha os dados:</h2>
+        </div>
         <mat-form-field class="input" id="nameField" appearance="outline">
           <mat-label>Nome</mat-label>
           <input matInput formControlName="name" />

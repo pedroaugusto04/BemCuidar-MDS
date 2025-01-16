@@ -34,7 +34,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  
   }
   .empty-projects {
     width: 10rem;
@@ -160,7 +159,7 @@
     text-transform: uppercase;
   }
   
-  @media screen and (min-width: 992px) {
+  @media screen and (min-width: 62rem) {
     .fields {
       width: 100%;
       display: flex;
@@ -168,18 +167,24 @@
       justify-content: first baseline;
       flex-wrap: wrap;
     }
-    #age-field {
-      padding-bottom: 0rem;
-      padding-top: 0rem;
-    }
+
     #nameField {
       padding-left: 1.5rem;
-      padding-bottom: 0rem;
+      padding-bottom: 1rem;
       padding-top: 0rem;
+      width: 33.3rem;
+      margin-top: 0rem;
+      margin-bottom: 0rem;
     }
+    #phone-field {
+      padding-bottom: 1rem;
+      padding-top: 0rem;
+      width: 18rem;
+    }
+
     .fields {
       width: 60rem;
-      height: 110rem;
+      height: 70rem;
       border-radius: 1.25rem;
       border-width: 0.07rem;
       border-color: #d9d9d9;
@@ -220,7 +225,7 @@
       padding-top: 0rem;
     }
   
-    .title-about-yourself {
+    .title-data {
       align-items: rigth;
       padding-top: 1.25rem;
       padding-left: 1.875rem;
@@ -228,7 +233,7 @@
       margin-bottom: 0rem;
       margin-top: 0rem;
     }
-    .title-about-yourself h2 {
+    .title-data h2 {
       font-family: Inter;
       font-size: 1.5rem;
       font-weight: bold;
@@ -249,38 +254,51 @@
     #country-field {
       margin-top: 0rem;
       padding-top: 0rem;
-      padding-bottom: 0rem;
+      padding-bottom: 1rem;
+      margin-bottom: 0rem;
+      padding-left: 1.5rem;
     }
     #state-field {
       margin-top: 0rem;
       padding-top: 0rem;
-      padding-bottom: 2rem;
+      padding-bottom: 1rem;
+      margin-bottom: 0rem;
+
     }
     #city-field {
       margin-top: 0rem;
       padding-top: 0rem;
-      padding-bottom: 0rem;
+      padding-bottom: 1rem;
+      margin-bottom: 0rem;
+
     }
     #CEP-field {
       margin-top: 0rem;
       padding-top: 0rem;
       padding-bottom: 0rem;
+      margin-bottom: 0rem;
+
     }
     #bairro-field {
       margin-top: 0rem;
       padding-top: 0rem;
-      padding-bottom: 0rem;
+      padding-bottom: 1rem;
+      margin-bottom: 0rem;
     }
     #street-field {
       margin-top: 0rem;
       padding-top: 0rem;
       padding-bottom: 0rem;
+      margin-bottom: 2rem;
+      padding-left: 1.5rem;
       width: 29rem;
     }
     #street-number-field {
       margin-top: 0rem;
+      margin-bottom: 2rem;
       padding-top: 0rem;
-      padding-bottom: 0rem;
+      padding-bottom: 1rem;
+      padding-right: 10rem;
       width: 8.65rem;
     }
     
@@ -305,7 +323,7 @@
     }
     .class-button-register {
       padding-bottom: 2rem;
-      padding-top: 6rem;
+      padding-top: 0.5rem;
     }
   
     #button-register {
@@ -349,34 +367,34 @@
     #street-field {
       padding-bottom: 1rem;
       padding-top: 0rem;
+      margin-bottom: 0rem;
     }
     #street-number-field {
       padding-bottom: 1rem;
       padding-top: 0rem;
+      margin-bottom: 0rem;
+      width: 10rem;
     }
+  }
+  .class-button-verify-address {
+    padding-bottom: 1rem;
+    padding-top: 0rem;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    height: 0rem;
+    width: 100%;
+    margin-top: 0rem;
   }
   ::ng-deep button[mat-flat-button] {
     background-color: black !important;
     color: white !important;
     border-radius: 0.5rem;
   }
-  .mat-mdc-checkbox{
-    --mdc-checkbox-selected-icon-color: #3f51b5 !important;
-    --mdc-checkbox-pressed-focus-state-color: #3f51b5 !important;
-  
-    --mdc-checkbox-state-layer-size: 50px;
-    --mdc-checkbox-unselected-hover-icon-color: #3f51b5 !important;
-    --mdc-checkbox-selected-focus-state-layer-color: #3f51b5 !important;
-    --mdc-checkbox-selected-pressed-state-layer-color:#3f51b5 !important;
-    --mdc-checkbox-selected-pressed-icon-color: #3f51b5!important;
-    --mdc-checkbox--anim-unchecked-checked-color: #3f51b5!important;
-    --mdc-checkbox__native-control-color:#3f51b5!important;
-    --mdc-checkbox--selected-color: #3f51b5!important;
-    --mat-full-pseudo-checkbox-selected-icon-color:#3f51b5!important;
-    --mdc-checkbox-selected-hover-state-layer-color:#3f51b5!important;
-    --mdc-checkbox-selected-hover-icon-color:#3f51b5!important;
-    --mdc-checkbox-selected-focus-icon-color:#3f51b5!important;
-    --mat-select-invalid-arrow-color:#3f51b5!important;
-    --mat-minimal-pseudo-checkbox-selected-checkmark-color:#3f51b5!important;
+  mat-form-field {
+    border-radius: 1rem;
+    padding-top: 0rem;
+    padding-top: 0rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
   }
-  
