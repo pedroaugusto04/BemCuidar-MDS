@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@asymmetrik/ngx-leaflet": "^18.0.1"
+  }
+}
