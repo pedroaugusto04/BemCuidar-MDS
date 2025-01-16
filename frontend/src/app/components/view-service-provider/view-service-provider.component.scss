@@ -1,5 +1,11 @@
 .container {
   margin-top: 0.5rem;
+  height: 100%;
+}
+
+.upload-img{
+height: 50%;
+width: 80%;
 }
 
 .container-mobile {
@@ -10,9 +16,12 @@
 .content {
   display: flex;
   justify-content: space-between;
+  height: 80%;
 }
+
 .description {
   word-break: break-all;
+  font-size: 1.2rem;
 }
 
 .container-data {
@@ -36,7 +45,15 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
-
+.button-register{
+  padding-left: 50%;
+  padding-top: 1.5rem;
+  padding-right: 3rem;
+}
+.btn-register{
+  width:100%;
+  align-items: center;
+}
 #date {
   color: var(--Neutral-Colors-Neutral-110, #515255);
   font-size: 1rem;
@@ -63,6 +80,9 @@ a {
   width: 80%;
   display: flex;
   align-items: center;
+  text-align: center;
+  justify-content: center;
+
   margin: 0 auto;
   gap: calc(0.33 * 80%);
 }
@@ -72,6 +92,7 @@ a {
   padding: var(--none, 0rem);
   align-items: center;
   gap: var(--1, 0.5rem);
+  text-align: center;
 }
 ::ng-deep button[mat-flat-button] {
   background-color: black !important; /* Fundo preto */
@@ -136,29 +157,50 @@ a {
   height: 100%;
   width: 100%;
 }
-.button-register{
-  padding-left: 2rem;
-  padding-top: 1.5rem;
-  padding-right: 2rem;
-}
-.btn-register{
-  width:40%;
-  align-items: left;
-}
+
 @media  (max-width: 37.5rem) {
   .content {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: first baseline;
     align-items: baseline;
   }
-  .btn-register{
+  .upload-img{
+    align-items: center;
+    height: 50%;
     width: 100%;
-  }
+    }
   .provider-description{
+    align-items: baseline;
+    text-align: flex;
     padding-left: 1rem;
     padding-right: 1rem;
   }
-  
+  .button-register{
+    padding-left: 3%;
+    padding-top: 1.5rem;
+    padding-right: 3%;
+  }
+  .btn-register{
+    width:100%;
+    align-items: center;
+  }
+  .providers{
+    height: 100%;
+    width: 20rem;
+    align-items: center;
+  }
+  .class-img-provider{
+    align-items: center;
+    height: 100%;
+  }
+  .class-img-provider{
+    align-items: center;
+    height: 100%;
+  }
+  .provider-cover{
+    align-items: center;
+    height: 100%;
+  }
 }
