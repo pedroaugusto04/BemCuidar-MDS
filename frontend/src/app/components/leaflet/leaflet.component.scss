@@ -1,0 +1,42 @@
+#map {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    //height: 500px;
+    width: 100%;
+    margin-bottom: 1%;
+}
+
+#map-title {    
+    margin-top: 1%;
+    font-size: 180%;
+}
+
+#map app-leaflet {
+    margin-top: 1%;
+}
+
+.search-address, .form-address, .input-address {
+    height: 100%;
+}
+
+.input-address {
+    margin: 5px;
+    border-radius: 8px;
+}
+
+.button-address { 
+    cursor: pointer;
+    background-color: white;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.button-address:hover {
+    color: white;
+    background: black;
+    transform: scale(1.1);
+    transition: all 0.5s;
+}

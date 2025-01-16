@@ -1,1 +1,79 @@
-<p>request-provider works!</p>
+<app-nav-bar></app-nav-bar>
+<div class="container">
+  <h1>Solicite o Cuidador</h1>
+  <div class="div-form">
+    <form [formGroup]="form">
+      <div class="fields">
+        <mat-form-field class="input" id="nameField" appearance="outline">
+          <mat-label>Nome</mat-label>
+          <input matInput formControlName="name" />
+          @if(form.get("name")?.invalid){
+          <mat-error>{{ formErrorMessage("name") }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="input" id="phone-field" appearance="outline">
+          <mat-label>Telefone</mat-label>
+          <input matInput formControlName="phone" />
+          @if(form.get("phone")?.invalid){
+          <mat-error>{{ formErrorMessage("phone") }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="input" id="country-field" appearance="outline">
+          <mat-label>País</mat-label>
+          <input matInput formControlName="country" />
+          @if(form.get("country")?.invalid){
+          <mat-error>{{ formErrorMessage("country") }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="input" id="state-field" appearance="outline">
+          <mat-label>Estado</mat-label>
+          <input matInput formControlName="state" />
+          @if(form.get("state")?.invalid){
+          <mat-error>{{ formErrorMessage("state") }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="input" id="city-field" appearance="outline">
+          <mat-label>Cidade</mat-label>
+          <input matInput formControlName="city" />
+          @if(form.get("city")?.invalid){
+          <mat-error>{{ formErrorMessage("city") }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="input" id="bairro-field" appearance="outline">
+          <mat-label>Bairro</mat-label>
+          <input matInput formControlName="city" />
+          @if(form.get("city")?.invalid){
+          <mat-error>{{ formErrorMessage("city") }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="input" id="street-field" appearance="outline">
+          <mat-label>Rua</mat-label>
+          <input matInput formControlName="city" />
+          @if(form.get("city")?.invalid){
+          <mat-error>{{ formErrorMessage("city") }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="input" id="street-number-field" appearance="outline">
+          <mat-label>N°</mat-label>
+          <input matInput formControlName="city" />
+          @if(form.get("city")?.invalid){
+          <mat-error>{{ formErrorMessage("city") }}</mat-error>
+          }
+        </mat-form-field>
+        <div class="map-gap">
+            <app-leaflet [height]="430" [width]="870"></app-leaflet>
+        </div>
+        <div class="class-button-register">
+          <button
+            (click)="registerProvider()"
+            id="button-register"
+            mat-flat-button
+            color="white"
+          >
+            SOLICITAR
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
