@@ -14,6 +14,7 @@ export class CardUserRequestComponent {
   @Input({ required: true }) name!: string;
   @Input({ required: true }) photo!: string;
   @Input({ required: true }) status!: string;
+  @Input({ required: true }) address!: string;
 
   userRequest!: UserRequest;
 
@@ -22,6 +23,7 @@ export class CardUserRequestComponent {
       req_name: this.name,
       req_photo: this.photo,
       req_status: this.status as UserRequestStatus,
+      req_address: this.address
     };
   }
 }

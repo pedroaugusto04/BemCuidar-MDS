@@ -107,17 +107,15 @@ export class UserService {
       client = await connection.connect();
       const id = uuidv4();
       const sqlStatement =
-        "INSERT INTO user_requests_service_providers (id, user_id, provider_id, req_name, req_email, req_address, req_phone, req_photo) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *";
+        "INSERT INTO user_requests_service_providers (id, user_id, provider_id, req_name,req_address, req_phone) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *";
 
       const values = [
         id,
         userId,
         providerId,
         newRequest.req_name,
-        newRequest.req_email,
         newRequest.req_address,
         newRequest.req_phone,
-        newRequest.req_photo
       ];
 
       await client.query(sqlStatement, values);

@@ -9,7 +9,6 @@ import {
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
-import { RegisterProviderService } from "../../services/providerServices/register-provider.service";
 import { MatButtonModule } from "@angular/material/button";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
@@ -18,6 +17,9 @@ import { LeafletComponent } from "../leaflet/leaflet.component";
 import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { RequestProviderService } from "../../services/providerServices/request-provider.service";
+import { CookieService } from "ngx-cookie-service";
+import { ActivatedRoute } from "@angular/router";
+
 
 @Component({
   selector: "app-request-provider",
@@ -41,13 +43,16 @@ export class RequestProviderComponent {
   form!: FormGroup;
   formData = new FormData();
   user: any;
+  providerId!: string;
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
-    private requestProviderService: RequestProviderService,
     private snackBar: MatSnackBar,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private cookieService: CookieService,
+    private providerService: RequestProviderService,
+    private route: ActivatedRoute 
   ) {
     this.form = this.formBuilder.group({
       name: ["", [Validators.required, Validators.minLength(3)]],
@@ -58,6 +63,10 @@ export class RequestProviderComponent {
       neighborhood: ["", [Validators.required]],  
       street: ["", [Validators.required]],      
       streetNumber: ["", [Validators.required]]  
+    });
+
+    this.route.paramMap.subscribe((params) => {
+      this.providerId = params.get("providerId") || ""; 
     });
   }
 
@@ -80,15 +89,25 @@ export class RequestProviderComponent {
   }
 
   requestProvider() {
+    if (!this.cookieService.get("token")) {
+      this.onError("Faça login para solicitar um cuidador!");
+      return;
+    }
+
     this.formData = new FormData();
-    this.formData.append("name", this.form.value.name);
-    this.formData.append("phone", this.form.value.phone);
-    this.formData.append("country", this.form.value.country);
-    this.formData.append("state", this.form.value.state);
-    this.formData.append("city", this.form.value.city);
-    this.formData.append("neighborhood", this.form.value.neighborhood); 
-    this.formData.append("street", this.form.value.street); 
-    this.formData.append("number", this.form.value.streetNumber); 
+    this.formData.append("req_name", this.form.value.name);
+    this.formData.append("req_phone", this.form.value.phone);
+    this.formData.append("req_country", this.form.value.country);
+
+    const country: String = this.form.value.country;
+    const state: String = this.form.value.state;
+    const city: String = this.form.value.city;
+    const neighborhood: String = this.form.value.neighborhood;
+    const street: String = this.form.value.street;
+    const streetNumber: String = this.form.value.streetNumber;
+    const address = `${street} ${streetNumber} ${neighborhood} ${city} ${state} ${country}`;
+    
+    this.formData.append("req_address", address);
 
     if (this.form.invalid) {
       this.onError("Preencha os campos corretamente!");
@@ -98,12 +117,12 @@ export class RequestProviderComponent {
       this.onError("Por favor, digite um endereço válido!");
       return;
     }
-    this.requestProviderService.register(this.formData).subscribe({
-      next: () => {
-        this.onSuccess("Cuidador registrado com sucesso!");
-      },
-      error: (error: any) => {
-        this.onError("Erro ao registrar cuidador!");
+
+    this.providerService.requestProvider(this.formData,this.providerId).subscribe({
+      next: () => this.onSuccess("Cuidador solicitado com sucesso!"),
+      error: () => {
+        this.onError("Erro ao solicitar cuidador!");
+        return;
       },
     });
   }

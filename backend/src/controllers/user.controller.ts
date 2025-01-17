@@ -63,13 +63,10 @@ export class UserController {
     try {
       const token = req.headers.authorization;
       let newRequest: ServiceRequest = req.body;
+      
       if (token) {
         const userId = getUserIdByToken(token);
         const providerId = req.params.providerId;
-        if (req.files && "req_photo" in req.files) {
-          let downloadUrl = await uploadFile(req.files["req_photo"][0]);
-          newRequest.req_photo = downloadUrl ? downloadUrl : "";
-        }
         await UserService.requestProvider(newRequest, userId, providerId);
         return res
           .status(200)

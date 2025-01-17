@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS user_requests_service_providers (
     create_time TIMESTAMP (6) WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     status request_status NOT NULL DEFAULT 'pendente',
     req_name VARCHAR NOT NULL,
-    req_email VARCHAR NOT NULL,
+    req_email VARCHAR NULL,
     req_address VARCHAR NOT NULL,
     req_phone VARCHAR NOT NULL,
     req_photo VARCHAR NULL

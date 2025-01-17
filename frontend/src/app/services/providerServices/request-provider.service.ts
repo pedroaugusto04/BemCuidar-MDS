@@ -13,8 +13,8 @@ export class RequestProviderService {
   
     constructor(private httpClient: HttpClient) {}
   
-    register(providerData: FormData): Observable<ServiceProvider> { // mudar para o model do request
-      const apiUrl = new URL(environment.getApiProviders, this.API).toString(); // mudar para url do request
-      return this.httpClient.post<ServiceProvider>(apiUrl, providerData);
+    requestProvider(requestData: FormData, providerId: string): Observable<ServiceProvider> { 
+      const apiUrl = new URL(environment.postApiRequestProvider(providerId), this.API).toString();
+      return this.httpClient.post<ServiceProvider>(apiUrl, requestData);
     }
 }

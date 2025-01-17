@@ -45,24 +45,7 @@ export class ViewServiceProviderComponent {
     this.user$ = this.loginService.getUserInfo();
     this.isProviderRequirement = this.modal.isProviderRequirement;
   }
-
-  enviarSolicitacao() {
-    if (!this.cookieService.get("token")) {
-      this.onError("Faça login para solicitar um cuidador!");
-      return;
-    }
-
-    const serviceProvider = this.modal.serviceProvider;
-
-    this.providerService.requestProvider(serviceProvider.id, new FormData()).subscribe({
-      next: () => this.onSuccess("Cuidador solicitado com sucesso!"),
-      error: () => {
-        this.onError("Erro ao solicitar cuidador!");
-        return;
-      },
-    });
-  }
-
+  
   onSuccess(msg: string) {
     this.snackBar.open(msg, "X", {
       duration: 1000,
