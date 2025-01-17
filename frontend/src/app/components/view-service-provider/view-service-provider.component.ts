@@ -63,6 +63,11 @@ export class ViewServiceProviderComponent {
   }
 
   onRequestProvider(){
+    if (!this.cookieService.get("token")) {
+      this.onError("Faça login para solicitar um cuidador!");
+      return;
+    }
+    
     this.closeDialog();
 
     const serviceProvider = this.modal.serviceProvider;

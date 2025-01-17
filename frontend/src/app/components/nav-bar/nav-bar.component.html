@@ -23,10 +23,12 @@
             <span class="sections-text">Meus Favoritos</span>
           </button>
           }
-          <button routerLink="/care" mat-menu-item>
-            <mat-icon>work</mat-icon>
-            <span class="sections-text">Quero Cuidar</span>
-          </button>
+          @if(user$ | async; as user) {
+            <button routerLink="/care" mat-menu-item>
+              <mat-icon>work</mat-icon>
+              <span class="sections-text">Quero Cuidar</span>
+            </button>  
+          }
           @if(user$ | async; as user){
           <button (click)="signOut()" mat-menu-item>
             <mat-icon>exit_to_app</mat-icon>
@@ -49,7 +51,9 @@
           @if (user$ | async; as user){
           <a routerLink="/favorites" class="menu-item">Meus Favoritos</a>
           }
-          <a routerLink="/care" class="menu-item">Quero Cuidar</a>
+          @if(user$ | async; as user) {
+            <a routerLink="/care" class="menu-item">Quero Cuidar</a>
+          }
         </div>
         }
       </div>

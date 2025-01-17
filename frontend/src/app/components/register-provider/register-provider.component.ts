@@ -109,6 +109,11 @@ export class RegisterProviderComponent {
   }
 
   registerProvider() {
+    if (!this.cookieService.get("token")) {
+      this.onError("Faça login para solicitar um cuidador!");
+      return;
+    }
+    
     const file = this.formData.get("photo") as File;
     this.formData = new FormData();
     if (file) {
@@ -135,8 +140,6 @@ export class RegisterProviderComponent {
     this.returnCoordinates().subscribe({
       next: (coordinates) => {
         const { latitude, longitude } = coordinates;
-        console.log('Latitude:', latitude);
-        console.log('Longitude:', longitude);
         // Agora você tem as coordenadas para usar como precisar.
         this.formData.append("coords_lat", String(latitude));
         this.formData.append("coords_lon", String(longitude));
@@ -147,6 +150,7 @@ export class RegisterProviderComponent {
           },
           error: (error: any) => {
             this.onError("Erro ao registrar cuidador!");
+            return;
           },
         });    
       },
