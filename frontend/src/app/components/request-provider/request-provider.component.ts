@@ -161,6 +161,7 @@ export class RequestProviderComponent {
           const longitude: number = location.lon;
           // encontrou endereço (marca no mapa)
           this.leafletComponent.addMarker(latitude, longitude);
+          this.leafletComponent.setView(latitude,longitude,13);
         } else {
           // avisa que o endereco nao foi encontrado
           this.onError("Endereço não encontrado");
