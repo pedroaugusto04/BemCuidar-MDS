@@ -19,6 +19,7 @@ export class LeafletComponent implements OnInit, AfterViewInit {
   markers: L.Marker[] = [
     L.marker([-19.4650, -42.5380]) // centraliza inicialmente em Ipatinga
   ];
+  defaultIcon: string = "assets/imgs/map-profile-icon.svg";
 
   constructor(private snackBar: MatSnackBar, private viewServiceProviderService: ViewServiceProviderService) {}
 
@@ -43,24 +44,25 @@ export class LeafletComponent implements OnInit, AfterViewInit {
   addMarker(latitude: number, longitude: number, provider?: ServiceProvider) {
     const marker = L.marker([latitude, longitude], {
       icon: L.icon({
-        iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
+        iconUrl: this.defaultIcon,
         iconSize: [25, 41],
         iconAnchor: [12, 41],
         popupAnchor: [1, -34],
         shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
-        shadowSize: [41, 41]
+        shadowSize: [41, 41],
       })
     }).addTo(this.map);
 
     if (provider && provider.name != null) {
       marker.bindPopup(`${provider.name}`, {
-        autoClose: false,  
+        autoClose: false,
         closeButton: false,
         closeOnClick: false,
-      }).openPopup(); 
+      }).openPopup();
     }
 
-    marker.on('click', () => {
+    marker.on('click', (e) => {
+      e.target.openPopup();
       this.onMarkerClick(provider!);
     });
 
