@@ -92,15 +92,11 @@ export class ListProviderComponent implements OnInit {
     let minlon = Number.POSITIVE_INFINITY;
     let maxlat = Number.NEGATIVE_INFINITY;
     let minlat = Number.POSITIVE_INFINITY;
-    let avglon = 0;
-    let avglat = 0;
     for(let i=0;i<filteredProviders.length;i++){
       const lon = filteredProviders[i].coords_lon;
       const lat = filteredProviders[i].coords_lat;
       if(!lon || !lat)
         continue;
-      avglon += lon / filteredProviders.length;
-      avglat += lat / filteredProviders.length;
       if (lon > maxlon)
         maxlon = lon;
       if (lon < minlon)
@@ -111,12 +107,8 @@ export class ListProviderComponent implements OnInit {
         minlat = lat;
     }
 
-    console.log("MINLON ", minlon, " MAXLON ", maxlon, " MINLAT ", minlat, " MAXLAT ", maxlat)
-
     const maxdif = Math.sqrt(Math.pow((maxlon - minlon)/2, 2) + Math.pow(maxlat - minlat, 2))
     const zoom = Math.log2(360 / maxdif);
-
-    console.log("MAXDIF ", maxdif, " ZOOM ", zoom )
 
     this.leafletComponent.setView((minlat + maxlat)/2, (minlon + maxlon)/2, zoom);
 
