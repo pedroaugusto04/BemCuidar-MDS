@@ -58,7 +58,9 @@ export class RegisterProviderComponent {
       country: ["", [Validators.required, Validators.minLength(3)]],
       state: ["", [Validators.required]],
       city: ["", [Validators.required, Validators.minLength(3)]],
-      address: ["", [Validators.required]],
+      neighborhood: ["", [Validators.required]],  
+      street: ["", [Validators.required]],      
+      street_number: ["", [Validators.required]] ,
       photo: [""],
     });
     if (!this.cookieService.get("token")) {
@@ -121,7 +123,9 @@ export class RegisterProviderComponent {
     this.formData.append("country", this.form.value.country);
     this.formData.append("state", this.form.value.state);
     this.formData.append("city", this.form.value.city);
-    this.formData.append("address", this.form.value.address);
+    this.formData.append("neighborhood", this.form.value.neighborhood);
+    this.formData.append("street", this.form.value.street);
+    this.formData.append("street_number", this.form.value.street_number);
 
     if (this.form.invalid) {
       this.onError("Preencha os campos corretamente!");
@@ -177,8 +181,10 @@ export class RegisterProviderComponent {
     const country: string = this.form.value.country;
     const state: string = this.form.value.state;
     const city: string = this.form.value.city;
-    const address: string = this.form.value.address;
-    const fullAddress = `${address} ${city} ${state} ${country}`;
+    const neighborhood: String = this.form.value.neighborhood;
+    const street: String = this.form.value.street;
+    const street_number: String = this.form.value.street_number;
+    const fullAddress = `${street} ${street_number} ${neighborhood} ${city} ${state} ${country}`;
   
     return new Observable<{ latitude: number, longitude: number }>((observer) => {
       this.getCoordinates(fullAddress).subscribe({

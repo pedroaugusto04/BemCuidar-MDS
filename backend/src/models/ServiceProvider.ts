@@ -6,7 +6,9 @@ export interface ServiceProvider {
   state: string;
   country: string;
   city: string;
-  address: string;
+  neighborhood: string;
+  street: string;
+  street_number: string;
   coords_lon: number;
   coords_lat: number;
   photo: string;
