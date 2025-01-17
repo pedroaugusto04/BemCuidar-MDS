@@ -13,7 +13,7 @@ import { UserRequest } from "../../models/UserRequest";
 export class CardUserRequestComponent {
   @Input({ required: true }) name!: string;
   @Input({ required: true }) photo!: string;
-  @Input({ required: true }) status!: string;
+  @Input({ required: false }) status!: string;
   @Input({ required: true }) address!: string;
 
   userRequest!: UserRequest;

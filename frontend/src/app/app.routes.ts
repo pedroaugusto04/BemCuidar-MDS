@@ -78,5 +78,12 @@ export const APP_ROUTES: Routes = [
         (m) => m.REQUEST_PROVIDER_ROUTES
       ),
   },
+  {
+    path: "provider-requests",
+    loadChildren: () =>
+      import("./components/provider-requests/provider-requests.component.routes").then(
+        (m) => m.PROVIDER_REQUESTS_ROUTES
+      ),
+  },
 ];
 export { Routes };
