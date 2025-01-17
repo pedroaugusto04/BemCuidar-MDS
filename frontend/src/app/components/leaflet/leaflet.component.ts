@@ -70,8 +70,11 @@ export class LeafletComponent implements OnInit, AfterViewInit {
       this.onMarkerClick(provider!);
     });
 
-    this.map.setView([latitude, longitude], 13); 
     this.hasAddress = true;
+  }
+
+  setView(latitude: number, longitude: number, scale: number){
+    this.map.setView([latitude, longitude], scale);
   }
 
   // limpa todos os marcadores
