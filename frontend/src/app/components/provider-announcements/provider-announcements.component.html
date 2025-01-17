@@ -1,4 +1,7 @@
 <app-nav-bar></app-nav-bar>
+<div class="title-announcements">
+  <h1>Meus Anúncios:</h1>
+</div>
 <div class="list-elements">
   @if(providerAnnouncements$ | async; as providerAnnouncements) { @for (providerAnnouncement of providerAnnouncements; track
   providerAnnouncement.name) {

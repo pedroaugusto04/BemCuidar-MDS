@@ -1,11 +1,20 @@
-.request-container{
+.request-container {
     margin-left: 0rem;
     padding-left: 2rem;
     padding-top: 2rem;
 }
-h1{
+
+h1 {
     font-family: Hammersmith One;
 }
-.request-info{
+
+.request-info {
     font-family: Hammersmith One;
+}
+
+.list-elements {
+    display: flex; /* Aplica o modelo Flexbox */
+    flex-wrap: wrap; /* Permite que os itens "quebrem" para a próxima linha se necessário */
+    margin-left: -1rem; /* Remove o espaçamento extra à esquerda */
+    margin-top: -1rem; /* Remove o espaçamento extra no topo */
 }

@@ -19,6 +19,7 @@ import { HttpClient } from "@angular/common/http";
 import { RequestProviderService } from "../../services/providerServices/request-provider.service";
 import { CookieService } from "ngx-cookie-service";
 import { ActivatedRoute } from "@angular/router";
+import L from "leaflet";
 
 
 @Component({
@@ -152,7 +153,7 @@ export class RequestProviderComponent {
     const street: String = this.form.value.street;
     const streetNumber: String = this.form.value.streetNumber;
     const fullAddress = `${street} ${streetNumber} ${neighborhood} ${city} ${state} ${country}`;
-
+    
     this.getCoordinates(fullAddress).subscribe({
       next: (response: any) => {
         if (response && response.length > 0) {

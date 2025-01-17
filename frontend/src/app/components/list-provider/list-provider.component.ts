@@ -8,7 +8,7 @@ import { ServiceProvider } from "../../models/ServiceProvider";
 import { CardServiceProviderComponent } from "../card-service-provider/card-service-provider.component";
 import { ProviderService } from "../../services/providerServices/provider.service";
 import { Observable, Subject } from "rxjs";
-import { debounceTime, distinctUntilChanged } from "rxjs/operators";
+import { debounceTime, distinctUntilChanged, map } from "rxjs/operators";
 import { CommonModule } from "@angular/common";
 import { LoadingComponent } from "../loading/loading.component";
 import { FormsModule } from "@angular/forms";
@@ -17,6 +17,7 @@ import { MatInputModule } from "@angular/material/input";
 import { LeafletComponent } from "../leaflet/leaflet.component";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { HttpClient } from "@angular/common/http";
+import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 
 @Component({
   selector: "app-list",
@@ -44,16 +45,23 @@ export class ListProviderComponent implements OnInit {
   allProviders: ServiceProvider[] = [];
   filteredProviders: ServiceProvider[] = [];
   @ViewChild(LeafletComponent) leafletComponent!: LeafletComponent;
+  isMobile$!: Observable<boolean>;
 
   private cityFilterSubject = new Subject<string>();
 
   constructor(
     private providerService: ProviderService,
     private snackBar: MatSnackBar,
-    private http: HttpClient
+    private http: HttpClient, 
+    private breakpointObserver: BreakpointObserver
   ) {}
 
   ngOnInit(): void {
+    this.isMobile$ = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+      map(result => result.matches)
+    );this.isMobile$ = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+      map(result => result.matches)
+    );
     this.providers$ = this.providerService.getProviders();
     this.providers$.subscribe((providers) => {
       this.allProviders = providers;

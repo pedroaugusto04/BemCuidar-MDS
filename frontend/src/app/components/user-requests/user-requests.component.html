@@ -1,15 +1,17 @@
 <app-nav-bar></app-nav-bar>
 <div class="request-container">
-  <h1>Suas Solicitações</h1>
+  <h1>Solicitações recebidas:</h1>
   <div class="list-elements">
     @if(requests$ | async; as requests) { @for (request of requests; track
     request) {
     <div class="request">
       <app-card-user-request class="request-info"
+        req_id = "{{request.req_id}}"
         name="{{ request.req_name }}"
         photo="{{ request.req_photo }}"
         status="{{ request.req_status }}"
         address="{{ request.req_address }}"
+        [isProvider]="true"
       ></app-card-user-request>
     </div>
     } }

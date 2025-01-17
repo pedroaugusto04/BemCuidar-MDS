@@ -24,6 +24,7 @@
   }
   
   .providerAnnouncement-info {
+    
     width: 80%;
     height: 20%;
   }
@@ -33,10 +34,14 @@
   }
   h2{
     font-family: Hammersmith One;
+    display: flex;
+    align-items: flex-start;
+
   }
   h4 {
     font-family: Hammersmith One;
     font-weight: 400;
+    
   }
   
   @media screen and (min-width: 992px) {

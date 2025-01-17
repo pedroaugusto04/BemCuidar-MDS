@@ -1,35 +1,54 @@
 <app-nav-bar></app-nav-bar>
-<mat-form-field appearance="fill">
-  <mat-label for="cityFilter">Filtrar por cidade</mat-label>
-  <input
-    matInput
-    id="cityFilter"
-    [(ngModel)]="cityFilter"
-    (ngModelChange)="onCityFilterChange($event)"
-    placeholder="Digite a cidade"
-  />
-</mat-form-field>
-<div class="list-elements">
-  @if(providers$ | async; as providers) { @for (provider of filteredProviders; track
-  provider.name) {
-  <div class="provider">
-    <app-card-service-provider
-      providerId="{{ provider.id }}"
-      providerName="{{ provider.name }}"
-      providerServiceDescription="{{ provider.service_description }}"
-      providerAge="{{ provider.age }}"
-      providerCountry="{{ provider.country }}"
-      providerState="{{ provider.state }}"
-      providerCity="{{ provider.city }}"
-      providerPhoto="{{ provider.photo }}"
-      [providerFavorited]="provider.favorited ?? false"
-      [discover]="true"
-    ></app-card-service-provider>
+
+<div class="title-city-filter">
+  <h1>Digite a sua cidade para achar cuidadores:</h1>
+</div>
+
+<div class="city-filter">
+  <mat-form-field appearance="fill">
+    <mat-label for="cityFilter">Filtrar por cidade</mat-label>
+    <input
+      matInput
+      id="cityFilter"
+      class="cityFilter"
+      [(ngModel)]="cityFilter"
+      (ngModelChange)="onCityFilterChange($event)"
+      placeholder="Digite a cidade"
+    />
+  </mat-form-field>
+</div>
+
+<div *ngIf="isMobile$ | async; else desktopContent">
+  <div class="map">
+    <!-- Mapa ajustado para mobile -->
+    <app-leaflet [mapId]="'descobrir'" [height]="'20rem'" [width]="'23rem'" [canClick]="true"></app-leaflet>
   </div>
-  } }
 </div>
-<div>
-</div>
-<div class="map">
-  <app-leaflet></app-leaflet>
+
+<ng-template #desktopContent>
+  <div class="map">
+    <!-- Mapa ajustado para desktop -->
+    <app-leaflet [mapId]="'descobrir'" [height]="'40rem'" [width]="'80rem'" [canClick]="true"></app-leaflet>
+  </div>
+</ng-template>
+
+<div class="list-elements">
+  @if(providers$ | async; as providers) { 
+    @for (provider of filteredProviders; track provider.name) {
+      <div class="provider">
+        <app-card-service-provider
+          providerId="{{ provider.id }}"
+          providerName="{{ provider.name }}"
+          providerServiceDescription="{{ provider.service_description }}"
+          providerAge="{{ provider.age }}"
+          providerCountry="{{ provider.country }}"
+          providerState="{{ provider.state }}"
+          providerCity="{{ provider.city }}"
+          providerPhoto="{{ provider.photo }}"
+          [providerFavorited]="provider.favorited ?? false"
+          [discover]="true"
+        ></app-card-service-provider>
+      </div>
+    }
+  }
 </div>

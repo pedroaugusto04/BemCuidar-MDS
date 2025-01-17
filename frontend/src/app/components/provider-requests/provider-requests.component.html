@@ -1,24 +1,17 @@
 <app-nav-bar></app-nav-bar>
 <div class="request-container">
-  <h1>Solicitações recebidas</h1>
+  <h1>Solicitações enviadas:</h1>
   <div class="list-elements">
     @if(requests$ | async; as requests) { 
       @for (request of requests; track request) {
         <div class="request">
           <app-card-user-request class="request-info"
+            req_id="{{request.id}}"
             name="{{ request.req_name }}"
             photo="{{ request.req_photo }}"
             address="{{ request.req_address }}"
+            status = "{{request.status}}"
           ></app-card-user-request>
-          <div class="request-actions">
-            <ng-container *ngIf="request.status === userRequestStatus.Pendente; else showStatus">
-              <button mat-raised-button color="primary" (click)="acceptRequest(request.id)">Aceitar</button>
-              <button mat-raised-button color="warn" (click)="denyRequest(request.id)">Negar</button>
-            </ng-container>
-            <ng-template #showStatus>
-              <h3>{{ request.status }}</h3>
-            </ng-template>
-          </div>
         </div>
       } 
     }

@@ -1,7 +1,26 @@
-<div class="request">
+<div class="provider">
+  <img
+    mat-card-image
+    class="provider-img"
+    [src]="photo ? photo : 'assets/imgs/default_img.jpeg'"
+    alt="{{ name }}"
+  />
   <div class="info">
     <div class="request-info">
-      <h2>{{ name }} <br> {{ status }} <br> {{ address }}</h2>
+      <h2>{{ name }} <br> <br> {{ address }}</h2>
+    </div>
+    <div class="request-actions">
+      <ng-container *ngIf="status === userRequestStatus.Pendente && isProvider; else showStatus">
+        <button mat-raised-button color="primary" (click)="acceptRequest(req_id)">Aceitar</button>
+        <button mat-raised-button color="warn" (click)="denyRequest(req_id)">Negar</button>
+      </ng-container>
+      <ng-template #showStatus>
+        <div class="status-container">
+          <mat-icon *ngIf="status === 'aceito'" class="accepted">check_circle</mat-icon>
+          <mat-icon *ngIf="status === 'negado'" class="denied">cancel</mat-icon>
+          <h3>{{ capitalizeFirstLetter(status) }}</h3>
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>

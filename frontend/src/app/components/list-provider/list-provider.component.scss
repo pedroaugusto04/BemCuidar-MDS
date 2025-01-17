@@ -1,16 +1,37 @@
 .list-elements {
   padding: 1.5rem;
+  display: flex; 
+  flex-wrap: wrap; 
+}
+
+.provider {
+  width: 100%; 
+  padding: 1rem;
+  box-sizing: border-box; 
+}
+
+.title-city-filter {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding-top: 2rem;
+}
+
+.title-city-filter h1 {
+  font-size: 2.25rem;
+  font-family: Hammersmith One;
+}
+
+.city-filter {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }
 
 @media screen and (min-width: 992px) {
-  .list-elements {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-  }
-
   .provider {
-    width: 33%;
+    width: 22%;
   }
 }

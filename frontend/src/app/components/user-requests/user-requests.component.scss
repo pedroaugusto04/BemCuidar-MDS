@@ -1,11 +1,19 @@
-.request-container{
+.request-container {
     margin-left: 0rem;
     padding-left: 2rem;
     padding-top: 2rem;
 }
-h1{
+
+h1 {
     font-family: Hammersmith One;
 }
-.request-info{
+
+.request-info {
     font-family: Hammersmith One;
+}
+
+.list-elements {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 2rem; 
 }

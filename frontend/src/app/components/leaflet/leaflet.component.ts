@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import * as L from 'leaflet';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import '@geoman-io/leaflet-geoman-free';
@@ -20,6 +20,10 @@ export class LeafletComponent implements OnInit, AfterViewInit {
     L.marker([-19.4650, -42.5380]) // centraliza inicialmente em Ipatinga
   ];
   defaultIcon: string = "assets/imgs/map-profile-icon.svg";
+  @Input({ required: true }) mapId!: string;
+  @Input() canClick: boolean = false;
+  @Input() height: string = '30rem';  
+  @Input() width: string = '50rem';   
 
   constructor(private snackBar: MatSnackBar, private viewServiceProviderService: ViewServiceProviderService) {}
 
@@ -32,7 +36,7 @@ export class LeafletComponent implements OnInit, AfterViewInit {
 
   private initMap() {
     const baseMapURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    this.map = L.map('map');
+    this.map = L.map(this.mapId);
     L.tileLayer(baseMapURL).addTo(this.map);
   }
 
@@ -45,7 +49,7 @@ export class LeafletComponent implements OnInit, AfterViewInit {
     const marker = L.marker([latitude, longitude], {
       icon: L.icon({
         iconUrl: this.defaultIcon,
-        iconSize: [25, 41],
+        iconSize: [40, 70],
         iconAnchor: [12, 41],
         popupAnchor: [1, -34],
         shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
@@ -80,6 +84,8 @@ export class LeafletComponent implements OnInit, AfterViewInit {
   }
 
   onMarkerClick(provider: ServiceProvider): void {
-    this.viewServiceProviderService.openDialog(provider);
+    if (this.canClick){
+      this.viewServiceProviderService.openDialog(provider);  
+    }
   }
 }
