@@ -2,28 +2,27 @@ import { AfterViewInit, Component, OnInit, ViewEncapsulation } from '@angular/co
 import * as L from 'leaflet';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import '@geoman-io/leaflet-geoman-free';
+import { ServiceProvider } from '../../models/ServiceProvider';
+import { ViewServiceProviderService } from '../view-service-provider/services/view-service-provider.service';
 
 @Component({
   selector: 'app-leaflet',
   standalone: true,
   imports: [],
   templateUrl: './leaflet.component.html',
-  styleUrl: './leaflet.component.scss',
+  styleUrls: ['./leaflet.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class LeafletComponent implements OnInit, AfterViewInit{
+export class LeafletComponent implements OnInit, AfterViewInit {
   hasAddress: boolean = false;
-  private map!: L.Map
+  private map!: L.Map;
   markers: L.Marker[] = [
-    L.marker([-19.4650, -42.5380]) // Centraliza inicialmente em Ipatinga, Minas Gerais, Brasil
-];
+    L.marker([-19.4650, -42.5380]) // centraliza inicialmente em Ipatinga
+  ];
 
+  constructor(private snackBar: MatSnackBar, private viewServiceProviderService: ViewServiceProviderService) {}
 
-  constructor(private snackBar: MatSnackBar) {}
-
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit() {
     this.initMap();
@@ -31,37 +30,54 @@ export class LeafletComponent implements OnInit, AfterViewInit{
   }
 
   private initMap() {
-    const baseMapURl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+    const baseMapURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     this.map = L.map('map');
-    L.tileLayer(baseMapURl).addTo(this.map);
+    L.tileLayer(baseMapURL).addTo(this.map);
   }
-
 
   private centerMap() {
     const bounds = L.latLngBounds(this.markers.map(marker => marker.getLatLng()));
-    
     this.map.fitBounds(bounds);
   }
 
-  addMarker(latitude: number, longitude: number) {
-    // Remove os marcadores existentes 
-    this.hasAddress = false;
+  addMarker(latitude: number, longitude: number, provider?: ServiceProvider) {
+    const marker = L.marker([latitude, longitude], {
+      icon: L.icon({
+        iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
+        shadowSize: [41, 41]
+      })
+    }).addTo(this.map);
+
+    if (provider && provider.name != null) {
+      marker.bindPopup(`${provider.name}`, {
+        autoClose: false,  
+        closeButton: false,
+        closeOnClick: false,
+      }).openPopup(); 
+    }
+
+    marker.on('click', () => {
+      this.onMarkerClick(provider!);
+    });
+
+    this.map.setView([latitude, longitude], 13); 
+    this.hasAddress = true;
+  }
+
+  // limpa todos os marcadores
+  clearMarkers() {
     this.map.eachLayer((layer) => {
       if (layer instanceof L.Marker) {
         this.map.removeLayer(layer); 
       }
     });
-    const marker = L.marker([latitude, longitude], {
-      icon: L.icon({
-        iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png', // Caminho do ícone padrão
-        iconSize: [25, 41], // Tamanho do ícone
-        iconAnchor: [12, 41], // Posição do ponto de ancoragem
-        popupAnchor: [1, -34], // Posição do popup
-        shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png', // Sombra do ícone
-        shadowSize: [41, 41] // Tamanho da sombra
-      })
-    }).addTo(this.map);
-    this.map.setView([latitude, longitude], 13); 
-    this.hasAddress = true;
+  }
+
+  onMarkerClick(provider: ServiceProvider): void {
+    this.viewServiceProviderService.openDialog(provider);
   }
 }

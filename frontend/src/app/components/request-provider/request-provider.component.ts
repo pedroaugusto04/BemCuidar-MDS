@@ -134,10 +134,6 @@ export class RequestProviderComponent {
       verticalPosition: "top",
       panelClass: ["success-snackbar"],
     });
-
-    setTimeout(() => {
-      this.router.navigateByUrl("/home");
-    }, 1000);
   }
 
   onError(msg: string) {
