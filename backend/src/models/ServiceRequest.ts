@@ -9,4 +9,5 @@ export interface ServiceRequest {
     req_address: string;
     req_phone: string;
     req_photo: string;
+    req_city: string;
   }  

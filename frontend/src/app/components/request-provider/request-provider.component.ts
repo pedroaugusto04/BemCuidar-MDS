@@ -108,6 +108,7 @@ export class RequestProviderComponent {
     const address = `${street} ${streetNumber} ${neighborhood} ${city} ${state} ${country}`;
     
     this.formData.append("req_address", address);
+    this.formData.append("req_city",this.form.value.city);
 
     if (this.form.invalid) {
       this.onError("Preencha os campos corretamente!");
@@ -156,24 +157,25 @@ export class RequestProviderComponent {
     const streetNumber: String = this.form.value.streetNumber;
     const fullAddress = `${street} ${streetNumber} ${neighborhood} ${city} ${state} ${country}`;
 
-    this.getCoordinates(fullAddress).subscribe(
-      (response: any) => {
+    this.getCoordinates(fullAddress).subscribe({
+      next: (response: any) => {
         if (response && response.length > 0) {
           const location = response[0];
           const latitude: number = location.lat;
           const longitude: number = location.lon;
           // encontrou endereço (marca no mapa)
-          this.leafletComponent.addMarker(latitude,longitude);
+          this.leafletComponent.addMarker(latitude, longitude);
         } else {
           // avisa que o endereco nao foi encontrado
           this.onError("Endereço não encontrado");
         }
       },
-      (error) => {
+      error: (err) => {
         this.onError("Endereço não encontrado");
       }
-    );
+    });
   }
+
   
   getCoordinates(address: string): Observable<any> {
     const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json`;
