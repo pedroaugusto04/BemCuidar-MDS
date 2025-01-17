@@ -26,7 +26,7 @@ export class ServiceProviderService {
       const id = uuidv4();
       newProvider.id = id;
       const sqlStatement =
-        "INSERT INTO service_providers (id, name,age,state,country,city,photo,service_description,user_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING *";
+        "INSERT INTO service_providers (id, name,age,state,country,city,address,coords_lon,coords_lat,photo,service_description,user_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING *";
       const values = [
         newProvider.id,
         newProvider.name,
@@ -34,6 +34,9 @@ export class ServiceProviderService {
         newProvider.state,
         newProvider.country,
         newProvider.city,
+        newProvider.address,
+        newProvider.coords_lon,
+        newProvider.coords_lat,
         newProvider.photo,
         newProvider.service_description,
         userId

@@ -6,6 +6,9 @@ export interface ServiceProvider {
   state: string;
   country: string;
   city: string;
+  address: string;
+  coords_lon: number;
+  coords_lat: number;
   photo: string;
   service_description: string;
   favorited?: boolean;

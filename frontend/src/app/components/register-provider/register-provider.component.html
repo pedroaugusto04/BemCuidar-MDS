@@ -72,6 +72,13 @@
           <mat-error>{{ formErrorMessage("city") }}</mat-error>
           }
         </mat-form-field>
+        <mat-form-field class="input" id="address-field" appearance="outline">
+          <mat-label>Endereço</mat-label>
+          <input matInput formControlName="address" />
+          @if(form.get("address")?.invalid){
+          <mat-error>{{ formErrorMessage("address") }}</mat-error>
+          }
+        </mat-form-field>
 
         <div class="title-age-preference">
           <h3>Como cuidador você prefere tratar de:</h3>

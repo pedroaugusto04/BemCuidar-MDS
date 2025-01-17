@@ -14,6 +14,9 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { CookieService } from "ngx-cookie-service";
 
 @Component({
   selector: "app-register-provider",
@@ -43,8 +46,10 @@ export class RegisterProviderComponent {
   constructor(
     private formBuilder: NonNullableFormBuilder,
     private registerProviderService: RegisterProviderService,
+    private cookieService: CookieService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {
     this.form = this.formBuilder.group({
       name: ["", [Validators.required, Validators.minLength(3)]],
@@ -53,8 +58,13 @@ export class RegisterProviderComponent {
       country: ["", [Validators.required, Validators.minLength(3)]],
       state: ["", [Validators.required]],
       city: ["", [Validators.required, Validators.minLength(3)]],
+      address: ["", [Validators.required]],
       photo: [""],
     });
+    if (!this.cookieService.get("token")) {
+      this.onError("Faça login para se registrar como cuidador!");
+      return;
+    }
   }
 
   formErrorMessage(fieldName: string) {
@@ -111,19 +121,36 @@ export class RegisterProviderComponent {
     this.formData.append("country", this.form.value.country);
     this.formData.append("state", this.form.value.state);
     this.formData.append("city", this.form.value.city);
+    this.formData.append("address", this.form.value.address);
 
     if (this.form.invalid) {
       this.onError("Preencha os campos corretamente!");
       return;
     }
-    this.registerProviderService.register(this.formData).subscribe({
-      next: () => {
-        this.onSuccess("Cuidador registrado com sucesso!");
+
+    this.returnCoordinates().subscribe({
+      next: (coordinates) => {
+        const { latitude, longitude } = coordinates;
+        console.log('Latitude:', latitude);
+        console.log('Longitude:', longitude);
+        // Agora você tem as coordenadas para usar como precisar.
+        this.formData.append("coords_lat", String(latitude));
+        this.formData.append("coords_lon", String(longitude));
+
+        this.registerProviderService.register(this.formData).subscribe({
+          next: () => {
+            this.onSuccess("Cuidador registrado com sucesso!");
+          },
+          error: (error: any) => {
+            this.onError("Erro ao registrar cuidador!");
+          },
+        });    
       },
-      error: (error: any) => {
-        this.onError("Erro ao registrar cuidador!");
-      },
+      error: (errorMessage) => {
+        this.onError(errorMessage);
+      }
     });
+    
   }
 
   onSuccess(msg: string) {
@@ -145,4 +172,37 @@ export class RegisterProviderComponent {
       panelClass: ["error-snackbar"],
     });
   }
+
+  returnCoordinates(): Observable<{ latitude: number, longitude: number }> {
+    const country: string = this.form.value.country;
+    const state: string = this.form.value.state;
+    const city: string = this.form.value.city;
+    const address: string = this.form.value.address;
+    const fullAddress = `${address} ${city} ${state} ${country}`;
+  
+    return new Observable<{ latitude: number, longitude: number }>((observer) => {
+      this.getCoordinates(fullAddress).subscribe({
+        next: (response: any) => {
+          if (response && response.length > 0) {
+            const location = response[0];
+            const latitude: number = location.lat;
+            const longitude: number = location.lon;
+            // Retorna apenas as coordenadas
+            observer.next({ latitude, longitude });
+            observer.complete();
+          } else {
+            observer.error("Endereço não localizado! Digite novamente");
+          }
+        },
+        error: (err) => {
+          observer.error("Erro ao obter coordenadas");
+        }
+      });
+    });
+  }
+
+    getCoordinates(address: string): Observable<any> {
+      const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json`;
+      return this.http.get(url);
+    }
 }
