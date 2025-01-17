@@ -58,7 +58,7 @@ export class ListProviderComponent implements OnInit {
     this.providers$.subscribe((providers) => {
       this.allProviders = providers;
       this.filteredProviders = providers;
-      this.verifyAddress(this.filteredProviders);
+      this.addProviderMarkers(this.filteredProviders);
     });
 
     // debounce pro filtro de cidade
@@ -69,7 +69,7 @@ export class ListProviderComponent implements OnInit {
       )
       .subscribe((city) => {
         this.filteredProviders = this.filterProvidersByCity(city);
-        this.verifyAddress(this.filteredProviders);
+        this.addProviderMarkers(this.filteredProviders);
       });
   }
 
@@ -87,41 +87,46 @@ export class ListProviderComponent implements OnInit {
     );
   }
 
-  verifyAddress(filteredProviders: ServiceProvider[]) {
-    filteredProviders.forEach((provider) => {
-      const country: string = provider.country || '';
-      const state: string = provider.state || '';
-      const city: string = provider.city || '';
-      const neighborhood: string = provider.neighborhood || '';
-      const street: string = provider.street || '';
-      const streetNumber: string = provider.street_number || '';
+  addProviderMarkers(filteredProviders: ServiceProvider[]) {
+    let maxlon = Number.NEGATIVE_INFINITY;
+    let minlon = Number.POSITIVE_INFINITY;
+    let maxlat = Number.NEGATIVE_INFINITY;
+    let minlat = Number.POSITIVE_INFINITY;
+    let avglon = 0;
+    let avglat = 0;
+    for(let i=0;i<filteredProviders.length;i++){
+      const lon = filteredProviders[i].coords_lon;
+      const lat = filteredProviders[i].coords_lat;
+      if(!lon || !lat)
+        continue;
+      avglon += lon / filteredProviders.length;
+      avglat += lat / filteredProviders.length;
+      if (lon > maxlon)
+        maxlon = lon;
+      if (lon < minlon)
+        minlon = lon;
+      if (lat > maxlat)
+        maxlat = lat;
+      if (lat < minlat)
+        minlat = lat;
+    }
 
-      const fullAddress = `${street} ${streetNumber} ${neighborhood} ${city} ${state} ${country}`;
+    console.log("MINLON ", minlon, " MAXLON ", maxlon, " MINLAT ", minlat, " MAXLAT ", maxlat)
 
-      this.getCoordinates(fullAddress).subscribe({
-        next: (response: any) => {
-          if (response && response.length > 0) {
-            const location = response[0];
-            const latitude: number = location.lat;
-            const longitude: number = location.lon;
-            // Encontrou o endereço (marca no mapa)
-            this.leafletComponent.addMarker(latitude, longitude,provider);
-          } else {
-            this.onError("Endereço não encontrado");
-          }
-        },
-        error: (err) => {
-          this.onError("Endereço não encontrado");
-        },
-      });
-    });
-  }
+    const maxdif = Math.sqrt(Math.pow((maxlon - minlon)/2, 2) + Math.pow(maxlat - minlat, 2))
+    const zoom = Math.log2(360 / maxdif);
 
-  getCoordinates(address: string): Observable<any> {
-    const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
-      address
-    )}&format=json`;
-    return this.http.get(url);
+    console.log("MAXDIF ", maxdif, " ZOOM ", zoom )
+
+    this.leafletComponent.setView((minlat + maxlat)/2, (minlon + maxlon)/2, zoom);
+
+    for(let i=0;i<filteredProviders.length;i++){
+      const lon = filteredProviders[i].coords_lon;
+      const lat = filteredProviders[i].coords_lat;
+      if(!lon || !lat)
+        continue;
+      this.leafletComponent.addMarker(lat, lon,filteredProviders[i]);
+    }
   }
 
   onSuccess(msg: string) {
