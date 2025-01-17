@@ -1,6 +1,20 @@
 <app-nav-bar></app-nav-bar>
+
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label for="cityFilter">Filtrar por cidade</mat-label>
+    <input
+      matInput
+      id="cityFilter"
+      [(ngModel)]="cityFilter"
+      (ngModelChange)="onCityFilterChange()"
+      placeholder="Digite a cidade"
+    />
+  </mat-form-field>
+</div>
+
 <div class="list-elements">
-  @if(providers$ | async; as providers) { @for (provider of providers; track
+  @if(providers$ | async; as providers) { @for (provider of filteredProviders; track
   provider.name) {
   <div class="provider">
     <app-card-service-provider
