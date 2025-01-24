@@ -81,3 +81,9 @@
     width: 32.313rem;
   }
 }
+
+::ng-deep button[mat-flat-button] {
+  background-color: black !important;
+  color: white !important;
+  border-radius: 0.5rem;
+}
