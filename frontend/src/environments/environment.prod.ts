@@ -1,7 +1,8 @@
 export const environment = {
   production: true,
   name: "production",
-  baseUrl: "https://bemcuidar-mds.onrender.com/",
+  //baseUrl: "https://bemcuidar-mds.onrender.com/",
+  baseUrl: "https://bemcuidar-mds-midx.onrender.com/",
   getApiProviders: "providers",
   getApiProviderAnnouncements: "providers/announcements",
   getApiUsersInfo: "users/info/",
