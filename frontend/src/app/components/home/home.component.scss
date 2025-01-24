@@ -66,24 +66,27 @@ nav a {
 .features {
   display: flex;
   justify-content: space-around;
-  padding: 40px 20px;
+  padding: 2.5rem 1.25rem;
 }
 
 .feature {
   font-family: Hammersmith One;
   background: white;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 1.25rem;
+  border-radius: 0,625rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  width: 30%;
+  width: 22%;
   text-align: center;
 }
-
+.hero p{
+  line-height: 2rem;
+}
 .feature h3 {
   margin-bottom: 15px;
   font-size: 1.5rem;
   font-weight: bold;
 }
+
 .feature h4 {
   margin-bottom: 15px;
   font-size: 1.5rem;
@@ -96,8 +99,9 @@ nav a {
 }
 
 .feature p {
-  font-size: 1rem;
+  font-size: 1.5rem;
   color: #6c757d;
+  line-height: 1.5rem;
 }
 
 .footer {
@@ -133,8 +137,22 @@ nav a {
 .footer a:hover {
   text-decoration: underline;
 }
+
 ::ng-deep button[mat-flat-button] {
   background-color: black !important;
   color: white !important;
   border-radius: 0.5rem;
+}
+@media (max-width: 42rem) {
+  .features {
+    display: flex;
+    flex-direction: column; /* Coloca os itens em coluna */
+    align-items: center; /* Centraliza os itens */
+    gap: 1.5rem;
+  }
+
+  .feature {
+    width: 100%; /* Ocupa toda a largura */
+    max-width: 400px; /* Define um limite de largura para manter o design */
+  }
 }
