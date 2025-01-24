@@ -1,115 +1,118 @@
-<ng-container>
-  <mat-toolbar color="primary">
-    <mat-toolbar-row>
-      @if (isMobile){
-      <button
-        class="button-menu"
-        id="button-menu-mobile"
-        mat-icon-button
-        [matMenuTriggerFor]="menu"
-        aria-label="Menu button"
-      >
-        <mat-icon>menu</mat-icon>
-      </button>
-      <mat-menu class="mat-menu" #menu="matMenu">
-        <div class="sections">
-          <button routerLink="/discover" mat-menu-item>
-            <mat-icon>search</mat-icon>
-            <span class="sections-text">Descobrir</span>
-          </button>
-          @if(user$ | async; as user){
-          <button routerLink="/favorites" mat-menu-item>
-            <mat-icon>star</mat-icon>
-            <span class="sections-text">Meus Favoritos</span>
-          </button>
-          }
-          @if(user$ | async; as user) {
-            <button routerLink="/care" mat-menu-item>
-              <mat-icon>work</mat-icon>
-              <span class="sections-text">Quero Cuidar</span>
-            </button>  
-          }
-          @if(user$ | async; as user){
-          <button (click)="signOut()" mat-menu-item>
-            <mat-icon>exit_to_app</mat-icon>
-            <span class="sections-text">Sair</span>
-          </button>
-          }
-        </div>
-      </mat-menu>
-      }
-      <div routerLink="/home" class="div-logo">
-        <a>
-          <mat-icon id="icon-logo" svgIcon="Logo">menu</mat-icon>
-        </a>
-        <h4>BemCuidar</h4>
-      </div>
-      <div class="right-side">
-        @if (!isMobile){
-        <div class="sections" id="sections-desktop">
-          <a routerLink="/discover" class="menu-item">Descobrir</a>
-          @if (user$ | async; as user){
-          <a routerLink="/favorites" class="menu-item">Meus Favoritos</a>
-          }
-          @if(user$ | async; as user) {
-            <a routerLink="/care" class="menu-item">Quero Cuidar</a>
-          }
-        </div>
-        }
-      </div>
-      <div class="div-icons">
-        @if (user$ | async; as user){ @if(isMobile){
-        <a
-          routerLink="/profile"
-          class="div-profile-img"
-          id="profile-img-mobile"
+<div class="container">
+  <ng-container>
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        @if (isMobile){
+        <button
+          class="button-menu"
+          id="button-menu-mobile"
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          aria-label="Menu button"
         >
-          <img
-            class="profile-img"
-            [src]="user.icon || defaultIcon"
-            alt="{{ user.name }}"
-          />
-        </a>
-        } @else {
-        <a
-          class="div-profile-img"
-          [matMenuTriggerFor]="menu2"
-          id="profile-img-desktop"
-          ><img
-            class="profile-img"
-            [src]="user.icon || defaultIcon"
-            alt="{{ user.name }}"
-        /></a>
-        <mat-menu class="mat-menu" #menu2="matMenu">
-          <div class="info-user">
-            <div class="info-user-text">
-              <span id="username-info">{{ user.name }}</span>
-              <span id="username-email-info">{{ user.email }}</span>
-            </div>
-          </div>
-          <div class="divider">
-            <div class="divider-row"></div>
-          </div>
+          <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu class="mat-menu" #menu="matMenu">
           <div class="sections">
-            <a routerLink="/profile" mat-menu-item>
-              <mat-icon>person</mat-icon>
-              <span class="sections-text">Meu perfil</span>
-            </a>
+            <button routerLink="/discover" mat-menu-item>
+              <mat-icon>search</mat-icon>
+              <span class="sections-text">Descobrir</span>
+            </button>
+            @if(user$ | async; as user){
+            <button routerLink="/favorites" mat-menu-item>
+              <mat-icon>star</mat-icon>
+              <span class="sections-text">Meus Favoritos</span>
+            </button>
+            }
+            @if(user$ | async; as user) {
+              <button routerLink="/care" mat-menu-item>
+                <mat-icon>work</mat-icon>
+                <span class="sections-text">Quero Cuidar</span>
+              </button>  
+            }
+            @if(user$ | async; as user){
             <button (click)="signOut()" mat-menu-item>
               <mat-icon>exit_to_app</mat-icon>
               <span class="sections-text">Sair</span>
             </button>
+            }
           </div>
         </mat-menu>
-        } } @else {
-        <div routerLink="/login" id="div-register">
-         <div routerLink="/login" id="div-register">
-          <mat-icon id="icon-register">person</mat-icon>
-          <a id="text-register"> Entrar</a>
-        </div>
-        </div>
         }
-      </div>
-    </mat-toolbar-row>
-  </mat-toolbar>
-</ng-container>
+        <div routerLink="/home" class="div-logo">
+          <a>
+            <mat-icon id="icon-logo" svgIcon="Logo">menu</mat-icon>
+          </a>
+          <h4>BemCuidar</h4>
+        </div>
+        <div class="right-side">
+          @if (!isMobile){
+          <div class="sections" id="sections-desktop">
+            <a routerLink="/discover" class="menu-item">Descobrir</a>
+            @if (user$ | async; as user){
+            <a routerLink="/favorites" class="menu-item">Meus Favoritos</a>
+            }
+            @if(user$ | async; as user) {
+              <a routerLink="/care" class="menu-item">Quero Cuidar</a>
+            }
+          </div>
+          }
+        </div>
+        <div class="div-icons">
+          @if (user$ | async; as user){ @if(isMobile){
+          <a
+            routerLink="/profile"
+            class="div-profile-img"
+            id="profile-img-mobile"
+          >
+            <img
+              class="profile-img"
+              [src]="user.icon || defaultIcon"
+              alt="{{ user.name }}"
+            />
+          </a>
+          } @else {
+          <a
+            class="div-profile-img"
+            [matMenuTriggerFor]="menu2"
+            id="profile-img-desktop"
+            ><img
+              class="profile-img"
+              [src]="user.icon || defaultIcon"
+              alt="{{ user.name }}"
+          /></a>
+          <mat-menu class="mat-menu" #menu2="matMenu">
+            <div class="info-user">
+              <div class="info-user-text">
+                <span id="username-info">{{ user.name }}</span>
+                <span id="username-email-info">{{ user.email }}</span>
+              </div>
+            </div>
+            <div class="divider">
+              <div class="divider-row"></div>
+            </div>
+            <div class="sections">
+              <a routerLink="/profile" mat-menu-item>
+                <mat-icon>person</mat-icon>
+                <span class="sections-text">Meu perfil</span>
+              </a>
+              <button (click)="signOut()" mat-menu-item>
+                <mat-icon>exit_to_app</mat-icon>
+                <span class="sections-text">Sair</span>
+              </button>
+            </div>
+          </mat-menu>
+          } } @else {
+          <div routerLink="/login" id="div-register">
+           <div routerLink="/login" id="div-register">
+            <mat-icon id="icon-register">person</mat-icon>
+            <a id="text-register"> Entrar</a>
+          </div>
+          </div>
+          }
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </ng-container>
+  
+</div>
