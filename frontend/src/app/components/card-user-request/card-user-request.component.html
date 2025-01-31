@@ -6,7 +6,7 @@
     alt="{{ name }}"
   />
   
-  <button *ngIf="enviada" class="trash-button" (click)="cancelRequest(req_id)">
+  <button *ngIf="enviada && status === userRequestStatus.Pendente" class="trash-button" (click)="cancelRequest(req_id)">
     <mat-icon>close</mat-icon>
   </button>
 

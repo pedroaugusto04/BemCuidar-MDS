@@ -18,6 +18,20 @@ export class ServiceProviderService {
     }
   }
 
+  public static async deleteProvider(
+    providerId: string
+  ): Promise<void> {
+    const client: PoolClient = await connection.connect();
+    try {
+      const sqlStatement = "DELETE FROM service_providers WHERE id = $1";
+  
+      const values = [providerId];
+      await client.query(sqlStatement, values);
+    } finally {
+      client.release(); 
+    }
+  }
+
   public static async createProvider(
     newProvider: ServiceProvider
   ,userId: string): Promise<ServiceProvider> {

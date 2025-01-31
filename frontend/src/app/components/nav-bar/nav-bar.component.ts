@@ -73,7 +73,8 @@ export class NavBarComponent implements OnInit {
     });
 
     setTimeout(() => {
-      this.router.navigateByUrl("/home");
+      this.router.navigateByUrl("/discover");
+      window.location.reload();
     }, 1000);
   }
 }

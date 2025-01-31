@@ -135,6 +135,10 @@ export class RequestProviderComponent {
       verticalPosition: "top",
       panelClass: ["success-snackbar"],
     });
+
+    setTimeout(() => {
+      this.router.navigateByUrl("/discover");
+    }, 1000);
   }
 
   onError(msg: string) {

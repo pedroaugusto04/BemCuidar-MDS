@@ -22,4 +22,10 @@ export class RequestProviderService {
       const apiUrl = new URL(environment.deleteApiRequestProvider(requestId), this.API).toString();
       return this.httpClient.delete<void>(apiUrl);
     }
+
+    deleteAnnouncement(providerId: string): Observable<void>{
+      const apiUrl = new URL(environment.deleteApiServiceProvider(providerId), this.API).toString();
+      return this.httpClient.delete<void>(apiUrl);
+    }
+
 }

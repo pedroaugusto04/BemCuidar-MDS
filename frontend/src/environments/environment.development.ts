@@ -14,6 +14,7 @@ export const environment = {
   postApiRequestProvider: (providerId: string) =>
     `/users/requests/${providerId}`,
   deleteApiRequestProvider: (requestId: string) => `/users/requests/${requestId}`,
+  deleteApiServiceProvider: (providerId: string) => `/providers/${providerId}`,
   getApiUserRequest: (requestId: string) =>
     `/users/requests/${requestId}`,
   getApiServiceRequests: "providers/requests",

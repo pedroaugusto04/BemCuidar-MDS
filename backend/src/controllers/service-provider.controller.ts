@@ -30,6 +30,21 @@ export class ServiceProviderController {
     }
   }
 
+  public static async deleteProvider(req: Request, res: Response) {
+    try {
+      const token = req.headers.authorization;
+      if (token) {
+        const providerId = req.params.providerId;
+        await ServiceProviderService.deleteProvider(providerId);
+      } 
+      return res
+          .status(200)
+          .json({ message: "Anuncio deletado com sucesso!" });
+    } catch (error: any) {
+      res.status(500).json({ message: "Erro ao deletar anuncio." });
+    }
+  }
+
   public static async createProvider(req: Request, res: Response) {
     try {
       const token = req.headers.authorization;

@@ -34,7 +34,9 @@ export class ProviderRequestsComponent {
       .subscribe({
         next: () => {
           this.onSuccess('Requisição aceita com sucesso!');
-          window.location.reload(); 
+          setTimeout(() => {
+            window.location.reload(); 
+          }, 1000); 
         },
         error: (err) => {
           this.onError('Falha ao aceitar a requisição');
@@ -48,7 +50,9 @@ export class ProviderRequestsComponent {
       .subscribe({
         next: () => {
           this.onSuccess('Requisição negada com sucesso!');
-          window.location.reload(); 
+          setTimeout(() => {
+            window.location.reload(); 
+          }, 1000); 
         },
         error: (err) => {
           this.onError('Falha ao negar a requisição');

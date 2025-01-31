@@ -169,7 +169,7 @@ export class RegisterProviderComponent {
     });
 
     setTimeout(() => {
-      this.router.navigateByUrl("/home");
+      this.router.navigateByUrl("/discover");
     }, 1000);
   }
 

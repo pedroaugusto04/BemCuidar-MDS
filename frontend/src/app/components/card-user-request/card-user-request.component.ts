@@ -47,7 +47,9 @@ export class CardUserRequestComponent {
       .subscribe({
         next: () => {
           this.onSuccess('Requisição aceita com sucesso!');
-          window.location.reload(); 
+          setTimeout(() => {
+            window.location.reload(); 
+          }, 1000); 
         },
         error: (err) => {
           this.onError('Falha ao aceitar a requisição');
@@ -61,7 +63,9 @@ export class CardUserRequestComponent {
       .subscribe({
         next: () => {
           this.onSuccess('Requisição negada com sucesso!');
-          window.location.reload(); 
+          setTimeout(() => {
+            window.location.reload(); 
+          }, 1000); 
         },
         error: (err) => {
           this.onError('Falha ao negar a requisição');
@@ -74,7 +78,9 @@ export class CardUserRequestComponent {
     this.requestProviderService.deleteRequest(requestId).subscribe({
       next: () => {
         this.onSuccess('Solicitação cancelada com sucesso!');
-        window.location.reload(); 
+        setTimeout(() => {
+          window.location.reload(); 
+        }, 1000); 
       },
       error: (err) => {
         this.onError('Falha ao cancelar a solicitação');

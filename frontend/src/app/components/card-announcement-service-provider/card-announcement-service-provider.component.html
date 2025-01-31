@@ -6,6 +6,9 @@
       [src]="providerAnnouncementPhoto ? providerAnnouncementPhoto : 'assets/imgs/default_img.jpeg'"
       alt="{{ providerAnnouncementName }}"
     />
+    <button class="trash-button" (click)="deleteAnnouncement(providerAnnouncementId)">
+      <mat-icon>close</mat-icon>
+    </button>
     <div class="info">
       <div class="providerAnnouncement-info">
         <h2>{{ providerAnnouncementName }} ({{ providerAnnouncementAge }} anos)</h2>
