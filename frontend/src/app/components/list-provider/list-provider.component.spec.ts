@@ -1,49 +1,60 @@
-import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
-import { ListProviderComponent } from "./list-provider.component";
-import { By } from "@angular/platform-browser";
-import { RouterTestingModule } from "@angular/router/testing";
-import { providersMock$ } from "../tests/mocks/providers.mock";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ListProviderComponent } from './list-provider.component';
+import { ProviderService } from '../../services/providerServices/provider.service';
+import { of } from 'rxjs';
+import { providersMock } from '../tests/mocks/providers.mock';
+import { By } from '@angular/platform-browser';
+import { DebugElement } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-describe("ListProviderComponent", () => {
-  let component: ListProviderComponent;
+describe('ListProviderComponent', () => {
   let fixture: ComponentFixture<ListProviderComponent>;
+  let component: ListProviderComponent;
+  let providersService: ProviderService;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [RouterTestingModule, ListProviderComponent],
-      declarations: [],
-    }).compileComponents();
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule,
+        BrowserAnimationsModule,
+        HttpClientTestingModule,
+        ListProviderComponent
+      ],
+      providers: [
+        {
+          provide: ProviderService,
+          useValue: {
+            getProviders: () => of(providersMock)  
+          }
+        }
+      ]
+    })
+    .compileComponents();
 
     fixture = TestBed.createComponent(ListProviderComponent);
     component = fixture.componentInstance;
-  }));
-
-  it("should create", () => {
-    expect(component).toBeTruthy();
+    providersService = TestBed.inject(ProviderService);  
   });
 
-  it("Should render providers correctly in app card", () => {
-    const cardProviderElements = fixture.debugElement.queryAll(
-      By.css("app-card-service-provider")
-    );
+  it('Verifica a renderizacao correta dos cards ( numero e informacoes)', () => {
+    fixture.detectChanges();  
+    const providerCards: DebugElement[] = fixture.debugElement.queryAll(By.css('app-card-service-provider'));
 
-    providersMock$.subscribe((providers) => {
-      expect(cardProviderElements.length).toBe(providers.length);
+    expect(providerCards.length).toBe(providersMock.length); 
 
-      cardProviderElements.forEach((element, i) => {
-        const provider = providers[i];
+    providerCards.forEach((element, i) => {
+      const provider = providersMock[i];
 
-        expect(element.componentInstance.providerName).toBe(provider.name);
-        expect(element.componentInstance.providerServiceDescription).toBe(
-          provider.service_description
-        );
-        expect(element.componentInstance.providerAge).toBe(provider.age);
-        expect(element.componentInstance.providerCountry).toBe(
-          provider.country
-        );
-        expect(element.componentInstance.providerState).toBe(provider.state);
-        expect(element.componentInstance.providerCity).toBe(provider.city);
-      });
+      expect(element.componentInstance.providerName).toBe(provider.name);
+      expect(element.componentInstance.providerServiceDescription).toBe(
+        provider.service_description
+      );
+      expect(element.componentInstance.providerAge).toBe(provider.age);
+      expect(element.componentInstance.providerCountry).toBe(provider.country);
+      expect(element.componentInstance.providerState).toBe(provider.state);
+      expect(element.componentInstance.providerCity).toBe(provider.city);
     });
   });
-});
+  });
