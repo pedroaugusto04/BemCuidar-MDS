@@ -205,4 +205,18 @@ export class UserService {
       client.release();
     }
   }
+
+  public static async deleteRequest(
+    requestId: string
+  ): Promise<void> {
+    const client: PoolClient = await connection.connect();
+    try {
+      const sqlStatement = "DELETE FROM user_requests_service_providers WHERE id = $1";
+  
+      const values = [requestId];
+      await client.query(sqlStatement, values);
+    } finally {
+      client.release();
+    }
+  }
 }

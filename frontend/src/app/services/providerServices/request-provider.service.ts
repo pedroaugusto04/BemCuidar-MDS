@@ -17,4 +17,9 @@ export class RequestProviderService {
       const apiUrl = new URL(environment.postApiRequestProvider(providerId), this.API).toString();
       return this.httpClient.post<ServiceProvider>(apiUrl, requestData);
     }
+
+    deleteRequest(requestId: string): Observable<void>{
+      const apiUrl = new URL(environment.deleteApiRequestProvider(requestId), this.API).toString();
+      return this.httpClient.delete<void>(apiUrl);
+    }
 }

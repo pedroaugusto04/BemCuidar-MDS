@@ -56,6 +56,11 @@ userRouter.post(
   UserController.requestProvider
 );
 
+userRouter.delete(
+  "/users/requests/:requestId",
+  UserController.deleteRequest
+);
+
 /**
  * @openapi
  * '/users/providers/:providerId':

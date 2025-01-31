@@ -76,6 +76,22 @@ export class UserController {
       return res.status(500).json({ message: "Erro ao solicitar cuidador." });
     }
   }
+  
+  public static async deleteRequest(req: Request, res: Response) {
+    try {
+      const token = req.headers.authorization;
+      
+      if (token) {
+        const requestId = req.params.requestId;
+        await UserService.deleteRequest(requestId);
+        return res
+          .status(200)
+          .json({ message: "Requisicao deletada com sucesso!" });
+      }
+    } catch (error: any) {
+      return res.status(500).json({ message: "Erro ao deletar a requisicao de cuidador." });
+    }
+  }
 
   public static async getFavoritedProviders(req: Request, res: Response) {
     try {

@@ -2,6 +2,7 @@ import { Component, Input } from "@angular/core";
 import { UserRequestStatus } from "../../models/enums/UserRequestStatus";
 import { UserRequest } from "../../models/UserRequest";
 import { ProviderService } from "../../services/providerServices/provider.service";
+import { RequestProviderService } from "../../services/providerServices/request-provider.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatButtonModule } from "@angular/material/button";
 import { CommonModule } from "@angular/common";
@@ -21,9 +22,11 @@ export class CardUserRequestComponent {
   @Input({ required: false }) status!: string;
   @Input({ required: true }) address!: string;
   @Input({ required: false}) isProvider: boolean = false;
+  @Input({ required: false }) phone!: string;
+  @Input({ required: false }) enviada: boolean = false;
   userRequestStatus = UserRequestStatus;
 
-  constructor(private providerService: ProviderService,private snackBar: MatSnackBar
+  constructor(private providerService: ProviderService, private requestProviderService: RequestProviderService, private snackBar: MatSnackBar
      ) {}
 
   userRequest!: UserRequest;
@@ -34,8 +37,8 @@ export class CardUserRequestComponent {
       req_name: this.name,
       req_photo: this.photo,
       req_status: this.status as UserRequestStatus,
-      req_address: this.address
-      
+      req_address: this.address,
+      req_phone: this.phone
     };
   }
 
@@ -65,6 +68,19 @@ export class CardUserRequestComponent {
           return;
         }
       });
+  }
+
+  cancelRequest(requestId: string): void {
+    this.requestProviderService.deleteRequest(requestId).subscribe({
+      next: () => {
+        this.onSuccess('Solicitação cancelada com sucesso!');
+        window.location.reload(); 
+      },
+      error: (err) => {
+        this.onError('Falha ao cancelar a solicitação');
+        return;
+      }
+    });
   }
 
   onSuccess(msg: string) {
