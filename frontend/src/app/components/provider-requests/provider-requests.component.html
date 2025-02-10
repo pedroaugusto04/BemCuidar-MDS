@@ -6,11 +6,11 @@
       @for (request of requests; track request) {
         <div class="request">
           <app-card-user-request class="request-info"
-            req_id="{{request.id}}"
+            req_id="{{request.req_id}}"
             name="{{ request.req_name }}"
             photo="{{ request.req_photo }}"
             address="{{ request.req_address }}"
-            status = "{{request.status}}"
+            status = "{{request.req_status}}"
             [enviada]="true"
           ></app-card-user-request>
         </div>

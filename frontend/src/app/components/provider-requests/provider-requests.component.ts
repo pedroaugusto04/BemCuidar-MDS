@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProviderService } from '../../services/providerServices/provider.service';
-import { ServiceRequest } from '../../models/ServiceRequest';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import { CommonModule } from '@angular/common';
 import { CardUserRequestComponent } from '../card-user-request/card-user-request.component';
@@ -9,6 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { UserRequestStatus } from '../../models/enums/UserRequestStatus';
 import { ActivatedRoute} from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserRequest } from '../../models/UserRequest';
+import { UserService } from '../../services/userServices/user.service';
 
 @Component({
   selector: 'app-provider-requests',
@@ -18,62 +19,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './provider-requests.component.scss'
 })
 export class ProviderRequestsComponent {
-  requests$!: Observable<ServiceRequest[]>;
+  requests$!: Observable<UserRequest[]>;
   userRequestStatus = UserRequestStatus;
 
-  constructor(private providerService: ProviderService,private snackBar: MatSnackBar,
+  constructor(private userService: UserService,private snackBar: MatSnackBar,
     private route: ActivatedRoute 
    ) {}
 
   ngOnInit(): void {
-    this.requests$ = this.providerService.getRequests();
-  }
-
-  acceptRequest(requestId: string): void {
-    this.providerService.setRequestStatus(requestId, UserRequestStatus.Aceito)
-      .subscribe({
-        next: () => {
-          this.onSuccess('Requisição aceita com sucesso!');
-          setTimeout(() => {
-            window.location.reload(); 
-          }, 1000); 
-        },
-        error: (err) => {
-          this.onError('Falha ao aceitar a requisição');
-          return;
-        }
-      });
-  }
-
-  denyRequest(requestId: string): void {
-    this.providerService.setRequestStatus(requestId, UserRequestStatus.Negado)
-      .subscribe({
-        next: () => {
-          this.onSuccess('Requisição negada com sucesso!');
-          setTimeout(() => {
-            window.location.reload(); 
-          }, 1000); 
-        },
-        error: (err) => {
-          this.onError('Falha ao negar a requisição');
-          return;
-        }
-      });
-  }
-
-  onSuccess(msg: string) {
-    this.snackBar.open(msg, "X", {
-      duration: 1000,
-      verticalPosition: "top",
-      panelClass: ["success-snackbar"],
-    });
-  }
-
-  onError(msg: string) {
-    this.snackBar.open(msg, "X", {
-      duration: 1000,
-      verticalPosition: "top",
-      panelClass: ["error-snackbar"],
-    });
+    this.requests$ = this.userService.getUserRequests();
   }
 }
