@@ -18,6 +18,8 @@ import { LeafletComponent } from "../leaflet/leaflet.component";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { HttpClient } from "@angular/common/http";
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 
 @Component({
   selector: "app-list",
@@ -35,6 +37,7 @@ import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
     MatFormFieldModule,
     MatInputModule,
     LeafletComponent,
+    MatCheckboxModule,
   ],
   templateUrl: "./list-provider.component.html",
   styleUrls: ["./list-provider.component.scss"],
@@ -42,6 +45,9 @@ import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 export class ListProviderComponent implements OnInit {
   providers$!: Observable<ServiceProvider[]>;
   cityFilter: string = "";
+  elderlyFilter: boolean = false;
+  childrenFilter: boolean = false;
+  disabledFilter: boolean = false;
   allProviders: ServiceProvider[] = [];
   filteredProviders: ServiceProvider[] = [];
   @ViewChild(LeafletComponent) leafletComponent!: LeafletComponent;
@@ -76,8 +82,7 @@ export class ListProviderComponent implements OnInit {
         distinctUntilChanged() 
       )
       .subscribe((city) => {
-        this.filteredProviders = this.filterProvidersByCity(city);
-        this.addProviderMarkers(this.filteredProviders);
+        this.onFilterChange();
       });
   }
 
@@ -85,14 +90,43 @@ export class ListProviderComponent implements OnInit {
     this.cityFilterSubject.next(city);
   }
 
+  onElderlyFilterChange(v: boolean): void {
+    this.onFilterChange();
+  }
+
+  onChildrenFilterChange(v: boolean): void {
+    this.onFilterChange();
+  }
+
+  onDisabledFilterChange(v: boolean): void {
+    this.onFilterChange();
+  }
+
+  onFilterChange(): void{
+    this.leafletComponent.clearMarkers();
+    this.filteredProviders = this.filterProviders();
+    this.addProviderMarkers(this.filteredProviders);
+  }
+
   filterProvidersByCity(city: string): ServiceProvider[] {
     if (!city) {
       return this.allProviders;
     }
     this.leafletComponent.clearMarkers();
-    return this.allProviders.filter((provider) =>
+    return this.allProviders.filter((provider) => {
       provider.city?.toLowerCase().includes(city.toLowerCase())
-    );
+    });
+  }
+
+  filterProviders(): ServiceProvider[] {
+    if(!this.cityFilter && !this.childrenFilter && !this.elderlyFilter && !this.disabledFilter){
+      return this.allProviders;
+    }
+    return this.allProviders.filter((provider) =>
+      provider.city?.toLowerCase().includes(this.cityFilter.toLowerCase()) && 
+      !(!provider.exp_children && this.childrenFilter) && 
+      !(!provider.exp_elderly && this.elderlyFilter) &&
+      !(!provider.exp_disabled && this.disabledFilter))
   }
 
   addProviderMarkers(filteredProviders: ServiceProvider[]) {

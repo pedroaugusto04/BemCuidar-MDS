@@ -10,9 +10,13 @@ export class ServiceProviderService {
   public static async getProviders(): Promise<ServiceProvider[]> {
     const client: PoolClient = await connection.connect();
     try {
-      const sqlStatement = "SELECT * FROM service_providers";
+      const sqlStatement = "SELECT s.*,u.name AS first_name, u.last_name FROM service_providers AS s INNER JOIN users AS u ON u.id = s.user_id";
       const result: QueryResult = await client.query(sqlStatement);
-      return result.rows as ServiceProvider[];
+      var r = result.rows as ServiceProvider[];
+      for(let i=0; i<result.rows.length; i++){
+        r[i].name = result.rows[i].first_name + " " + result.rows[i].last_name;
+      }
+      return r;
     } finally {
       client.release();
     }
@@ -40,7 +44,7 @@ export class ServiceProviderService {
       const id = uuidv4();
       newProvider.id = id;
       const sqlStatement =
-        "INSERT INTO service_providers (id, name,age,state,country,city,neighborhood,street,street_number,coords_lon,coords_lat,photo,service_description,user_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) RETURNING *";
+        "INSERT INTO service_providers (id, name,age,state,country,city,neighborhood,street,street_number,coords_lon,coords_lat,photo,service_description,user_id,exp_elderly,exp_children,exp_disabled,experience,qualifications) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19) RETURNING *";
       const values = [
         newProvider.id,
         newProvider.name,
@@ -55,7 +59,12 @@ export class ServiceProviderService {
         newProvider.coords_lat,
         newProvider.photo,
         newProvider.service_description,
-        userId
+        userId,
+        newProvider.exp_elderly,
+        newProvider.exp_children,
+        newProvider.exp_disabled,
+        newProvider.experience ? Math.floor(newProvider.experience) : null,
+        newProvider.qualifications
       ];
       const { rows } = await client.query(sqlStatement, values);
 

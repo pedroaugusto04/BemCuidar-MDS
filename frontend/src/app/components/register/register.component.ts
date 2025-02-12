@@ -50,6 +50,7 @@ export class RegisterComponent {
       last_name: ["", [Validators.required, Validators.minLength(3)]],
       email: ["", [Validators.required, Validators.email]],
       password: ["", [Validators.required, Validators.minLength(8)]],
+      password_repeat: ["", [Validators.required, Validators.minLength(8)]],
     });
   }
 
@@ -82,6 +83,10 @@ export class RegisterComponent {
   signUp() {
     if (this.form.invalid) {
       this.onError("Preencha os campos corretamente!");
+      return;
+    }
+    if(this.form.value.password != this.form.value.password_repeat){
+      this.onError("Senha não é igual nos campos 'Senha' e 'Confirmar Senha'");
       return;
     }
     this.registerService

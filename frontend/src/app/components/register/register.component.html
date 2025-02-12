@@ -38,6 +38,17 @@
           <mat-icon (click)="onClick()" matSuffix>visibility</mat-icon>
           }
         </mat-form-field>
+        <mat-form-field class="input" appearance="outline">
+          <mat-label>Confirmar Senha</mat-label>
+          <input type="{{ password }}" matInput formControlName="password_repeat" />
+          @if(form.get("password_repeat")?.invalid){
+          <mat-error>{{ formErrorMessage("password_repeat") }}</mat-error>
+          } @if(visibility){
+          <mat-icon (click)="onClick()" matSuffix>visibility_off</mat-icon>
+          } @else {
+          <mat-icon (click)="onClick()" matSuffix>visibility</mat-icon>
+          }
+        </mat-form-field>
         <button (click)="signUp()" class="btn-primary" mat-flat-button color="primary">
           <span>CADASTRAR</span>
         </button>

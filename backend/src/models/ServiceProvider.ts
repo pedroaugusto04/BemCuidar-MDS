@@ -13,5 +13,11 @@ export interface ServiceProvider {
   coords_lat: number;
   photo: string;
   service_description: string;
+  experience?: number;
+  qualifications?: string;
+  exp_elderly: boolean;
+  exp_children: boolean;
+  exp_disabled: boolean;
+
   favorited?: boolean;
 }

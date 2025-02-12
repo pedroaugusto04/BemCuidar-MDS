@@ -24,6 +24,11 @@ CREATE TABLE IF NOT EXISTS service_providers (
     photo VARCHAR NULL,
     service_description VARCHAR NULL,
     user_id VARCHAR NOT NULL,
+    experience INT NULL,
+    qualifications VARCHAR NULL,
+    exp_elderly BOOLEAN NOT NULL,
+    exp_children BOOLEAN NOT NULL,
+    exp_disabled BOOLEAN NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 

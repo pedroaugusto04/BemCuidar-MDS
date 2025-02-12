@@ -17,6 +17,7 @@ mat-form-field {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 14rem;
 }
 
 h1 {
@@ -294,6 +295,11 @@ h5 {
   }
   .description #description-field {
     margin-top: 0rem;
+    width: 60rem;
+  }
+  .description #qualifications-field {
+    margin-top: 0rem;
+    margin-bottom: 6rem;
     width: 60rem;
   }
 

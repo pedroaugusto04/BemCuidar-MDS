@@ -10,10 +10,11 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { RegisterProviderService } from "../../services/providerServices/register-provider.service";
+import { ProviderService } from "../../services/providerServices/provider.service";
 import { MatButtonModule } from "@angular/material/button";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { CookieService } from "ngx-cookie-service";
@@ -46,13 +47,13 @@ export class RegisterProviderComponent {
   constructor(
     private formBuilder: NonNullableFormBuilder,
     private registerProviderService: RegisterProviderService,
+    private providerService: ProviderService,
     private cookieService: CookieService,
     private snackBar: MatSnackBar,
     private router: Router,
     private http: HttpClient
   ) {
     this.form = this.formBuilder.group({
-      name: ["", [Validators.required, Validators.minLength(3)]],
       service_description: ["", [Validators.required, Validators.minLength(3)]],
       age: ["", [Validators.required]],
       country: ["", [Validators.required, Validators.minLength(3)]],
@@ -62,11 +63,27 @@ export class RegisterProviderComponent {
       street: ["", [Validators.required]],      
       street_number: ["", [Validators.required]] ,
       photo: [""],
+      exp_children: [false],
+      exp_elderly: [false],
+      exp_disabled: [false],
+      qualifications: [""],
+      experience: [""]
     });
     if (!this.cookieService.get("token")) {
       this.onError("Faça login para se registrar como cuidador!");
       return;
     }
+    this.providerService.getProviderAnnouncements().subscribe((r) => {
+      if(r != null && r.length != 0){
+        this.onError("Já registrou um cuidador usando esta conta!");
+        const btn = document.getElementById("button-register") as HTMLButtonElement;
+        if(btn){
+          btn.disabled = true;
+          btn.innerHTML = "CUIDADOR JÁ REGISTRADO"
+        }
+        return;
+      }
+    });
   }
 
   formErrorMessage(fieldName: string) {
@@ -119,11 +136,17 @@ export class RegisterProviderComponent {
     if (file) {
       this.formData.append("photo", file);
     }
-    this.formData.append("name", this.form.value.name);
     this.formData.append(
       "service_description",
       this.form.value.service_description
     );
+    this.formData.append("exp_children", this.form.value.exp_children);
+    this.formData.append("exp_elderly", this.form.value.exp_elderly);
+    this.formData.append("exp_disabled", this.form.value.exp_disabled);
+
+    this.formData.append("experience", this.form.value.experience);
+    this.formData.append("qualifications", this.form.value.qualifications);    
+
     this.formData.append("age", this.form.value.age);
     this.formData.append("country", this.form.value.country);
     this.formData.append("state", this.form.value.state);

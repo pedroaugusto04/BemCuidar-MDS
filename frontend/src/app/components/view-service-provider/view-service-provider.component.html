@@ -28,6 +28,19 @@
             }}
             anos) - {{ modal.serviceProvider.city }},
             {{ modal.serviceProvider.state }} <br /><br />
+            {{ modal.serviceProvider.exp_elderly ? "" : "Não" }} Possui experiência cuidando de idosos <br />
+            {{ modal.serviceProvider.exp_children ? "" : "Não" }} Possui experiência cuidando de crianças <br />
+            {{ modal.serviceProvider.exp_disabled ? "" : "Não" }} Possui experiência cuidando de Pessoas com Condições Especiais <br />
+            <br />
+            @if(modal.serviceProvider.qualifications){
+              <b>Formações:</b> <br />
+              {{ modal.serviceProvider.qualifications }} <br />
+            }
+            <br />
+            @if(modal.serviceProvider.experience != null){
+              <b>Anos de Experiência:</b> <br />
+              {{ modal.serviceProvider.experience }} <br />
+            }
           </span>
         </div>
       </div>
