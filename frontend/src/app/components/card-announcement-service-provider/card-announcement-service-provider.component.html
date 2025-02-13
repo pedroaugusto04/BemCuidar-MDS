@@ -6,6 +6,9 @@
       [src]="providerAnnouncementPhoto ? providerAnnouncementPhoto : 'assets/imgs/default_img.jpeg'"
       alt="{{ providerAnnouncementName }}"
     />
+    <button class="edit-button" (click)="editAnnouncement()">
+      <mat-icon>edit</mat-icon>
+    </button>
     <button class="trash-button" (click)="deleteAnnouncement(providerAnnouncementId)">
       <mat-icon>close</mat-icon>
     </button>

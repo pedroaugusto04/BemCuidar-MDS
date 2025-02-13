@@ -16,4 +16,9 @@ export class RegisterProviderService {
     const apiUrl = new URL(environment.getApiProviders, this.API).toString();
     return this.httpClient.post<ServiceProvider>(apiUrl, providerData);
   }
+
+  update(providerData: FormData): Observable<ServiceProvider> {
+    const apiUrl = new URL(environment.getApiProviders, this.API).toString();
+    return this.httpClient.put<ServiceProvider>(apiUrl, providerData);
+  }
 }

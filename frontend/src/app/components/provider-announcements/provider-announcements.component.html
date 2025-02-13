@@ -1,6 +1,6 @@
 <app-nav-bar></app-nav-bar>
 <div class="title-announcements">
-  <h1>Meus Anúncios:</h1>
+  <h1>Meu Anúncio:</h1>
 </div>
 <div class="list-elements">
   @if(providerAnnouncements$ | async; as providerAnnouncements) { @for (providerAnnouncement of providerAnnouncements; track
@@ -16,6 +16,13 @@
       providerAnnouncementState="{{ providerAnnouncement.state }}"
       providerAnnouncementCity="{{ providerAnnouncement.city }}"
       providerAnnouncementPhoto="{{ providerAnnouncement.photo }}"
+      providerAnnouncementNeighborhood="{{providerAnnouncement.neighborhood}}"
+      providerAnnouncementStreet="{{providerAnnouncement.street}}"
+      providerAnnouncementStreetNumber="{{providerAnnouncement.street_number}}"
+      providerAnnouncementQualifications="{{providerAnnouncement.qualifications}}"
+      [providerAnnouncementExpElderly]="providerAnnouncement.exp_elderly ?? false"
+      [providerAnnouncementExpChildren]="providerAnnouncement.exp_children ?? false"
+      [providerAnnouncementExpDisabled]="providerAnnouncement.exp_disabled ?? false"
     ></app-card-announcement-service-provider>
   </div>
   } }

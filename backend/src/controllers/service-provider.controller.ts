@@ -68,6 +68,29 @@ export class ServiceProviderController {
     }
   }
 
+  public static async updateProvider(req: Request, res: Response) {
+    try {
+      const token = req.headers.authorization;
+      let updatedProvider: ServiceProvider;
+      if (token){
+        const userId = getUserIdByToken(token);
+        const newProvider: ServiceProvider = req.body;
+        if (req.files && "photo" in req.files) {
+          let downloadUrl = await uploadFile(req.files["photo"][0]);
+          newProvider.photo = downloadUrl ? downloadUrl : "";
+        }
+
+        updatedProvider = await ServiceProviderService.updateProvider(
+          newProvider,userId
+        ); 
+        return res.status(201).json(updatedProvider);
+      }
+    } catch (error: any) {
+      console.log(error);
+      return res.status(500).json({ message: "Erro ao atualizar anuncio." });
+    }
+  }
+
   public static async getProviderAnnouncements(req: Request, res: Response) {
     try {
       const token = req.headers.authorization;

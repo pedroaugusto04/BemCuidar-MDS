@@ -1,0 +1,162 @@
+<div class="container">
+  <h1 id = "edit-title">ALTERE SEU ANÚNCIO</h1>
+  <div class="div-form">
+    <form [formGroup]="form">
+      <div class="fields">
+        <div class="title-about-yourself">
+          <h2>Sobre você:</h2>
+        </div>
+        <mat-form-field class="input" id="age-field" appearance="outline">
+          <mat-label>Idade</mat-label>
+          <input matInput formControlName="age" />
+          @if(form.get("age")?.invalid){
+          <mat-error>{{ formErrorMessage("age") }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="input" id="experience-field" appearance="outline">
+          <mat-label>Anos de experiência</mat-label>
+          <input matInput formControlName="experience" />
+          @if(form.get("experience")?.invalid){
+          <mat-error>{{ formErrorMessage("experience") }}</mat-error>
+          }
+        </mat-form-field>
+
+        <br>
+        <div class="description">
+        <mat-form-field
+            id="qualifications-field"
+            class="input"
+            appearance="outline"
+          >
+            <mat-label>Suas qualificações</mat-label>
+            <textarea
+              matInput
+              formControlName="qualifications"
+              rows="5"
+              cols="50"
+            ></textarea>
+            @if(form.get("qualifications")?.invalid){
+            <mat-error>{{ formErrorMessage("qualifications") }}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="upload-img">
+          <input
+            #fileInput
+            type="file"
+            (change)="onFileSelected($event)"
+            accept="image/jpeg, image/png"
+            class="hidden-input"
+          />
+          @if(!selectedImage){
+          <div class="empty-projects">
+            <button id="add-img-button" (click)="triggerFile(fileInput)">
+              <span class="add-project">
+                <mat-icon class="mat-18">collections</mat-icon>
+                <label>Foto para upload</label>
+              </span>
+            </button>
+          </div>
+          } @else {
+          <button id="add-img-button" (click)="triggerFile(fileInput)">
+            <img
+              class="project-cover"
+              [src]="selectedImage"
+              alt="Imagem selecionada"
+            />
+          </button>
+          }
+        </div>
+        <div class="title-localization">
+          <h3>Sobre o local:</h3>
+        </div>
+        <mat-form-field class="input" id="country-field" appearance="outline">
+          <mat-label>País</mat-label>
+          <input matInput formControlName="country" />
+          @if(form.get("country")?.invalid){
+          <mat-error>{{ formErrorMessage("country") }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="input" id="state-field" appearance="outline">
+          <mat-label>Estado</mat-label>
+          <input matInput formControlName="state" />
+          @if(form.get("state")?.invalid){
+          <mat-error>{{ formErrorMessage("state") }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="input" id="city-field" appearance="outline">
+          <mat-label>Cidade</mat-label>
+          <input matInput formControlName="city" />
+          @if(form.get("city")?.invalid){
+          <mat-error>{{ formErrorMessage("city") }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="input" id="neighborhood-field" appearance="outline">
+          <mat-label>Bairro</mat-label>
+          <input matInput formControlName="neighborhood" />
+          @if(form.get("neighborhood")?.invalid){
+          <mat-error>{{ formErrorMessage("neighborhood") }}</mat-error>
+          }
+        </mat-form-field>
+      <mat-form-field class="input" id="street-field" appearance="outline">
+        <mat-label>Rua</mat-label>
+        <input matInput formControlName="street" />
+        @if(form.get("street")?.invalid){
+        <mat-error>{{ formErrorMessage("street") }}</mat-error>
+        }
+      </mat-form-field>
+    <mat-form-field class="input" id="street_number-field" appearance="outline">
+      <mat-label>Número</mat-label>
+      <input matInput formControlName="street_number" />
+      @if(form.get("street_number")?.invalid){
+      <mat-error>{{ formErrorMessage("street_number") }}</mat-error>
+      }
+    </mat-form-field>
+
+        <div class="title-age-preference">
+          <h3>Como cuidador você tem experiência tratando de:</h3>
+        </div>
+        <div class="checkbox-age">
+          <mat-checkbox id="exp_children" formControlName="exp_children" class="example-margin">Crianças</mat-checkbox>
+          <mat-checkbox id="exp_elderly" formControlName="exp_elderly" class="example-margin">Idosos</mat-checkbox>
+          <mat-checkbox id="exp_disabled" formControlName="exp_disabled" class="example-margin">Pessoas com condições Especiais</mat-checkbox>       
+        </div>
+
+        <div class="title-description">
+          <h3>Comente abaixo sobre sua forma de trabalho ou serviços adicionais:</h3>
+        </div>
+        <div class="description">
+          <mat-form-field
+            id="description-field"
+            class="input"
+            appearance="outline"
+          >
+            <mat-label>Descrição do tipo de Serviço</mat-label>
+            <textarea
+              matInput
+              formControlName="service_description"
+              rows="5"
+              cols="50"
+            ></textarea>
+            @if(form.get("service_description")?.invalid){
+            <mat-error>{{ formErrorMessage("service_description") }}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+
+        <div class="class-button-register">
+          <button
+            (click)="registerProvider()"
+            id="button-register"
+            mat-flat-button
+            color="white"
+          >
+            ALTERAR ANÚNCIO
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

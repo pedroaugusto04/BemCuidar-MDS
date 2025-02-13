@@ -46,12 +46,27 @@
   
 
   .trash-button {
+    position: absolute; 
+    background-color: rgba(255, 0, 0, 0.6);
+    color: white;
+    top: 45px;
+    width: 40px; 
+    height: 40px;
+    border-radius: 50%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+  }
+
+  .edit-button {
     position: absolute;
     width: 40px;  
     height: 40px; 
     border-radius: 50%; 
-    background-color: rgba(255, 0, 0, 0.6); 
-    color: white; 
+    background-color: var(--Secondary-70, #fc9);
     border: none;  
     display: flex;
     justify-content: center;
@@ -61,12 +76,12 @@
     z-index: 1;
   }
   
-  .trash-button mat-icon {
-    font-size: 24px; 
-  }
-  
   .trash-button:hover {
     background-color: rgba(255, 0, 0, 0.8);
+  }
+  
+  .edit-button:hover {
+    background-color: #ffb366;
   }
   
   @media screen and (min-width: 992px) {

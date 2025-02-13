@@ -4,6 +4,7 @@ import { ServiceProvider } from '../../models/ServiceProvider';
 import { RequestProviderService } from '../../services/providerServices/request-provider.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIcon } from '@angular/material/icon';
+import { ModalActionService } from '../modal-action/services/modal-action.service';
 
 @Component({
   selector: 'app-card-announcement-service-provider',
@@ -22,11 +23,19 @@ export class CardAnnouncementServiceProviderComponent {
   @Input({ required: true }) providerAnnouncementCity!: string;
   @Input() providerAnnouncementPhoto: string | undefined;
   @Input() providerAnnouncementFavorited!: boolean;
+  @Input() providerAnnouncementExpChildren: boolean = false;
+  @Input() providerAnnouncementExpElderly: boolean = false;
+  @Input() providerAnnouncementExpDisabled: boolean = false;
+  @Input() providerAnnouncementExperience: number = 0;
+  @Input() providerAnnouncementQualifications: string = "";
+  @Input() providerAnnouncementStreet: string = "";
+  @Input() providerAnnouncementNeighborhood: string = "";
+  @Input() providerAnnouncementStreetNumber: string = "";
 
   serviceProvider!: ServiceProvider;
 
   constructor(private viewServiceProviderService: ViewServiceProviderService, private requestProviderService: RequestProviderService,
-     private snackBar: MatSnackBar
+     private snackBar: MatSnackBar, private modalActionService: ModalActionService
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +49,14 @@ export class CardAnnouncementServiceProviderComponent {
       city: this.providerAnnouncementCity,
       photo: this.providerAnnouncementPhoto,
       favorited: this.providerAnnouncementFavorited,
+      exp_children: this.providerAnnouncementExpChildren,
+      exp_elderly: this.providerAnnouncementExpElderly,
+      exp_disabled: this.providerAnnouncementExpDisabled,
+      experience: this.providerAnnouncementExperience,
+      qualifications: this.providerAnnouncementQualifications,
+      street: this.providerAnnouncementStreet,
+      neighborhood: this.providerAnnouncementNeighborhood,
+      street_number: this.providerAnnouncementStreetNumber
     };
   }
 
@@ -60,6 +77,10 @@ export class CardAnnouncementServiceProviderComponent {
         return;
       }
     });
+  }
+
+  editAnnouncement(): void {
+    this.modalActionService.openDialog(this.serviceProvider,true);
   }
 
   onSuccess(msg: string) {

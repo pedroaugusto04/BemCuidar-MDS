@@ -50,6 +50,11 @@ serviceProviderRouter.post(
   ServiceProviderController.createProvider
 );
 
+serviceProviderRouter.put(
+  "/providers",
+  ServiceProviderController.updateProvider
+);
+
 serviceProviderRouter.delete(
   "/providers/:providerId",
   ServiceProviderController.deleteProvider

@@ -4,6 +4,16 @@
   flex-wrap: wrap; 
 }
 
+.div-filtro-experiencia {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.div-filtro-experiencia h3 {
+  padding-top: 1rem;
+}
+
 .provider {
   width: 100%; 
   padding: 1rem;

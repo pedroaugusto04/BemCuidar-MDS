@@ -74,6 +74,67 @@ export class ServiceProviderService {
     }
   }
 
+  public static async updateProvider(
+    newProvider: ServiceProvider,
+    userId: string
+  ): Promise<ServiceProvider> {
+    const client: PoolClient = await connection.connect();
+    try {
+      const sqlStatement = `
+        UPDATE service_providers 
+        SET 
+          name = $2,
+          age = $3,
+          state = $4,
+          country = $5,
+          city = $6,
+          neighborhood = $7,
+          street = $8,
+          street_number = $9,
+          coords_lon = $10,
+          coords_lat = $11,
+          photo = $12,
+          service_description = $13,
+          user_id = $14,
+          exp_elderly = $15,
+          exp_children = $16,
+          exp_disabled = $17,
+          experience = $18,
+          qualifications = $19
+        WHERE id = $1
+        RETURNING *`;
+      
+      const values = [
+        newProvider.id, 
+        newProvider.name,
+        newProvider.age,
+        newProvider.state,
+        newProvider.country,
+        newProvider.city,
+        newProvider.neighborhood,
+        newProvider.street,
+        newProvider.street_number,
+        newProvider.coords_lon,
+        newProvider.coords_lat,
+        newProvider.photo,
+        newProvider.service_description,
+        userId,
+        newProvider.exp_elderly,
+        newProvider.exp_children,
+        newProvider.exp_disabled,
+        newProvider.experience ? Math.floor(newProvider.experience) : null,
+        newProvider.qualifications
+      ];
+      
+      const { rows } = await client.query(sqlStatement, values);
+  
+      return rows[0] as ServiceProvider;
+    } finally {
+      client.release();
+    }
+  }
+  
+
   public static async getProviderAnnouncements(userId: string): Promise<ServiceProvider[]> {
     const client: PoolClient = await connection.connect();
     try {
