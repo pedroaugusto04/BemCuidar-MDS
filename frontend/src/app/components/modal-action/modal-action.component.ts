@@ -43,6 +43,7 @@ export class ModalActionComponent {
    selectedImage: string | undefined = "";
    formData = new FormData();
    hasErrorImg: string = "";
+   currentImage: File | undefined;
 
    constructor(
     @Inject(MAT_DIALOG_DATA)
@@ -51,10 +52,8 @@ export class ModalActionComponent {
     private cookieService: CookieService,
     private snackBar: MatSnackBar,
     private modalActionService: ModalActionService,
-    private router: Router,
     private formBuilder: NonNullableFormBuilder,
     private registerProviderService: RegisterProviderService,
-    private providerService: ProviderService,
     private http: HttpClient
   ) {
     if (!this.cookieService.get("token")) {
@@ -71,7 +70,7 @@ export class ModalActionComponent {
           neighborhood: [this.modal.serviceProvider.neighborhood, [Validators.required]],  
           street: [this.modal.serviceProvider.street, [Validators.required]],      
           street_number: [this.modal.serviceProvider.street_number, [Validators.required]] ,
-          photo: [this.modal.serviceProvider.photo],
+          photo: [""],
           exp_children: [this.modal.serviceProvider.exp_children ?? false],
           exp_elderly: [this.modal.serviceProvider.exp_elderly ?? false],
           exp_disabled: [this.modal.serviceProvider.exp_disabled ?? false],
@@ -80,7 +79,7 @@ export class ModalActionComponent {
         })
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.user$ = this.loginService.getUserInfo();
     this.isProviderRequirement = this.modal.isProviderRequirement;
   }
@@ -143,18 +142,25 @@ export class ModalActionComponent {
       reader.readAsDataURL(selectedFile);
     }
   }
+  
 
-  registerProvider() {
+  updateProvider() {
     if (!this.cookieService.get("token")) {
       this.onError("Faça login para solicitar um cuidador!");
       return;
     }
-    
+
     const file = this.formData.get("photo") as File;
     this.formData = new FormData();
+
     if (file) {
       this.formData.append("photo", file);
+    } else {
+      this.formData.append("photo",this.selectedImage ?? "");
     }
+
+
+    this.formData.append("name",this.modal.serviceProvider.name);
     this.formData.append(
       "service_description",
       this.form.value.service_description
@@ -179,16 +185,66 @@ export class ModalActionComponent {
       return;
     }
 
-    this.registerProviderService.update(this.formData).subscribe({
-      next: () => {
-        this.onSuccess("Anúncio alterado com sucesso!");
+    this.returnCoordinates().subscribe({
+      next: (coordinates) => {
+        const { latitude, longitude } = coordinates;
+
+        this.formData.append("coords_lat", String(latitude));
+        this.formData.append("coords_lon", String(longitude));
+
+        this.registerProviderService.update(this.formData).subscribe({
+          next: () => {
+            this.onSuccess("Anúncio alterado com sucesso!");
+            setTimeout(() => {
+              window.location.reload(); 
+            }, 1000); 
+          },
+          error: (error: any) => {
+            this.onError("Erro ao alterar anúncio!");
+            return;
+          },
+        });    
+        this.closeDialog();  
       },
-      error: (error: any) => {
-        this.onError("Erro ao alterar anúncio!");
-        return;
-      },
-    });    
-    this.closeDialog();
+      error: (errorMessage) => {
+        this.onError(errorMessage);
+      }
+    });
   }
+
+  returnCoordinates(): Observable<{ latitude: number, longitude: number }> {
+    const country: string = this.form.value.country;
+    const state: string = this.form.value.state;
+    const city: string = this.form.value.city;
+    const neighborhood: String = this.form.value.neighborhood;
+    const street: String = this.form.value.street;
+    const street_number: String = this.form.value.street_number;
+    const fullAddress = `${street} ${street_number} ${neighborhood} ${city} ${state} ${country}`;
+  
+    return new Observable<{ latitude: number, longitude: number }>((observer) => {
+      this.getCoordinates(fullAddress).subscribe({
+        next: (response: any) => {
+          if (response && response.length > 0) {
+            const location = response[0];
+            const latitude: number = location.lat;
+            const longitude: number = location.lon;
+            // Retorna apenas as coordenadas
+            observer.next({ latitude, longitude });
+            observer.complete();
+          } else {
+            observer.error("Endereço não localizado! Digite novamente");
+          }
+        },
+        error: (err) => {
+          observer.error("Erro ao obter coordenadas");
+        }
+      });
+    });
+  }
+
+    getCoordinates(address: string): Observable<any> {
+      const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json`;
+      return this.http.get(url);
+    }
 
 }

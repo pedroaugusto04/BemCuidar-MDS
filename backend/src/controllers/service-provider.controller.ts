@@ -75,6 +75,7 @@ export class ServiceProviderController {
       if (token){
         const userId = getUserIdByToken(token);
         const newProvider: ServiceProvider = req.body;
+        
         if (req.files && "photo" in req.files) {
           let downloadUrl = await uploadFile(req.files["photo"][0]);
           newProvider.photo = downloadUrl ? downloadUrl : "";

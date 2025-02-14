@@ -95,17 +95,16 @@ export class ServiceProviderService {
           coords_lat = $11,
           photo = $12,
           service_description = $13,
-          user_id = $14,
-          exp_elderly = $15,
-          exp_children = $16,
-          exp_disabled = $17,
-          experience = $18,
-          qualifications = $19
-        WHERE id = $1
+          exp_elderly = $14,
+          exp_children = $15,
+          exp_disabled = $16,
+          experience = $17,
+          qualifications = $18
+        WHERE user_id = $1
         RETURNING *`;
       
       const values = [
-        newProvider.id, 
+        userId, 
         newProvider.name,
         newProvider.age,
         newProvider.state,
@@ -118,7 +117,6 @@ export class ServiceProviderService {
         newProvider.coords_lat,
         newProvider.photo,
         newProvider.service_description,
-        userId,
         newProvider.exp_elderly,
         newProvider.exp_children,
         newProvider.exp_disabled,

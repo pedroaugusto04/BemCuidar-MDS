@@ -18,6 +18,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { CookieService } from "ngx-cookie-service";
+import { User } from "../../models/User";
+import { LoginService } from "../../services/userServices/login.service";
 
 @Component({
   selector: "app-register-provider",
@@ -42,13 +44,14 @@ export class RegisterProviderComponent {
   formData = new FormData();
   hasErrorImg: string = "";
 
-  user: any;
+  user$!: Observable<User | null>;
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
     private registerProviderService: RegisterProviderService,
     private providerService: ProviderService,
     private cookieService: CookieService,
+    private loginService: LoginService,
     private snackBar: MatSnackBar,
     private router: Router,
     private http: HttpClient
@@ -73,6 +76,9 @@ export class RegisterProviderComponent {
       this.onError("Faça login para se registrar como cuidador!");
       return;
     }
+
+    this.user$ = this.loginService.getUserInfo();
+
     this.providerService.getProviderAnnouncements().subscribe((r) => {
       if(r != null && r.length != 0){
         this.onError("Já registrou um cuidador usando esta conta!");
@@ -140,13 +146,23 @@ export class RegisterProviderComponent {
       "service_description",
       this.form.value.service_description
     );
+
+    let userName: string = '';
+    let userLastName: string = '';
+
+    this.user$.subscribe((user: User | null) => {
+      if (user) {
+          userName = user.name;
+          userLastName = user.last_name
+      }
+
+
+    this.formData.append("name", userName + " " + userLastName);
     this.formData.append("exp_children", this.form.value.exp_children);
     this.formData.append("exp_elderly", this.form.value.exp_elderly);
     this.formData.append("exp_disabled", this.form.value.exp_disabled);
-
     this.formData.append("experience", this.form.value.experience);
     this.formData.append("qualifications", this.form.value.qualifications);    
-
     this.formData.append("age", this.form.value.age);
     this.formData.append("country", this.form.value.country);
     this.formData.append("state", this.form.value.state);
@@ -181,6 +197,7 @@ export class RegisterProviderComponent {
         this.onError(errorMessage);
       }
     });
+  });
     
   }
 
