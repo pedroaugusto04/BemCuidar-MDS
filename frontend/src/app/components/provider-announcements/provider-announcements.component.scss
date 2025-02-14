@@ -1,102 +1,52 @@
-.provider {
-    cursor: pointer;
-    padding-right: 2rem;
-    padding-left: 2rem;
-    padding-bottom: 2rem;
-    display: flex;
-    flex-direction: column;
-    height: 25rem; /* Altura fixa do cartão */
-    width: 18rem; /* Largura fixa do cartão */
-    position: relative;
-    direction: rtl;
-  }
-  
-  .info {
-    display: inline-flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    position: relative;
-    z-index: 1;
-  }
-  
-  .provider-img {
-    width: 100%;
-    height: 12rem; /* Define uma altura fixa para todas as imagens */
-    object-fit: cover; /* Mantém a proporção sem deformar */
-    border-radius: 0.5rem; /* Opcional: arredonda os cantos das imagens */
-  }
-  
-  .provider-info {
-    width: 100%;
-    text-align: left;
-    padding-left: 0.5rem;
-  }
-  
-  .rating {
-    padding-top: 1rem;
-    position: relative;
-    z-index: 2;
-  }
-  
-  h2 {
-    font-family: Hammersmith One;
-    text-align: left;
-    margin: 0;
-  }
-  
-  h4 {
-    font-family: Hammersmith One;
-    font-weight: 400;
-    text-align: left;
-    margin: 0;
-  }
-
 .list-elements {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; 
+  align-items: center; 
   padding: 1.5rem;
+  width: 100%; 
 }
-.title-city-filter{
+
+.provider {
+  cursor: pointer;
+  padding-right: 6rem;
+  padding-left: 2rem;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  height: 25rem; 
+  width: 18rem; 
+  position: relative;
+  direction: rtl;
+  margin: 1rem; 
+}
+
+.title-announcements {
   align-items: center;
   display: flex;
   justify-content: center;
   text-align: center;
   padding-top: 2rem;
 }
-.title-city-filter h1{
+
+.title-announcements h1 {
   font-size: 2.25rem;
   font-family: Hammersmith One;
 }
 
-.city-filter{
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-}
-.title-announcements{
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    text-align: center;
+@media screen and (min-width: 992px) {
+  .list-elements {
+    flex-direction: row;
+    justify-content: center; 
+    height: auto;
+  }
+
+  .provider {
+    width: 20%;
+    height: 22rem;
     padding-top: 2rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center; 
   }
-  .title-announcements h1{
-    font-size: 2.25rem;
-    font-family: Hammersmith One;
-  }
-  @media screen and (min-width: 992px) {
-    .list-elements {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: first baseline;
-        height: 100%;
-      }
-    
-      .provider {
-        width: 20%;
-        height: 22rem;
-        display: flex;
-        align-items: flex-start;
-      }
-  }
+}
