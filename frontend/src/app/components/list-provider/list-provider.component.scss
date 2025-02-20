@@ -15,39 +15,38 @@
 /* Estilos para mobile */
 @media screen and (max-width: 767px) {
   .div-filtro-experiencia h3 {
-    width: 100%; /* Faz o título ocupar toda a largura */
-    margin-bottom: 0.5rem; /* Espaçamento abaixo do título */
+    width: 100%; 
+    margin-bottom: 0.5rem;
     padding-left: 2rem;
   }
   .div-filtro-experiencia {
-    flex-direction: column; /* Coloca o título e os checkboxes em coluna */
-    align-items: flex-start; /* Alinha os itens à esquerda */
+    flex-direction: column; 
+    align-items: flex-start;
   }
   .div-filtro-experiencia mat-checkbox {
-    display: block; /* Faz cada checkbox ocupar uma linha inteira */
-    width: 100%; /* Garante que o checkbox ocupe toda a largura */
-    margin-bottom: 0.5rem; /* Espaçamento entre os checkboxes */
+    display: block;
+    width: 100%; 
+    margin-bottom: 0.5rem;
   }
   .provider {
-    width: 100%; /* 1 item por linha no mobile */
+    width: 100%;
   }
 }
 
 /* Estilos para tablets */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .provider {
-    width: calc(50% - 1rem); /* 2 itens por linha em tablets */
+    width: calc(50% - 1rem); 
   }
 }
 
-/* Estilos para telas maiores (PC) */
 @media screen and (min-width: 1024px) {
   .provider {
-    width: 30%; /* 4 itens por linha em telas maiores */
+    width: 30%;
   }
 }
 
-/* Estilos para o filtro de experiência */
+
 .div-filtro-experiencia {
   display: flex;
   justify-content: center;
@@ -59,7 +58,6 @@
   font-weight: bolder;
 }
 
-/* Estilos para o título e filtro de cidade */
 .title-city-filter {
   align-items: center;
   display: flex;
@@ -80,12 +78,10 @@
   text-align: center;
 }
 
-/* Estilos para a mensagem "Nenhum encontrado" */
 .nenhumencontrado {
   text-align: center;
 }
 
-/* Estilos para o mat-paginator */
 mat-paginator {
   margin-top: 1rem;
   background-color: transparent;
