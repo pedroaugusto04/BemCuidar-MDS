@@ -18,23 +18,21 @@
   </mat-form-field>
 </div>
 
-<div class = "div-filtro-experiencia">
-  <h3>Preciso de algúem que cuide de: </h3>
-  <mat-checkbox id="exp_children" [(ngModel)]="childrenFilter" (ngModelChange)="onChildrenFilterChange($event)"  class="example-margin">Crianças</mat-checkbox>
+<div class="div-filtro-experiencia">
+  <h3>Preciso de alguém que cuide de: </h3>
+  <mat-checkbox id="exp_children" [(ngModel)]="childrenFilter" (ngModelChange)="onChildrenFilterChange($event)" class="example-margin">Crianças</mat-checkbox>
   <mat-checkbox id="exp_elderly" [(ngModel)]="elderlyFilter" (ngModelChange)="onElderlyFilterChange($event)" class="example-margin">Idosos</mat-checkbox>
   <mat-checkbox id="exp_disabled" [(ngModel)]="disabledFilter" (ngModelChange)="onDisabledFilterChange($event)" class="example-margin">Pessoas com condições Especiais</mat-checkbox>         
 </div>
 
 <div *ngIf="isMobile$ | async; else desktopContent">
   <div class="map">
-    <!-- Mapa ajustado para mobile -->
     <app-leaflet [mapId]="'descobrir'" [height]="'20rem'" [width]="'23rem'" [canClick]="true"></app-leaflet>
   </div>
 </div>
 
 <ng-template #desktopContent>
   <div class="map">
-    <!-- Mapa ajustado para desktop -->
     <app-leaflet [mapId]="'descobrir'" [height]="'40rem'" [width]="'80rem'" [canClick]="true"></app-leaflet>
   </div>
 </ng-template>
@@ -46,7 +44,7 @@
         Nenhum cuidador encontrado.
       </h2>
     }
-    @for (provider of filteredProviders; track provider.name) {
+    @for (provider of paginatedProviders; track provider.name) {
       <div class="provider">
         <app-card-service-provider
           providerId="{{ provider.id }}"
@@ -57,7 +55,7 @@
           providerState="{{ provider.state }}"
           providerCity="{{ provider.city }}"
           providerPhoto="{{ provider.photo }}"
-          providerExp_elderly="{provider.exp_elderly }}"
+          providerExp_elderly="{{ provider.exp_elderly }}"
           providerExp_children="{{ provider.exp_children }}"
           providerExp_disabled="{{ provider.exp_disabled }}"
           providerExperience="{{ provider.experience }}"
@@ -74,3 +72,11 @@
     </h2>
   }
 </div>
+
+<!-- Paginação -->
+<mat-paginator
+  [length]="filteredProviders.length"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[6, 12, 24]"
+  (page)="onPageChange($event)"
+></mat-paginator>

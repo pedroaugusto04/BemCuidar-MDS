@@ -17,20 +17,29 @@ mat-form-field {
 .container h1 {
   font-size: 2.25rem;
   font-family: Hammersmith One;
+  align-items: center;
+  text-align: center;
 }
 
 .fields {
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 14rem;
+  padding-bottom: 0rem;
 }
 
 h1 {
   padding-top: 1.5rem;
   font-size: 2.1rem;
 }
-
+.fields {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 15rem;
+}
 .input {
   width: 18rem;
   padding-bottom: 1.5rem;
@@ -166,8 +175,11 @@ h5 {
   letter-spacing: 0.02875rem;
   text-transform: uppercase;
 }
-
-@media screen and (min-width: 992px) {
+#age-field {
+  padding-bottom: 0rem;
+  padding-top: 0rem;
+}
+@media (min-width: 1300px) {
   .fields {
     width: 100%;
     display: flex;
@@ -393,4 +405,8 @@ h5 {
   --mdc-checkbox-selected-focus-icon-color:#3f51b5!important;
   --mat-select-invalid-arrow-color:#3f51b5!important;
   --mat-minimal-pseudo-checkbox-selected-checkmark-color:#3f51b5!important;
+}
+@media(max-width: 800px){
+
+
 }

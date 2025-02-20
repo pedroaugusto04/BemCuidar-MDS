@@ -1,9 +1,53 @@
+/* Estilos gerais */
 .list-elements {
   padding: 1.5rem;
-  display: flex; 
-  flex-wrap: wrap; 
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem; /* Espaçamento entre os itens */
 }
 
+.provider {
+  width: calc(33.33% - 1rem); /* 3 itens por linha no PC */
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Estilos para mobile */
+@media screen and (max-width: 767px) {
+  .div-filtro-experiencia h3 {
+    width: 100%; /* Faz o título ocupar toda a largura */
+    margin-bottom: 0.5rem; /* Espaçamento abaixo do título */
+    padding-left: 2rem;
+  }
+  .div-filtro-experiencia {
+    flex-direction: column; /* Coloca o título e os checkboxes em coluna */
+    align-items: flex-start; /* Alinha os itens à esquerda */
+  }
+  .div-filtro-experiencia mat-checkbox {
+    display: block; /* Faz cada checkbox ocupar uma linha inteira */
+    width: 100%; /* Garante que o checkbox ocupe toda a largura */
+    margin-bottom: 0.5rem; /* Espaçamento entre os checkboxes */
+  }
+  .provider {
+    width: 100%; /* 1 item por linha no mobile */
+  }
+}
+
+/* Estilos para tablets */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .provider {
+    width: calc(50% - 1rem); /* 2 itens por linha em tablets */
+  }
+}
+
+/* Estilos para telas maiores (PC) */
+@media screen and (min-width: 1024px) {
+  .provider {
+    width: 30%; /* 4 itens por linha em telas maiores */
+  }
+}
+
+/* Estilos para o filtro de experiência */
 .div-filtro-experiencia {
   display: flex;
   justify-content: center;
@@ -12,14 +56,10 @@
 
 .div-filtro-experiencia h3 {
   padding-top: 1rem;
+  font-weight: bolder;
 }
 
-.provider {
-  width: 100%; 
-  padding: 1rem;
-  box-sizing: border-box; 
-}
-
+/* Estilos para o título e filtro de cidade */
 .title-city-filter {
   align-items: center;
   display: flex;
@@ -40,12 +80,33 @@
   text-align: center;
 }
 
-.nenhumencontrado{
+/* Estilos para a mensagem "Nenhum encontrado" */
+.nenhumencontrado {
   text-align: center;
 }
 
-@media screen and (min-width: 992px) {
-  .provider {
-    width: 22%;
-  }
+/* Estilos para o mat-paginator */
+mat-paginator {
+  margin-top: 1rem;
+  background-color: transparent;
+}
+
+.mat-mdc-checkbox{
+  --mdc-checkbox-selected-icon-color: #3f51b5 !important;
+  --mdc-checkbox-pressed-focus-state-color: #3f51b5 !important;
+
+  --mdc-checkbox-state-layer-size: 50px;
+  --mdc-checkbox-unselected-hover-icon-color: #3f51b5 !important;
+  --mdc-checkbox-selected-focus-state-layer-color: #3f51b5 !important;
+  --mdc-checkbox-selected-pressed-state-layer-color:#3f51b5 !important;
+  --mdc-checkbox-selected-pressed-icon-color: #3f51b5!important;
+  --mdc-checkbox--anim-unchecked-checked-color: #3f51b5!important;
+  --mdc-checkbox__native-control-color:#3f51b5!important;
+  --mdc-checkbox--selected-color: #3f51b5!important;
+  --mat-full-pseudo-checkbox-selected-icon-color:#3f51b5!important;
+  --mdc-checkbox-selected-hover-state-layer-color:#3f51b5!important;
+  --mdc-checkbox-selected-hover-icon-color:#3f51b5!important;
+  --mdc-checkbox-selected-focus-icon-color:#3f51b5!important;
+  --mat-select-invalid-arrow-color:#3f51b5!important;
+  --mat-minimal-pseudo-checkbox-selected-checkmark-color:#3f51b5!important;
 }

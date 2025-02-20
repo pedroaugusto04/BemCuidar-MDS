@@ -19,7 +19,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { HttpClient } from "@angular/common/http";
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { MatCheckboxModule } from '@angular/material/checkbox';
-
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: "app-list",
@@ -38,6 +38,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatInputModule,
     LeafletComponent,
     MatCheckboxModule,
+    MatPaginator,
   ],
   templateUrl: "./list-provider.component.html",
   styleUrls: ["./list-provider.component.scss"],
@@ -50,6 +51,10 @@ export class ListProviderComponent implements OnInit {
   disabledFilter: boolean = false;
   allProviders: ServiceProvider[] = [];
   filteredProviders: ServiceProvider[] = [];
+  paginatedProviders: ServiceProvider[] = [];
+  pageSize = 6;
+  pageIndex = 0;
+
   @ViewChild(LeafletComponent) leafletComponent!: LeafletComponent;
   isMobile$!: Observable<boolean>;
 
@@ -65,21 +70,19 @@ export class ListProviderComponent implements OnInit {
   ngOnInit(): void {
     this.isMobile$ = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
       map(result => result.matches)
-    );this.isMobile$ = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-      map(result => result.matches)
     );
     this.providers$ = this.providerService.getProviders();
     this.providers$.subscribe((providers) => {
       this.allProviders = providers;
       this.filteredProviders = providers;
+      this.updatePaginatedProviders();
       this.addProviderMarkers(this.filteredProviders);
     });
 
-    // debounce pro filtro de cidade
     this.cityFilterSubject
       .pipe(
-        debounceTime(300), // espera 300ms após o usuário parar de digitar
-        distinctUntilChanged() 
+        debounceTime(300),
+        distinctUntilChanged()
       )
       .subscribe((city) => {
         this.onFilterChange();
@@ -102,9 +105,10 @@ export class ListProviderComponent implements OnInit {
     this.onFilterChange();
   }
 
-  onFilterChange(): void{
+  onFilterChange(): void {
     this.leafletComponent.clearMarkers();
     this.filteredProviders = this.filterProviders();
+    this.updatePaginatedProviders();
     this.addProviderMarkers(this.filteredProviders);
   }
 
@@ -114,19 +118,20 @@ export class ListProviderComponent implements OnInit {
     }
     this.leafletComponent.clearMarkers();
     return this.allProviders.filter((provider) => {
-      provider.city?.toLowerCase().includes(city.toLowerCase())
+      provider.city?.toLowerCase().includes(city.toLowerCase());
     });
   }
 
   filterProviders(): ServiceProvider[] {
-    if(!this.cityFilter && !this.childrenFilter && !this.elderlyFilter && !this.disabledFilter){
+    if (!this.cityFilter && !this.childrenFilter && !this.elderlyFilter && !this.disabledFilter) {
       return this.allProviders;
     }
     return this.allProviders.filter((provider) =>
       provider.city?.toLowerCase().includes(this.cityFilter.toLowerCase()) && 
       !(!provider.exp_children && this.childrenFilter) && 
       !(!provider.exp_elderly && this.elderlyFilter) &&
-      !(!provider.exp_disabled && this.disabledFilter))
+      !(!provider.exp_disabled && this.disabledFilter)
+    );
   }
 
   addProviderMarkers(filteredProviders: ServiceProvider[]) {
@@ -134,10 +139,10 @@ export class ListProviderComponent implements OnInit {
     let minlon = Number.POSITIVE_INFINITY;
     let maxlat = Number.NEGATIVE_INFINITY;
     let minlat = Number.POSITIVE_INFINITY;
-    for(let i=0;i<filteredProviders.length;i++){
+    for (let i = 0; i < filteredProviders.length; i++) {
       const lon = filteredProviders[i].coords_lon;
       const lat = filteredProviders[i].coords_lat;
-      if(!lon || !lat)
+      if (!lon || !lat)
         continue;
       if (lon > maxlon)
         maxlon = lon;
@@ -149,18 +154,30 @@ export class ListProviderComponent implements OnInit {
         minlat = lat;
     }
 
-    const maxdif = Math.sqrt(Math.pow((maxlon - minlon)/2, 2) + Math.pow(maxlat - minlat, 2))
+    const maxdif = Math.sqrt(Math.pow((maxlon - minlon) / 2, 2) + Math.pow(maxlat - minlat, 2));
     const zoom = Math.log2(360 / maxdif);
 
-    this.leafletComponent.setView((minlat + maxlat)/2, (minlon + maxlon)/2, zoom);
+    this.leafletComponent.setView((minlat + maxlat) / 2, (minlon + maxlon) / 2, zoom);
 
-    for(let i=0;i<filteredProviders.length;i++){
+    for (let i = 0; i < filteredProviders.length; i++) {
       const lon = filteredProviders[i].coords_lon;
       const lat = filteredProviders[i].coords_lat;
-      if(!lon || !lat)
+      if (!lon || !lat)
         continue;
-      this.leafletComponent.addMarker(lat, lon,filteredProviders[i]);
+      this.leafletComponent.addMarker(lat, lon, filteredProviders[i]);
     }
+  }
+
+  onPageChange(event: PageEvent) {
+    this.pageSize = event.pageSize;
+    this.pageIndex = event.pageIndex;
+    this.updatePaginatedProviders();
+  }
+
+  updatePaginatedProviders() {
+    const startIndex = this.pageIndex * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.paginatedProviders = this.filteredProviders.slice(startIndex, endIndex);
   }
 
   onSuccess(msg: string) {
@@ -178,6 +195,4 @@ export class ListProviderComponent implements OnInit {
       panelClass: ["error-snackbar"],
     });
   }
-  
-  
 }
