@@ -62,9 +62,18 @@
             VERIFICAR ENDEREÇO
           </button>
         </div>
-        <div class="map">
-          <app-leaflet [mapId]="'solicitar'" [height]="'28rem'" [width]="'40rem'"></app-leaflet>
+
+        <div *ngIf="isMobile$ | async; else desktopContent">
+          <div class="map">
+            <app-leaflet [mapId]="'solicitar'" [height]="'20rem'" [width]="'20rem'"></app-leaflet>
+          </div>
         </div>
+        
+        <ng-template #desktopContent>
+          <div class="map">
+            <app-leaflet [mapId]="'solicitar'" [height]="'30rem'" [width]="'50rem'"></app-leaflet>
+          </div>
+        </ng-template>
         
         <div class="class-button-register">
           <button

@@ -14,12 +14,14 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { LeafletComponent } from "../leaflet/leaflet.component";
-import { Observable } from "rxjs";
+import { map, Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { RequestProviderService } from "../../services/providerServices/request-provider.service";
 import { CookieService } from "ngx-cookie-service";
 import { ActivatedRoute } from "@angular/router";
 import L from "leaflet";
+import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
+import { CommonModule } from "@angular/common";
 
 
 @Component({
@@ -34,12 +36,14 @@ import L from "leaflet";
     MatButtonModule,
     MatCheckboxModule,
     LeafletComponent,
+    CommonModule
   ],
   templateUrl: "./request-provider.component.html",
   styleUrl: "./request-provider.component.scss",
 })
 export class RequestProviderComponent {
   @ViewChild(LeafletComponent) leafletComponent!: LeafletComponent;
+  isMobile$!: Observable<boolean>;
   isFieldClicked: boolean = false;
   form!: FormGroup;
   formData = new FormData();
@@ -53,7 +57,8 @@ export class RequestProviderComponent {
     private http: HttpClient,
     private cookieService: CookieService,
     private providerService: RequestProviderService,
-    private route: ActivatedRoute 
+    private route: ActivatedRoute,
+    private breakpointObserver: BreakpointObserver
   ) {
     this.form = this.formBuilder.group({
       name: ["", [Validators.required, Validators.minLength(3)]],
@@ -62,13 +67,17 @@ export class RequestProviderComponent {
       state: ["", [Validators.required]],
       city: ["", [Validators.required, Validators.minLength(3)]],
       neighborhood: ["", [Validators.required]],  
-      street: ["", [Validators.required]],      
-      streetNumber: ["", [Validators.required]]  
     });
 
     this.route.paramMap.subscribe((params) => {
       this.providerId = params.get("providerId") || ""; 
     });
+  }
+
+  ngOnInit(): void {
+      this.isMobile$ = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+        map(result => result.matches)
+      );
   }
 
   formErrorMessage(fieldName: string) {
@@ -104,9 +113,7 @@ export class RequestProviderComponent {
     const state: String = this.form.value.state;
     const city: String = this.form.value.city;
     const neighborhood: String = this.form.value.neighborhood;
-    const street: String = this.form.value.street;
-    const streetNumber: String = this.form.value.streetNumber;
-    const address = `${street} ${streetNumber} ${neighborhood} ${city} ${state} ${country}`;
+    const address = `${neighborhood} ${city} ${state} ${country}`;
     
     this.formData.append("req_address", address);
     this.formData.append("req_city",this.form.value.city);

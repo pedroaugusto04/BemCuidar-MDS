@@ -179,7 +179,6 @@ export class RegisterProviderComponent {
     this.returnCoordinates().subscribe({
       next: (coordinates) => {
         const { latitude, longitude } = coordinates;
-        // Agora você tem as coordenadas para usar como precisar.
         this.formData.append("coords_lat", String(latitude));
         this.formData.append("coords_lon", String(longitude));
 
