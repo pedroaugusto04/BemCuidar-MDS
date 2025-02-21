@@ -33,7 +33,7 @@ import L from "leaflet";
     MatInputModule,
     MatButtonModule,
     MatCheckboxModule,
-    LeafletComponent
+    LeafletComponent,
   ],
   templateUrl: "./request-provider.component.html",
   styleUrl: "./request-provider.component.scss",
@@ -154,9 +154,7 @@ export class RequestProviderComponent {
     const state: String = this.form.value.state;
     const city: String = this.form.value.city;
     const neighborhood: String = this.form.value.neighborhood;
-    const street: String = this.form.value.street;
-    const streetNumber: String = this.form.value.streetNumber;
-    const fullAddress = `${street} ${streetNumber} ${neighborhood} ${city} ${state} ${country}`;
+    const fullAddress = `${neighborhood} ${city} ${state} ${country}`;
     
     this.getCoordinates(fullAddress).subscribe({
       next: (response: any) => {

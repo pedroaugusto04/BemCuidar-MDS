@@ -52,20 +52,6 @@
           <mat-error>{{ formErrorMessage("city") }}</mat-error>
           }
         </mat-form-field>
-        <mat-form-field class="input" id="street-field" appearance="outline">
-          <mat-label>Rua</mat-label>
-          <input matInput formControlName="street" />
-          @if(form.get("city")?.invalid){
-          <mat-error>{{ formErrorMessage("city") }}</mat-error>
-          }
-        </mat-form-field>
-        <mat-form-field class="input" id="street-number-field" appearance="outline">
-          <mat-label>N°</mat-label>
-          <input matInput formControlName="streetNumber" />
-          @if(form.get("city")?.invalid){
-          <mat-error>{{ formErrorMessage("city") }}</mat-error>
-          }
-        </mat-form-field>
         <div class="class-button-verify-address">
           <button
             (click)="verifyAddress()"
@@ -77,8 +63,9 @@
           </button>
         </div>
         <div class="map">
-          <app-leaflet [mapId]="'solicitar'" [height]="'28rem'" [width]="'60rem'"></app-leaflet>
+          <app-leaflet [mapId]="'solicitar'" [height]="'28rem'" [width]="'40rem'"></app-leaflet>
         </div>
+        
         <div class="class-button-register">
           <button
             (click)="requestProvider()"
