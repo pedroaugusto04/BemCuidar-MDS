@@ -52,6 +52,13 @@
           <mat-error>{{ formErrorMessage("city") }}</mat-error>
           }
         </mat-form-field>
+        <mat-form-field class="input-area" id="information-field" appearance="outline">
+          <mat-label>Informações adicionais</mat-label>
+          <textarea matInput formControlName="information" rows="3" placeholder="Informe os detalhes sobre o serviço desejado"></textarea>
+          @if(form.get("information")?.invalid){
+            <mat-error>{{ formErrorMessage("information") }}</mat-error>
+          }
+        </mat-form-field>
         <div class="class-button-verify-address">
           <button
             (click)="verifyAddress()"

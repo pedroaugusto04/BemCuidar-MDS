@@ -67,6 +67,7 @@ export class RequestProviderComponent {
       state: ["", [Validators.required]],
       city: ["", [Validators.required, Validators.minLength(3)]],
       neighborhood: ["", [Validators.required]],  
+      information: [""]
     });
 
     this.route.paramMap.subscribe((params) => {
@@ -95,6 +96,10 @@ export class RequestProviderComponent {
       return "Link inválido";
     }
 
+    if (field?.hasError("information")) {
+      return "Informações adicionais inválidas";
+    }
+
     return "Este campo é necessário";
   }
 
@@ -108,6 +113,7 @@ export class RequestProviderComponent {
     this.formData.append("req_name", this.form.value.name);
     this.formData.append("req_phone", this.form.value.phone);
     this.formData.append("req_country", this.form.value.country);
+    this.formData.append("information",this.form.value.information);
 
     const country: String = this.form.value.country;
     const state: String = this.form.value.state;

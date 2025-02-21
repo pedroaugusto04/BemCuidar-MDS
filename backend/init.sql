@@ -52,5 +52,6 @@ CREATE TABLE IF NOT EXISTS user_requests_service_providers (
     req_address VARCHAR NOT NULL,
     req_city VARCHAR NOT NULL,
     req_phone VARCHAR NOT NULL,
-    req_photo VARCHAR NULL
+    req_photo VARCHAR NULL,
+    req_information VARCHAR NULL
 );

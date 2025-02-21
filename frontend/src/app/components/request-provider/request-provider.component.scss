@@ -28,6 +28,12 @@
     width: 18rem;
     padding-bottom: 1.5rem;
   }
+
+  .input-area {
+    padding: 1rem;
+    padding-bottom: 2rem;
+    width: 18rem;
+  }
   
   .div-form {
     padding: 2rem;
@@ -166,6 +172,11 @@
       flex-direction: row;
       justify-content: first baseline;
       flex-wrap: wrap;
+    }
+
+    .input-area {
+      padding: 2rem;
+      width: 50rem;
     }
 
     #nameField {

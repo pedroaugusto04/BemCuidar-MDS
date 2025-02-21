@@ -99,21 +99,6 @@
           <mat-error>{{ formErrorMessage("neighborhood") }}</mat-error>
           }
         </mat-form-field>
-      <mat-form-field class="input" id="street-field" appearance="outline">
-        <mat-label>Rua</mat-label>
-        <input matInput formControlName="street" />
-        @if(form.get("street")?.invalid){
-        <mat-error>{{ formErrorMessage("street") }}</mat-error>
-        }
-      </mat-form-field>
-    <mat-form-field class="input" id="street_number-field" appearance="outline">
-      <mat-label>Número</mat-label>
-      <input matInput formControlName="street_number" />
-      @if(form.get("street_number")?.invalid){
-      <mat-error>{{ formErrorMessage("street_number") }}</mat-error>
-      }
-    </mat-form-field>
-
         <div class="title-age-preference">
           <h3>Como cuidador você tem experiência tratando de:</h3>
         </div>

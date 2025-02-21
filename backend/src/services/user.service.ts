@@ -107,7 +107,7 @@ export class UserService {
       client = await connection.connect();
       const id = uuidv4();
       const sqlStatement =
-        "INSERT INTO user_requests_service_providers (id, user_id, provider_id, req_name,req_address,req_phone, req_city) VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *";
+        "INSERT INTO user_requests_service_providers (id, user_id, provider_id, req_name,req_address,req_phone, req_city,req_information) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *";
 
       const values = [
         id,
@@ -116,7 +116,8 @@ export class UserService {
         newRequest.req_name,
         newRequest.req_address,
         newRequest.req_phone,
-        newRequest.req_city
+        newRequest.req_city,
+        newRequest.information
       ];
 
       await client.query(sqlStatement, values);
@@ -152,7 +153,7 @@ export class UserService {
     const client: PoolClient = await connection.connect();
     try {
       const sqlStatement =
-        "SELECT r.id as req_id,r.create_time as req_create_time,r.status as req_status,r.req_name,r.req_email,r.req_address,r.req_phone,r.req_photo,p.id as prv_id,p.name as prv_name, p.age as prv_age, p.state as prv_state, p.country as prv_country, p.city as prv_city, p.photo as prv_photo, p.service_description as prv_service_description, (SELECT COUNT(user_id) AS prv_favorited FROM user_favorites_service_providers f WHERE r.user_id = f.user_id AND r.provider_id = f.provider_id) as prv_favorited FROM service_providers p JOIN user_requests_service_providers r  ON p.id = r.provider_id WHERE r.user_id = $1";
+        "SELECT r.id as req_id,r.create_time as req_create_time,r.status as req_status,r.req_name,r.req_email,r.req_address,r.req_phone,r.req_information,r.req_photo,p.id as prv_id,p.name as prv_name, p.age as prv_age, p.state as prv_state, p.country as prv_country, p.city as prv_city, p.photo as prv_photo, p.service_description as prv_service_description, (SELECT COUNT(user_id) AS prv_favorited FROM user_favorites_service_providers f WHERE r.user_id = f.user_id AND r.provider_id = f.provider_id) as prv_favorited FROM service_providers p JOIN user_requests_service_providers r  ON p.id = r.provider_id WHERE r.user_id = $1";
 
       const values = [userId];
 

@@ -1,26 +1,32 @@
 <app-nav-bar></app-nav-bar>
-@if(user$ | async; as user){
-<div class="list-elements">
-  @if(favoriteProviders$ | async; as favoriteProviders) { @for (provider of
-  favoriteProviders; track provider.name) {
-  <div class="favorite-provider">
-    <app-card-service-provider
-      providerName="{{ provider.name }}"
-      providerServiceDescription="{{ provider.service_description }}"
-      providerAge="{{ provider.age }}"
-      providerCountry="{{ provider.country }}"
-      providerState="{{ provider.state }}"
-      providerCity="{{ provider.city }}"
-      providerPhoto="{{ provider.photo }}"
-      providerExp_elderly="{{ provider.exp_elderly }}"
-      providerExp_children="{{ provider.exp_children }}"
-      providerExp_disabled="{{ provider.exp_disabled }}"
-      providerExperience="{{ provider.experience }}"
-      providerQualifications="{{ provider.qualifications }}"
-    ></app-card-service-provider>
+
+@if(user$ | async; as user) {
+  <div class="list-elements">
+    @if(favoriteProviders$ | async; as favoriteProviders) { 
+      @if(favoriteProviders.length > 0) {
+        @for (provider of favoriteProviders; track provider.name) {
+          <div class="favorite-provider">
+            <app-card-service-provider
+              providerName="{{ provider.name }}"
+              providerServiceDescription="{{ provider.service_description }}"
+              providerAge="{{ provider.age }}"
+              providerCountry="{{ provider.country }}"
+              providerState="{{ provider.state }}"
+              providerCity="{{ provider.city }}"
+              providerPhoto="{{ provider.photo }}"
+              providerExp_elderly="{{ provider.exp_elderly }}"
+              providerExp_children="{{ provider.exp_children }}"
+              providerExp_disabled="{{ provider.exp_disabled }}"
+              providerExperience="{{ provider.experience }}"
+              providerQualifications="{{ provider.qualifications }}"
+            ></app-card-service-provider>
+          </div>
+        }
+      } @else {
+        <h2>Nenhum cuidador foi favoritado</h2>
+      }
+    }
   </div>
-  } }
-</div>
 } @else {
-  <h1> Você precisa estar logado para ver seus favoritos!</h1>
+  <h1>Você precisa estar logado para ver seus favoritos!</h1>
 }

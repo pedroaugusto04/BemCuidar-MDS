@@ -10,4 +10,5 @@ export interface ServiceRequest {
     req_phone: string;
     req_photo: string;
     req_city: string;
+    information: string;
   }  

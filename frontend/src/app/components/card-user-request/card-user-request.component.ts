@@ -7,6 +7,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatButtonModule } from "@angular/material/button";
 import { CommonModule } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
+import { ViewUserRequestService } from "../view-user-request/services/view-user-request.service";
 
 @Component({
   selector: "app-card-user-request",
@@ -24,9 +25,11 @@ export class CardUserRequestComponent {
   @Input({ required: false}) isProvider: boolean = false;
   @Input({ required: false }) phone!: string;
   @Input({ required: false }) enviada: boolean = false;
+  @Input({required: false}) information: string = "";
   userRequestStatus = UserRequestStatus;
 
-  constructor(private providerService: ProviderService, private requestProviderService: RequestProviderService, private snackBar: MatSnackBar
+  constructor(private providerService: ProviderService, private requestProviderService: RequestProviderService, private snackBar: MatSnackBar,
+    private viewUserRequestService: ViewUserRequestService
      ) {}
 
   userRequest!: UserRequest;
@@ -38,7 +41,8 @@ export class CardUserRequestComponent {
       req_photo: this.photo,
       req_status: this.status as UserRequestStatus,
       req_address: this.address,
-      req_phone: this.phone
+      req_phone: this.phone,
+      req_information: this.information
     };
   }
 
@@ -108,5 +112,8 @@ export class CardUserRequestComponent {
   capitalizeFirstLetter(text: string): string {
     return text.charAt(0).toUpperCase() + text.slice(1);
   }
-  
+
+  onCardClick(): void {
+    this.viewUserRequestService.openDialog(this.userRequest);
+  }
 }

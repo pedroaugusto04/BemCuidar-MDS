@@ -1,0 +1,39 @@
+<div class="container">
+  <div mat-dialog-title class="dialog-title">
+    <button mat-icon-button aria-label="close dialog" mat-dialog-close>
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="content">
+    <!-- carregar componente de upload-->
+    <div class="upload-img">
+      <div class="providers">
+        <div class="class-img-provider">
+          <img
+          [src]="
+            modal.userRequest.req_photo
+              ? modal.userRequest.req_photo
+              : 'assets/imgs/user_icon.svg'
+          "
+          class="provider-cover"
+          alt="Imagem selecionada"
+        />
+        </div>
+      </div>
+      <div class="main-info">
+        <div class="provider-info">
+          <span id="username">
+            {{ modal.userRequest.req_name }} - {{ modal.userRequest.req_address }}
+            <br />
+            <br />
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="provider-description">
+      <p class="description">
+        {{ modal.userRequest.req_information }}<br /><br />
+      </p>
+    </div>
+  </div>
+</div>

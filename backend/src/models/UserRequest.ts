@@ -7,6 +7,7 @@ export interface UserRequest {
   req_address: string;
   req_phone: string;
   req_photo: string;
+  req_information: string;
   prv_id: string;
   prv_name: string;
   prv_age: number;
