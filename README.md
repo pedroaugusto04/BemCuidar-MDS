@@ -11,3 +11,11 @@ Projeto desenvolvido para a disciplina de laboratório de Engenharia de Software
 - Na raíz do projeto, digitar "sudo docker compose up" (linux) ou "docker compose up" (windows) através do terminal e aguardar alguns segundos
 - O front end será exibido em http://localhost:8080
 - O back end estará rodando em http://localhost:3000
+
+# Testes Unitários
+- Os testes unitários se encontram em:
+- frontend/src/app/components/nav-bar/nav-bar.component.spec.ts
+- frontend/src/app/components/list-provider/list-provider.component.spec.ts
+- frontend/src/app/components/register-provider/register-provider.component.spec.ts
+- backend/src/controllers/tests/login.controller.spec.ts
+- backend/src/controllers/tests/user.controller.spec.ts
