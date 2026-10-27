@@ -55,3 +55,24 @@ CREATE TABLE IF NOT EXISTS user_requests_service_providers (
     req_photo VARCHAR NULL,
     req_information VARCHAR NULL
 );
+
+-- Seed inicial de usuário padrão (user@gmail.com / 123)
+INSERT INTO users (id, name, last_name, email, password)
+VALUES (
+    '627a6cb5-09d2-44b1-8100-5ef86636b0f7',
+    'Nome',
+    'Sobrenome',
+    'user@gmail.com',
+    '$2b$10$ljgo2eHnlotE3d2bT1KSzOQT5n5cvTGb37lsXcjx7gerujKrvQmWW'
+) ON CONFLICT (id) DO NOTHING;
+
+-- Seed inicial de cuidador de exemplo
+INSERT INTO service_providers (
+    id, name, age, state, country, city, neighborhood, coords_lon, coords_lat,
+    service_description, user_id, experience, qualifications, exp_elderly, exp_children, exp_disabled
+) VALUES (
+    '1', 'Maria Silva', 35, 'Minas Gerais', 'Brasil', 'Ipatinga', 'Centro', -42.54, -19.46,
+    'Cuidadora dedicada com ampla experiência em atenção a idosos e suporte a rotinas diárias.',
+    '627a6cb5-09d2-44b1-8100-5ef86636b0f7', 8, 'Técnica em Enfermagem e Primeiros Socorros',
+    true, false, true
+) ON CONFLICT (id) DO NOTHING;
