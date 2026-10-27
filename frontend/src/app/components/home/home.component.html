@@ -1,67 +1,274 @@
 <app-nav-bar></app-nav-bar>
-<div class="title">
-  <h6>BEMCUIDAR</h6>
-</div>
-<div class="hero">
-  <h2>Sobre nós</h2>
-  <p>
-    Fazemos com que cuidadores experientes se unam a quem precisa, de maneira
-    segura, rápida e direcionada ao público ideal.
-  </p>
-  <div routerLink="/dicover" id="entrar-cuidadores">
-    <a href="/discover">Ver Cuidadores</a>
-  </div>
-</div>
 
-<div class="hero">
-  <h2>Encontre Cuidadores de Confiança de Forma Fácil e Rápida</h2>
-  <p>
-    Nosso objetivo é conectar você com profissionais altamente qualificados para
-    cuidar de pessoas com carinho e segurança. Se você precisa de ajuda com
-    crianças, idosos ou qualquer outro tipo de assistência, temos a pessoa certa
-    para você.
-  </p>
-  <p>
-    Com a nossa plataforma, os cuidadores podem divulgar seus serviços para um
-    público específico e interessado, enquanto os clientes podem encontrar
-    profissionais que atendem às suas necessidades com a confiança necessária.
-    Tudo de maneira fácil e acessível.
-  </p>
-</div>
+<main class="home-page">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-container">
+      <h1 class="hero-title">
+        Conectamos cuidadores de confiança a quem mais precisa
+      </h1>
 
-<div class="features">
-  <div class="feature">
-    <h3>Alcance Ampliado</h3>
-    <p>
-      Com a nossa plataforma, os cuidadores têm a chance de alcançar um grande
-      número de pessoas que realmente precisam dos seus serviços. E o melhor:
-      sem custos adicionais de marketing.
-    </p>
-  </div>
-  <div class="feature">
-    <h4>Confiança Garantida</h4>
-    <p>
-      Em um mercado onde a confiança é essencial, nossa plataforma assegura que
-      os clientes possam confiar nos cuidadores que contratam. As avaliações e o
-      histórico de experiência dos cuidadores são transparentes, para que você
-      possa fazer a melhor escolha para quem precisa de cuidados.
-    </p>
-  </div>
-  <div class="feature">
-    <h5>Fácil de Usar</h5>
-    <p>
-      Nosso sistema foi desenvolvido para ser intuitivo e fácil de usar, tanto
-      para os cuidadores quanto para os clientes. O processo de cadastro,
-      divulgação dos serviços e busca por cuidadores é simples e rápido,
-      permitindo que qualquer pessoa com conhecimento básico de tecnologia
-      consiga navegar com facilidade.
-    </p>
-  </div>
-</div>
+      <p class="hero-subtitle">
+        Fazemos com que cuidadores experientes se unam a quem precisa de maneira
+        segura, rápida e direcionada. O cuidado e carinho que sua família merece, com
+        a tranquilidade e confiança que você procura.
+      </p>
 
-<div class="footer">
-  <p>
-    &copy; 2024 Plataforma de Cuidadores. Todos os direitos reservados. |
-    <a href="#contato">Fale conosco</a>
-  </p>
-</div>
+      <div class="hero-actions">
+        <a routerLink="/discover" class="btn-primary" id="btn-ver-cuidadores">
+          <mat-icon>search</mat-icon>
+          <span>Encontrar Cuidadores</span>
+        </a>
+        <a routerLink="/care" class="btn-secondary" id="btn-quero-cuidar">
+          <mat-icon>work_outline</mat-icon>
+          <span>Quero Cuidar</span>
+        </a>
+      </div>
+
+      <div class="hero-highlights">
+        <div class="highlight-chip">
+          <mat-icon class="chip-icon">check_circle</mat-icon>
+          <span>Profissionais Qualificados</span>
+        </div>
+        <div class="highlight-chip">
+          <mat-icon class="chip-icon">check_circle</mat-icon>
+          <span>Crianças, Idosos e PCDs</span>
+        </div>
+        <div class="highlight-chip">
+          <mat-icon class="chip-icon">check_circle</mat-icon>
+          <span>Busca Direta por Cidade</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Sobre Nós -->
+  <section class="about-section" id="sobre">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">SOBRE A EMPRESA</span>
+        <h2 class="section-title">Cuidar é a nossa vocação</h2>
+        <p class="section-description">
+          O <strong>BemCuidar</strong> nasceu para aproximar pessoas e transformar
+          o cuidado domiciliar em uma experiência segura, transparente e acolhedora.
+        </p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-text-card">
+          <div class="card-icon-wrapper main-accent">
+            <mat-icon>diversity_1</mat-icon>
+          </div>
+          <h3>Nossa Missão</h3>
+          <p>
+            Nosso objetivo é conectar você com profissionais altamente qualificados
+            para cuidar de pessoas com carinho, respeito e máxima responsabilidade.
+            Seja para suporte com crianças, acompanhamento de idosos ou assistência a
+            pessoas com condições especiais, garantimos que você encontre a pessoa
+            certa.
+          </p>
+          <p>
+            Para os profissionais, oferecemos um espaço valorizado para divulgar seus
+            serviços para um público qualificado, criando oportunidades dignas e
+            sustentáveis.
+          </p>
+        </div>
+
+        <div class="about-stats-container">
+          <div class="stat-card">
+            <div class="stat-icon-box">
+              <mat-icon>family_restroom</mat-icon>
+            </div>
+            <div class="stat-content">
+              <h4>Atenção Especializada</h4>
+              <p>Experiência com foco em idosos, crianças e cuidados com necessidades específicas.</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-box">
+              <mat-icon>shield</mat-icon>
+            </div>
+            <div class="stat-content">
+              <h4>Segurança & Transparência</h4>
+              <p>Histórico e qualificações abertas para que você decida com total tranquilidade.</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-box">
+              <mat-icon>place</mat-icon>
+            </div>
+            <div class="stat-content">
+              <h4>Próximo a Você</h4>
+              <p>Busca inteligente integrada com mapa e localização por bairros e cidades.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Diferenciais / Features -->
+  <section class="features-section" id="diferenciais">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">DIFERENCIAIS</span>
+        <h2 class="section-title">Por que escolher o BemCuidar?</h2>
+        <p class="section-description">
+          Desenvolvido pensando na simplicidade de quem busca e na valorização de quem cuida.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <mat-icon>trending_up</mat-icon>
+          </div>
+          <h3>Alcance Ampliado</h3>
+          <p>
+            Com a nossa plataforma, os cuidadores têm a oportunidade de alcançar
+            um grande número de pessoas que realmente necessitam dos seus serviços,
+            sem burocracias ou custos intermediários ocultos.
+          </p>
+          <div class="card-footer-indicator"></div>
+        </div>
+
+        <div class="feature-card highlight-feature">
+          <div class="feature-icon-wrapper accent">
+            <mat-icon>verified</mat-icon>
+          </div>
+          <h3>Confiança Garantida</h3>
+          <p>
+            Em um setor onde confiança é essencial, asseguramos total transparência:
+            avaliações dos clientes, histórico de atuação e detalhes sobre a formação
+            para apoiar sua melhor decisão familiar.
+          </p>
+          <div class="card-footer-indicator"></div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <mat-icon>touch_app</mat-icon>
+          </div>
+          <h3>Fácil e Intuitivo</h3>
+          <p>
+            Sistema moderno e descomplicado para todos. Cadastre-se, divulgue ou
+            encontre cuidadores em poucos cliques, com visual adaptável para computadores,
+            tablets e celulares.
+          </p>
+          <div class="card-footer-indicator"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Como Funciona -->
+  <section class="how-it-works-section">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">PASSO A PASSO</span>
+        <h2 class="section-title">Como encontrar o cuidador perfeito</h2>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h4>Busque por Região</h4>
+          <p>Digite sua cidade e filtre pelo tipo de atendimento necessário: idosos, crianças ou PCDs.</p>
+        </div>
+
+        <div class="step-arrow">
+          <mat-icon>arrow_forward</mat-icon>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h4>Analise o Perfil</h4>
+          <p>Veja as fotos, qualificações profissionais, anos de experiência e localização no mapa.</p>
+        </div>
+
+        <div class="step-arrow">
+          <mat-icon>arrow_forward</mat-icon>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h4>Conecte-se</h4>
+          <p>Faça contato seguro para alinhar horários, detalhes da rotina e iniciar o atendimento.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Banner CTA para Cuidadores -->
+  <section class="cta-banner-section">
+    <div class="cta-banner-container">
+      <div class="cta-banner-content">
+        <span class="cta-tag">FAÇA PARTE DA COMUNIDADE</span>
+        <h2>Você é cuidador profissional?</h2>
+        <p>
+          Crie seu perfil no BemCuidar e receba solicitações diretas de clientes
+          que buscam o seu talento na sua cidade.
+        </p>
+        <div class="cta-buttons">
+          <a routerLink="/care" class="btn-cta-white">
+            <mat-icon>person_add</mat-icon>
+            <span>Cadastrar meu serviço</span>
+          </a>
+          <a routerLink="/discover" class="btn-cta-outline">
+            <span>Explorar a plataforma</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rodapé Institucional -->
+  <footer class="footer-section" id="contato">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <mat-icon class="footer-logo-icon">favorite</mat-icon>
+            <h3>BemCuidar</h3>
+          </div>
+          <p class="footer-bio">
+            A plataforma de referência que conecta profissionais dedicados a famílias
+            que buscam cuidado com excelência, carinho e segurança.
+          </p>
+        </div>
+
+        <div class="footer-links-group">
+          <div class="footer-col">
+            <span class="footer-col-title">Navegação</span>
+            <a routerLink="/home">Início</a>
+            <a routerLink="/discover">Encontrar Cuidadores</a>
+            <a routerLink="/care">Quero Cuidar</a>
+          </div>
+
+          <div class="footer-col">
+            <span class="footer-col-title">Conta</span>
+            <a routerLink="/login">Entrar</a>
+            <a routerLink="/register">Cadastre-se</a>
+            <a routerLink="/profile">Meu Perfil</a>
+          </div>
+
+          <div class="footer-col">
+            <span class="footer-col-title">Atendimento</span>
+            <span>Segurança & Privacidade</span>
+            <span>Termos de Uso</span>
+            <span class="contact-highlight">contato&#64;bemcuidar.com.br</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 BemCuidar. Todos os direitos reservados.</p>
+        <div class="footer-bottom-badge">
+          <span>Feito com dedicação e afeto</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+</main>
